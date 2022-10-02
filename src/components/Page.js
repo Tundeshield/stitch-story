@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Page = ({ children }) => {
-  return <div>{children}</div>;
+  return <div className="h-screen">{children}</div>;
 };
 
 export default Page;
