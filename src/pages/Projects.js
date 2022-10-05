@@ -1,11 +1,13 @@
 import React from 'react';
 import Page from '../components/Page';
+import SideMenu from '../components/SideMenu';
 
 const Projects = () => {
   return (
-    <Page>
+    <div className="flex">
+      <SideMenu />
       <h3>Projects</h3>
-    </Page>
+    </div>
   );
 };
 
