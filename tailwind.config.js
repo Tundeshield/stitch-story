@@ -13,6 +13,8 @@ module.exports = {
       orange: '#F2AF4C',
       red: '#EB5769',
       buttonBlue: 'rgb(239 246 255)',
+      txt: 'rgb(55 65 81)',
+      hover: '#505468',
     },
     extend: {},
   },
