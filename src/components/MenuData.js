@@ -18,13 +18,13 @@ const manager = [
       {
         id: randomInt(),
         name: 'Create ',
-        url: '/create',
+        url: '/create-project',
         icon: <AddIcon fontSize="small" />,
       },
       {
         id: randomInt(),
         name: 'View Projects ',
-        url: '/create',
+        url: '/projects',
         icon: <ListIcon fontSize="small" />,
       },
     ],
@@ -42,7 +42,7 @@ const manager = [
       {
         id: randomInt(),
         name: 'Create ',
-        url: '/create',
+        url: '/create-message',
         icon: <AddIcon fontSize="small" />,
       },
     ],
