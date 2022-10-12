@@ -1,0 +1,114 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "projectName": "Face mask production for secondary schools.",
+      "projectDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ipsum sed lacus lobortis luctus.",
+      "projectTasks": [],
+      "status": "Completed",
+      "projectOwnerID": "2"
+    },
+    {
+      "id": "5",
+      "projectName": "Face mask production for secondary schools.",
+      "projectDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ipsum sed lacus lobortis luctus.",
+      "projectTasks": [],
+      "status": "In progress",
+      "projectOwnerID": "2"
+    },
+    {
+      "id": "24",
+      "projectName": "Shirt production for schools.",
+      "projectDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ipsum sed lacus lobortis luctus.",
+      "projectTasks": [],
+      "status": "Stalled",
+      "projectOwnerID": "2"
+    },
+    {
+      "id": "33",
+      "projectName": "Face mask production for secondary schools.",
+      "projectDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ipsum sed lacus lobortis luctus.",
+      "projectTasks": [],
+      "status": "Completed",
+      "projectOwnerID": "3"
+    }
+  ],
+
+  "tasks": [
+    {
+      "id": "1",
+      "taskName": "Cut the garment.",
+      "taskDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ipsum sed lacus lobortis luctus.",
+      "projectID": "33",
+      "startDate": "2020-09-17",
+      "endDate": "2020-11-02",
+      "status": false,
+      "taskHandlerID": "2"
+    },
+    {
+      "id": "2",
+      "taskName": "Ironing the garments.",
+      "taskDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis ipsum sed lacus lobortis luctus.",
+      "projectID": "24",
+      "startDate": "2020-09-22",
+      "endDate": "2020-11-04",
+      "status": false,
+      "taskHandlerID": "2"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "firstName": "Tunde",
+      "lastName": "Adepegba",
+      "companyName": "Weaveworx Limited",
+      "Email": "christopher.adepegba@gmail.com",
+      "userCatID": "1"
+    },
+    {
+      "id": "2",
+      "firstName": "Samuel",
+      "lastName": "Biyi",
+      "companyName": "Busha Limited",
+      "Email": "samuel@busha.com",
+      "userCatID": "2"
+    }
+  ],
+  "userCategories": [
+    {
+      "id": "1",
+      "name": "Prodction Manager"
+    },
+    {
+      "id": "2",
+      "name": "Customer"
+    }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "messageTitle": "This is the first message",
+      "content": "https://lucid.app/lucidchart/c98c267d-8ad9-40c3-9e1d-5421286f08b4/edit?invitationId=inv_df955942-0fb8-43b4-8b9b-5961395c9c17&page=0_0#",
+      "senderID": "2",
+      "receiverID": "1",
+      "datePosted": "2020-11-0 10:05:00",
+      "read": false
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "commentOwnerID": "2",
+      "commentTaskID": "2",
+      "commentContent": "Why is this not done yet?",
+      "datePosted": "2020-11-0 10:05:00"
+    },
+    {
+      "id": "2",
+      "commentOwnerID": "2",
+      "commentTaskID": "2",
+      "commentContent": "We couldnt get the items quickly, sorry about the delay.",
+      "datePosted": "2020-11-0 10:05:00"
+    }
+  ]
+}
