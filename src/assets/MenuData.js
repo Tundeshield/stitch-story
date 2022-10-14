@@ -33,6 +33,20 @@ const manager = [
     id: randomInt(),
     name: 'People',
     icon: <PermIdentityIcon fontSize="small" />,
+    subMenu: [
+      {
+        id: randomInt(),
+        name: 'Create User ',
+        url: '/create-user',
+        icon: <AddIcon fontSize="small" />,
+      },
+      {
+        id: randomInt(),
+        name: 'View Users ',
+        url: '/view-users',
+        icon: <ListIcon fontSize="small" />,
+      },
+    ],
   },
   {
     id: randomInt(),

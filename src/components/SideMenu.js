@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Menu from './Menu';
-import { client, manager, supervisor } from './MenuData';
+import { client, manager, supervisor } from '../assets/MenuData';
 import Logo from '../assets/images/Logo.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { Link } from 'react-router-dom';
