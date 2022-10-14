@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import RadioComp from './RadioComp';
+import RadioComp from '../RadioComp';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { IconButton } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';

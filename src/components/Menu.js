@@ -9,27 +9,31 @@ const Menu = ({ name, icon, subMenu, url }) => {
   return (
     <ul class="space-y-2">
       <li>
-        <button
-          type="button"
-          className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-          aria-controls="dropdown-example"
-          data-collapse-toggle="dropdown-example"
-        >
-          {icon}
-          <span
-            className="flex-1 ml-3 text-left whitespace-nowrap"
-            sidebar-toggle-item=""
+        <Link to={url}>
+          <button
+            type="button"
+            className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+            aria-controls="dropdown-example"
+            data-collapse-toggle="dropdown-example"
           >
-            {name}
-          </span>
-          {subMenu && (
-            <IconButton onClick={() => setOpen(!open)}>
-              <KeyboardArrowUpIcon
-                className={`transition duration-300 ${!open && ' rotate-180'}`}
-              />
-            </IconButton>
-          )}
-        </button>
+            {icon}
+            <span
+              className="flex-1 ml-3 text-left whitespace-nowrap"
+              sidebar-toggle-item=""
+            >
+              {name}
+            </span>
+            {subMenu && (
+              <IconButton onClick={() => setOpen(!open)}>
+                <KeyboardArrowUpIcon
+                  className={`transition duration-300 ${
+                    !open && ' rotate-180'
+                  }`}
+                />
+              </IconButton>
+            )}
+          </button>
+        </Link>
       </li>
       {subMenu && open && (
         <React.Fragment>
