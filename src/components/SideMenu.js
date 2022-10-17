@@ -14,7 +14,7 @@ const SideMenu = () => {
   };
 
   return (
-    <div className="hidden sm:flex flex-col justify-between bg-gray-50 h-screen md:w-64">
+    <div className="hidden sm:flex flex-col justify-between bg-myWhite h-screen md:w-64">
       <div>
         <img
           src={Logo}
@@ -23,7 +23,7 @@ const SideMenu = () => {
         />
 
         <aside className="w-64" aria-label="Sidebar">
-          <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
+          <div className="overflow-y-auto py-4 px-3 bg-myWhite rounded">
             {menu.map((item) => (
               <Menu
                 name={item.name}
@@ -39,7 +39,7 @@ const SideMenu = () => {
       <div className="overflow-y-auto py-4 px-3 items-center bg-gray-50 rounded dark:bg-gray-800">
         <Menu
           name="Logout"
-          icon={<PowerSettingsNewIcon className="text-red-500" />}
+          icon={<PowerSettingsNewIcon className="text-myRed" />}
         />
       </div>
     </div>

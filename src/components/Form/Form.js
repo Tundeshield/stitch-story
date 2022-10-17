@@ -1,4 +1,4 @@
-const Input = ({ children }) => {
+const Input = ({ children, name, ref }) => {
   return (
     <div class="mb-6 w-full">
       <label
@@ -8,6 +8,8 @@ const Input = ({ children }) => {
         {children}
       </label>
       <input
+        name={name}
+        ref={ref}
         type="text"
         id="base-input"
         class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -16,7 +18,7 @@ const Input = ({ children }) => {
   );
 };
 
-const TextArea = ({ label }) => {
+const TextArea = ({ label, name, ref }) => {
   return (
     <div className="mb-6">
       <label
@@ -26,6 +28,8 @@ const TextArea = ({ label }) => {
         {label}
       </label>
       <textarea
+        name={name}
+        ref={ref}
         id="message"
         rows="4"
         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -35,7 +39,7 @@ const TextArea = ({ label }) => {
   );
 };
 
-const Dropdown = ({ label, options }) => {
+const Dropdown = ({ label, options, name, ref }) => {
   return (
     <div className="mb-6">
       <label
@@ -45,6 +49,8 @@ const Dropdown = ({ label, options }) => {
         {label}
       </label>
       <select
+        name={name}
+        ref={ref}
         id="countries"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
@@ -55,7 +61,7 @@ const Dropdown = ({ label, options }) => {
     </div>
   );
 };
-const UserCatDropdown = ({ label, options }) => {
+const UserCatDropdown = ({ label, options, name, ref }) => {
   return (
     <div className="mb-6 mt-4">
       <label
@@ -65,6 +71,8 @@ const UserCatDropdown = ({ label, options }) => {
         {label}
       </label>
       <select
+        name={name}
+        ref={ref}
         id="countries"
         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >

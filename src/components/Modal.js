@@ -18,7 +18,7 @@ const style = {
   borderRadius: '0.5rem',
 };
 
-const TaskModal = ({ children, handleClose, open }) => {
+const TaskModal = ({ children, handleClose, open, title }) => {
   return (
     <Modal
       open={open}
@@ -28,7 +28,7 @@ const TaskModal = ({ children, handleClose, open }) => {
     >
       <Box sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Add new task
+          {title}
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           {children}

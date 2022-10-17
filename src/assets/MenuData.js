@@ -13,69 +13,69 @@ const manager = [
   {
     id: randomInt(),
     name: 'Projects',
-    icon: <FolderOpenIcon fontSize="small" />,
+    icon: <FolderOpenIcon fontSize="small" className="text-myPurple" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create ',
         url: '/create-project',
-        icon: <AddIcon fontSize="small" />,
+        icon: <AddIcon fontSize="small" className="text-myPurple" />,
       },
       {
         id: randomInt(),
         name: 'View Projects ',
         url: '/projects',
-        icon: <ListIcon fontSize="small" />,
+        icon: <ListIcon fontSize="small" className="text-myPurple" />,
       },
     ],
   },
   {
     id: randomInt(),
     name: 'People',
-    icon: <PermIdentityIcon fontSize="small" />,
+    icon: <PermIdentityIcon fontSize="small" className="text-myPurple" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create User ',
         url: '/create-user',
-        icon: <AddIcon fontSize="small" />,
+        icon: <AddIcon fontSize="small" className="text-myPurple" />,
       },
       {
         id: randomInt(),
         name: 'View Users ',
         url: '/view-users',
-        icon: <ListIcon fontSize="small" />,
+        icon: <ListIcon fontSize="small" className="text-myPurple" />,
       },
     ],
   },
   {
     id: randomInt(),
     name: 'Messages',
-    icon: <MailOutlineIcon fontSize="small" />,
+    icon: <MailOutlineIcon fontSize="small" className="text-myPurple" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create ',
         url: '/create-message',
-        icon: <AddIcon fontSize="small" />,
+        icon: <AddIcon fontSize="small" className="text-myPurple" />,
       },
     ],
   },
 ];
 
-const supervisor = [
-  {
-    id: randomInt(),
-    name: 'Tasks',
-    icon: <FormatListBulletedIcon fontSize="small" />,
-  },
+// const supervisor = [
+//   {
+//     id: randomInt(),
+//     name: 'Tasks',
+//     icon: <FormatListBulletedIcon fontSize="small" />,
+//   },
 
-  {
-    id: randomInt(),
-    name: 'Messages',
-    icon: <MailOutlineIcon fontSize="small" />,
-  },
-];
+//   {
+//     id: randomInt(),
+//     name: 'Messages',
+//     icon: <MailOutlineIcon fontSize="small" />,
+//   },
+// ];
 
 const client = [
   {
@@ -90,4 +90,4 @@ const client = [
   },
 ];
 
-export { manager, supervisor, client };
+export { manager, client };

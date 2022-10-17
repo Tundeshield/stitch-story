@@ -7,14 +7,8 @@ import { CalendarPicker } from '@mui/x-date-pickers';
 import { addDays } from 'date-fns';
 import { DateRange } from 'react-date-range';
 
-const DatePicker = () => {
-  const [range, setRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 7),
-      key: 'selection',
-    },
-  ]);
+const DatePicker = ({ range, setRange }) => {
+ 
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
 

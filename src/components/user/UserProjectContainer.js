@@ -1,36 +1,38 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import OnCreateTaskItem from './OnCreateTaskItem';
+import ProjectItem from './ProjectItem';
 
-const OnCreateTaskContainer = () => {
-  const tasks = useSelector((state) => state.task);
+const UserProjectContainer = () => {
+  const [userProjects, setUserProjects] = useState([{}]);
 
+  useEffect(() => {
+    axios.get('http://localhost:3000/projects').then((response) => {
+      setUserProjects(response.data);
+    });
+  }, []);
   return (
     <div>
       <div class="p-4 w-full max-w-sm bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-          Added Tasks
+          Task List
         </h5>
         <p class="text-sm font-normal text-gray-500 dark:text-gray-400">
           Outline of the list of tasks required to complete the listed project.
         </p>
         <ul class="my-4 space-y-3">
-          {!tasks ? (
-            <p>There are no tasks to display. Please create some..</p>
-          ) : (
-            tasks.map((item) => (
-              <OnCreateTaskItem
-                taskName={item.taskName}
+          {userProjects.map((item) => (
+            <span key={item.id}>
+              <ProjectItem
+                projectName={item.projectName}
                 id={item.id}
-                key={item.id}
-                supervisor={item.supervisor}
+                status={item.status}
               />
-            ))
-          )}
+            </span>
+          ))}
         </ul>
       </div>
     </div>
   );
 };
 
-export default OnCreateTaskContainer;
+export default UserProjectContainer;
