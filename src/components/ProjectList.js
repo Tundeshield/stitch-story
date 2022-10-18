@@ -17,8 +17,8 @@ const ProjectList = () => {
   }, []);
 
   return (
-    <div classNameName="overflow-x-auto relative shadow-md sm:rounded-lg">
-      <div className="pb-4 bg-white dark:bg-gray-900">
+    <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+      <div className="p-4 bg-white dark:bg-gray-900">
         <label for="table-search" className="sr-only">
           Search
         </label>

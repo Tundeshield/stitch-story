@@ -62,7 +62,7 @@ const CreateProject = () => {
 
         <div className="flex flex-col md:flex  justify-between relative">
           <div className="flex justify-between">
-            <section className="w-7/12 p-4 bg-white   rounded-lg dark:bg-gray-800 md:w-full">
+            <section className=" p-4 bg-white rounded-lg dark:bg-gray-800 md:w-full">
               <form
                 className="overflow-hidden  bg-white drop-shadow-lg sm:rounded-lg px-4 py-5 sm:px-6 "
                 onSubmit={handleSubmit((data) => handleSaveProject(data))}
@@ -140,12 +140,12 @@ const CreateProject = () => {
                 </span>
               </form>
             </section>
-            <div className="pt-4">
+            <div className="pt-4 ml-6">
               <OnCreateTaskContainer />
             </div>
-            <div className="absolute left-1/4 w-3/4 ">
-              <AddTask open={open} handleClose={handleClose} />
-            </div>
+          </div>
+          <div className="absolute left-1/4 w-3/4 ">
+            <AddTask open={open} handleClose={handleClose} />
           </div>
         </div>
       </Container>

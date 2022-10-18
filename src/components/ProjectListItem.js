@@ -5,14 +5,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { useParams, useNavigate } from 'react-router-dom';
 import StatusBadge from './StatusBadge';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
   const navigate = useNavigate();
 
   const handleOpenProject = () => {
     navigate(`/projects/${id}`);
+  };
+
+  const handleDelete = (id) => {
     console.log(id);
   };
+
   return (
     <>
       <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -42,12 +47,12 @@ const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
         </td>
         <td className="py-4 px-6">
           <IconButton onClick={handleOpenProject}>
-            <OpenInNewIcon className="text-blue-600" />
+            <VisibilityIcon className="text-blue-600" />
           </IconButton>
           <IconButton>
             <EditIcon />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => handleDelete(id)}>
             <DeleteIcon className="text-red-500" />
           </IconButton>
         </td>

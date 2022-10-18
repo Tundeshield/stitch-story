@@ -1,9 +1,10 @@
-import { Avatar } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/freeLogo.jpeg';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
   return (
@@ -27,10 +28,9 @@ const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
         >
           <VisibilityIcon fontSize="small" />
         </Link>
-
-        <Link className="ml-4">
-          <DeleteForeverIcon fontSize="small" className="text-red-500" />
-        </Link>
+        <IconButton className="ml-4">
+          <DeleteIcon className="text-red-500" />
+        </IconButton>
       </td>
     </tr>
   );

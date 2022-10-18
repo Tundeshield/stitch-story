@@ -2,15 +2,13 @@ import React, { useEffect } from 'react';
 import BreadCrumb from './BreadCrumb';
 import Header from './Header';
 import axios from 'axios';
+import SideMenu from './SideMenu';
 
 const Container = ({ children }) => {
   return (
-    <div className="flex flex-col w-full">
-      <Header />
-      <div className="flex flex-col w-full p-10">
-        <BreadCrumb />
-        <div>{children}</div>
-      </div>
+    <div className="flex bg-myGray">
+      <SideMenu />
+      <div className="w-screen py-8 px-14">{children}</div>
     </div>
   );
 };

@@ -13,51 +13,51 @@ const manager = [
   {
     id: randomInt(),
     name: 'Projects',
-    icon: <FolderOpenIcon fontSize="small" className="text-myPurple" />,
+    icon: <FolderOpenIcon className="text-white" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create ',
         url: '/create-project',
-        icon: <AddIcon fontSize="small" className="text-myPurple" />,
+        icon: <AddIcon className="text-white" />,
       },
       {
         id: randomInt(),
         name: 'View Projects ',
         url: '/projects',
-        icon: <ListIcon fontSize="small" className="text-myPurple" />,
+        icon: <ListIcon className="text-white" />,
       },
     ],
   },
   {
     id: randomInt(),
     name: 'People',
-    icon: <PermIdentityIcon fontSize="small" className="text-myPurple" />,
+    icon: <PermIdentityIcon className="text-white" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create User ',
         url: '/create-user',
-        icon: <AddIcon fontSize="small" className="text-myPurple" />,
+        icon: <AddIcon className="text-white" />,
       },
       {
         id: randomInt(),
         name: 'View Users ',
         url: '/view-users',
-        icon: <ListIcon fontSize="small" className="text-myPurple" />,
+        icon: <ListIcon className="text-white" />,
       },
     ],
   },
   {
     id: randomInt(),
     name: 'Messages',
-    icon: <MailOutlineIcon fontSize="small" className="text-myPurple" />,
+    icon: <MailOutlineIcon className="text-white" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create ',
         url: '/create-message',
-        icon: <AddIcon fontSize="small" className="text-myPurple" />,
+        icon: <AddIcon className="text-white" />,
       },
     ],
   },
@@ -81,12 +81,12 @@ const client = [
   {
     id: randomInt(),
     name: 'My projects',
-    icon: <FolderOpenIcon fontSize="small" />,
+    icon: <FolderOpenIcon className="text-white" />,
   },
   {
     id: randomInt(),
     name: 'Messages',
-    icon: <MailOutlineIcon fontSize="small" />,
+    icon: <MailOutlineIcon className="text-white" />,
   },
 ];
 

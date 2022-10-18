@@ -14,8 +14,7 @@ const MyProjects = () => {
     <Page>
       <Container>
         <ProjectHeader header={headers} />
-        <div className="flex flex-col justify-center items-center w-5/6 h-screen">
-          <OrderCard />
+        <div className="flex flex-col justify-center items-center w-5/6 ">
           <OrderCard />
         </div>
       </Container>
