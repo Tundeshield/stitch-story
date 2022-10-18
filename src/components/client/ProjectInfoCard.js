@@ -8,7 +8,7 @@ const ProjectInfoCard = () => {
   return (
     <div className="p-2 shadow-sm shadow-blue-100 h-64 flex flex-col justify-around mb-4 bg-white rounded-md">
       <section className="p-4 flex items-center justify-between">
-        <span className="">
+        <span>
           <p>
             <strong>Project title</strong>{' '}
           </p>
@@ -28,8 +28,7 @@ const ProjectInfoCard = () => {
       <section className="border-t-2 border-grey-200 flex justify-between p-4 items-center">
         <div className="w-1/2">
           <p className="text-xs flex-wrap">
-            Your feedback helps our couriers to improve. Rate your courier out
-            of 5 stars to let them know how it went
+            Send a message to the production team handling your project.
           </p>
         </div>
         <div>

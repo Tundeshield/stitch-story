@@ -1,7 +1,7 @@
 import Edit from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import { useState } from 'react';
-import TaskModal from '../Modal';
+import TaskModal from '../TaskModal';
 
 const UserInfoCard = ({
   id,

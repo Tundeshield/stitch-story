@@ -7,7 +7,7 @@ import InfoCard from '../../components/InfoCard';
 import axios from 'axios';
 import TaskContainer from '../../components/task/TaskContainer';
 import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
-import TaskModal from '../../components/Modal';
+import TaskModal from '../../components/TaskModal';
 
 const Project = () => {
   const { projectID } = useParams();

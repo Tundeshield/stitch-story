@@ -7,23 +7,25 @@ import TrackOrder from '../../pages/client/TrackOrder';
 
 const OrderCard = () => {
   return (
-    <div className="flex flex-col justify-between mb-8 drop-shadow-lg h-80 bg-gray-100 rounded-2xl  w-full lg:w-4/5">
-      <div className="flex justify-between rounded-t-3xl p-3 bg-gray-200 items-center">
+    <div className="flex flex-col justify-between mb-8 drop-shadow-lg h-80 bg-white rounded-2xl  w-full lg:w-4/5">
+      <div className="flex justify-between p-3 bg-white border-b-2 border-gray-200 rounded shadow-sm items-center">
         <div className="flex flex-col">
-          <span>ORDER PLACED</span>{' '}
-          <span className="text-xs">16 October 2022</span>
+          <span className="text-myDarkBlue">ORDER PLACED</span>{' '}
+          <span className="text-xs text-myBlue">16 October 2022</span>
         </div>
         <div>
-          <Link to="#">View order details</Link>
-          <p className="text-xs">ORDER # 0258689897694-99867</p>
+          <Link to="#" className="text-myDarkBlue">
+            View order details
+          </Link>
+          <p className="text-xs text-myBlue">ORDER # 0258689897694-99867</p>
         </div>
       </div>
       <div className="flex justify-between p-3">
         <div>
-          <h1 className="text-blue-500">
+          <h1 className="text-myDarkBlue">
             <strong>Production of 100 T-shirts.</strong>{' '}
           </h1>
-          <p className="text-sm">
+          <p className="text-sm text-gray-500">
             Due to be completed on the 16th, march, 2022
           </p>
         </div>
@@ -32,10 +34,6 @@ const OrderCard = () => {
             <Link to={`/my-projects/track/${2}`}>
               Track your project <TimelineIcon className="ml-4" />
             </Link>
-          </Button>
-
-          <Button>
-            Email manager <SendIcon className="ml-4" />{' '}
           </Button>
         </div>
       </div>

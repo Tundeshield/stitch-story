@@ -5,8 +5,18 @@ import img from '../../assets/images/freeLogo.jpeg';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
+import TaskModal from '../TaskModal';
 
 const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const handleDelete = (id) => {
+    console.log(id, 'has been deleted!');
+  };
+
   return (
     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
       <th
@@ -28,10 +38,32 @@ const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
         >
           <VisibilityIcon fontSize="small" />
         </Link>
-        <IconButton className="ml-4">
+        <IconButton className="ml-4" onClick={handleOpen}>
           <DeleteIcon className="text-red-500" />
         </IconButton>
       </td>
+      <TaskModal
+        open={open}
+        handleClose={handleClose}
+        title="Are you sure you want to delete this project?"
+      >
+        <span className="flex justify-between items-center">
+          <button
+            onClick={() => handleDelete(id)}
+            type="button"
+            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          >
+            Yes
+          </button>
+          <button
+            onClick={handleClose}
+            type="button"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          >
+            No
+          </button>
+        </span>
+      </TaskModal>
     </tr>
   );
 };

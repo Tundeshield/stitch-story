@@ -6,16 +6,23 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { useParams, useNavigate } from 'react-router-dom';
 import StatusBadge from './StatusBadge';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import TaskModal from './TaskModal';
+import Button from './Button';
 
 const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
+  const [open, setOpen] = React.useState(false);
+
   const navigate = useNavigate();
 
   const handleOpenProject = () => {
     navigate(`/projects/${id}`);
   };
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleDelete = (id) => {
-    console.log(id);
+    console.log(id, 'has been deleted!');
   };
 
   return (
@@ -52,11 +59,33 @@ const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
           <IconButton>
             <EditIcon />
           </IconButton>
-          <IconButton onClick={() => handleDelete(id)}>
+          <IconButton onClick={handleOpen}>
             <DeleteIcon className="text-red-500" />
           </IconButton>
         </td>
       </tr>
+      <TaskModal
+        open={open}
+        handleClose={handleClose}
+        title="Are you sure you want to delete this project?"
+      >
+        <span className="flex justify-between items-center">
+          <button
+            onClick={() => handleDelete(id)}
+            type="button"
+            class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          >
+            Yes
+          </button>
+          <button
+            onClick={handleClose}
+            type="button"
+            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          >
+            No
+          </button>
+        </span>
+      </TaskModal>
     </>
   );
 };

@@ -7,14 +7,14 @@ import ProjectHeader from '../../components/ProjectHeader';
 const MyProjects = () => {
   const headers = [
     {
-      title: 'My Orders',
+      title: 'Your orders',
     },
   ];
   return (
     <Page>
       <Container>
         <ProjectHeader header={headers} />
-        <div className="flex flex-col justify-center items-center w-5/6 ">
+        <div className="flex flex-col justify-center items-center w-5/6 mt-4 ">
           <OrderCard />
         </div>
       </Container>

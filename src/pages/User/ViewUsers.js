@@ -22,10 +22,7 @@ const style = {
 };
 
 const ViewUsers = () => {
-  const [open, setOpen] = React.useState(false);
   const [companies, setCompanies] = useState([]);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   useEffect(() => {
     axios.get('http://localhost:3000/users').then((response) => {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '../../components/Container';
-import TaskModal from '../../components/Modal';
+import TaskModal from '../../components/TaskModal';
 import Page from '../../components/Page';
 import TaskContainer from '../../components/task/TaskContainer';
 import UserEditForm from '../../components/user/UserEditForm';
