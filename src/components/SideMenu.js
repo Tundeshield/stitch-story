@@ -6,7 +6,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
-  const [menu, setMenu] = useState(manager);
+  const [menu, setMenu] = useState(client);
   const [open, setOpen] = useState(false);
 
   const toggleClick = () => {
