@@ -7,6 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { Avatar, IconButton } from '@mui/material';
 import Drawer from './Drawer';
+import logo from '../assets/images/Logo.png';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -18,15 +19,13 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white shadow flex py-3 px-4 justify-between items-center">
+    <header className="shadow bg-white flex py-3 px-4 justify-between items-center">
       <div className="max-w-7xl  sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight text-txt">
-          Dashboard
-        </h1>
+        <img src={logo} alt="" className="w-64" />
       </div>
       <div className="flex items-center px-8">
         <IconButton>
-          <NotificationsNoneIcon className="mr-2 cursor-pointer" />
+          <NotificationsNoneIcon className="mr-2 cursor-pointer text-myDarkBlue" />
         </IconButton>
         <IconButton>
           <Avatar
@@ -35,7 +34,10 @@ const Header = () => {
             className="cursor-pointer"
           />
         </IconButton>
-        <span className="md:hidden" onClick={() => setOpen(!open)}>
+        <span
+          className="cursor-pointer text-myDarkBlue md:hidden"
+          onClick={() => setOpen(!open)}
+        >
           <IconButton>
             <MenuIcon />
           </IconButton>

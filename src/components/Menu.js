@@ -7,30 +7,28 @@ const Menu = ({ name, icon, subMenu, url }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <ul class="space-y-2">
+    <ul>
       <li>
         <Link to={url}>
           <button
             type="button"
-            className="flex items-center p-2 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-            aria-controls="dropdown-example"
-            data-collapse-toggle="dropdown-example"
+            className="flex items-center p-2 w-full border border-myBlue mb-4 text-base font-normal rounded-full transition duration-75 group hover:bg-myBlue dark:text-white dark:hover:bg-gray-700"
           >
             {icon}
             <span
-              className="flex-1 ml-3 text-left whitespace-nowrap"
+              className="flex-1 ml-3 text-left whitespace-nowrap text-white "
               sidebar-toggle-item=""
             >
               {name}
             </span>
             {subMenu && (
-              <IconButton onClick={() => setOpen(!open)}>
-                <KeyboardArrowUpIcon
-                  className={`transition duration-300 ${
-                    !open && ' rotate-180'
-                  }`}
-                />
-              </IconButton>
+              <KeyboardArrowUpIcon
+                fontSize="xs"
+                onClick={() => setOpen(!open)}
+                className={`transition duration-300 text-white  ${
+                  !open && ' rotate-180'
+                }`}
+              />
             )}
           </button>
         </Link>
@@ -42,10 +40,10 @@ const Menu = ({ name, icon, subMenu, url }) => {
               <li>
                 <Link
                   to={item.url}
-                  className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                  className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-myBlue dark:text-white dark:hover:bg-gray-700"
                 >
                   <span className="text-buttonBlue text-sm">{item.icon}</span>
-                  <span className="pl-3 text-buttonBlue text-xs font-semibold mr-2">
+                  <span className="pl-3 text-white text-xs font-semibold mr-2">
                     {item.name}
                   </span>
                 </Link>

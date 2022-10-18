@@ -13,81 +13,81 @@ const manager = [
   {
     id: randomInt(),
     name: 'Projects',
-    icon: <FolderOpenIcon fontSize="small" />,
+    icon: <FolderOpenIcon className="text-white" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create ',
         url: '/create-project',
-        icon: <AddIcon fontSize="small" />,
+        icon: <AddIcon className="text-white" />,
       },
       {
         id: randomInt(),
         name: 'View Projects ',
         url: '/projects',
-        icon: <ListIcon fontSize="small" />,
+        icon: <ListIcon className="text-white" />,
       },
     ],
   },
   {
     id: randomInt(),
     name: 'People',
-    icon: <PermIdentityIcon fontSize="small" />,
+    icon: <PermIdentityIcon className="text-white" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create User ',
         url: '/create-user',
-        icon: <AddIcon fontSize="small" />,
+        icon: <AddIcon className="text-white" />,
       },
       {
         id: randomInt(),
         name: 'View Users ',
         url: '/view-users',
-        icon: <ListIcon fontSize="small" />,
+        icon: <ListIcon className="text-white" />,
       },
     ],
   },
   {
     id: randomInt(),
     name: 'Messages',
-    icon: <MailOutlineIcon fontSize="small" />,
+    icon: <MailOutlineIcon className="text-white" />,
     subMenu: [
       {
         id: randomInt(),
         name: 'Create ',
         url: '/create-message',
-        icon: <AddIcon fontSize="small" />,
+        icon: <AddIcon className="text-white" />,
       },
     ],
   },
 ];
 
-const supervisor = [
-  {
-    id: randomInt(),
-    name: 'Tasks',
-    icon: <FormatListBulletedIcon fontSize="small" />,
-  },
+// const supervisor = [
+//   {
+//     id: randomInt(),
+//     name: 'Tasks',
+//     icon: <FormatListBulletedIcon fontSize="small" />,
+//   },
 
-  {
-    id: randomInt(),
-    name: 'Messages',
-    icon: <MailOutlineIcon fontSize="small" />,
-  },
-];
+//   {
+//     id: randomInt(),
+//     name: 'Messages',
+//     icon: <MailOutlineIcon fontSize="small" />,
+//   },
+// ];
 
 const client = [
   {
     id: randomInt(),
     name: 'My projects',
-    icon: <FolderOpenIcon fontSize="small" />,
+    icon: <FolderOpenIcon className="text-white" />,
   },
   {
     id: randomInt(),
     name: 'Messages',
-    icon: <MailOutlineIcon fontSize="small" />,
+    icon: <MailOutlineIcon className="text-white" />,
   },
 ];
 
-export { manager, supervisor, client };
+export { manager, client };

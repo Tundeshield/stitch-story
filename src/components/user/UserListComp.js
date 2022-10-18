@@ -1,10 +1,12 @@
-import { Avatar } from '@mui/material';
+import { Avatar, IconButton } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/freeLogo.jpeg';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const UserListComp = ({ companyName, contactPerson, email, phone }) => {
+const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
   return (
     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
       <th
@@ -21,14 +23,14 @@ const UserListComp = ({ companyName, contactPerson, email, phone }) => {
       <td class="py-4 px-6">{phone}</td>
       <td class="py-4 px-6">
         <Link
-          to="#"
-          class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          to={`/view-user/${id}`}
+          class="mr-4 text-blue-600 dark:text-blue-500 hover:underline"
         >
-          Edit
+          <VisibilityIcon fontSize="small" />
         </Link>
-        <Link className="ml-4">
-          <DeleteForeverIcon fontSize="small" className="text-red-500" />
-        </Link>
+        <IconButton className="ml-4">
+          <DeleteIcon className="text-red-500" />
+        </IconButton>
       </td>
     </tr>
   );

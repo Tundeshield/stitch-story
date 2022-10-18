@@ -1,12 +1,15 @@
 import React from 'react';
+import Footer from './Footer';
+import Header from './Header';
 import SideMenu from './SideMenu';
 
 const Page = ({ children }) => {
   return (
-    <div className="h-screen flex">
-      <SideMenu />
+    <React.Fragment className="h-screen">
+      <Header />
       {children}
-    </div>
+      <Footer />
+    </React.Fragment>
   );
 };
 

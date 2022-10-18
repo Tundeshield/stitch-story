@@ -7,6 +7,7 @@ import InfoCard from '../../components/InfoCard';
 import axios from 'axios';
 import TaskContainer from '../../components/task/TaskContainer';
 import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
+import TaskModal from '../../components/Modal';
 
 const Project = () => {
   const { projectID } = useParams();
@@ -72,11 +73,13 @@ const Project = () => {
                 </div>
               </div>
             </div>
-
             <div>
               <TaskContainer />
             </div>
           </div>
+        </div>
+        <div>
+          <TaskModal />
         </div>
       </Container>
     </Page>

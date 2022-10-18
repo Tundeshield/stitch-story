@@ -16,6 +16,9 @@ import Task from './pages/Task/Task';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateUser from './pages/User/CreateUser';
 import ViewUsers from './pages/User/ViewUsers';
+import ViewUser from './pages/User/ViewUser';
+import MyProjects from './pages/client/MyProjects';
+import TrackOrder from './pages/client/TrackOrder';
 
 function App() {
   return (
@@ -26,8 +29,12 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/create-user" element={<CreateUser />} />
         <Route path="/view-users" element={<ViewUsers />} />
+        <Route path="/view-user/:userID" element={<ViewUser />} />
         <Route path="/projects/:projectID" element={<Project />} />
         <Route path="/projects/:projectID/:taskID" element={<Task />} />
+        <Route path="/my-projects/" element={<MyProjects />} />
+        <Route path="/my-projects/track/:projectID" element={<TrackOrder />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

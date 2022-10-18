@@ -7,7 +7,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import img from '../assets/images/Logo.png';
+import img from '../assets/images/loginLogo.png';
 import sewingMachine from '../assets/images/cloth.jpg';
 import { Link } from 'react-router-dom';
 import Copyright from '../components/Copyright';
@@ -62,7 +62,7 @@ export default function LogIn() {
               alignItems: 'center',
             }}
           >
-            <img src={img} alt="" className="w-52 py-7" />
+            <img src={img} alt="" className="w-96 py-7" />
 
             <Typography component="h4" variant="h6" className="text-blue-900">
               Sign in
