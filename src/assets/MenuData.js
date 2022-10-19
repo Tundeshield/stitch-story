@@ -4,6 +4,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AddIcon from '@mui/icons-material/Add';
 import ListIcon from '@mui/icons-material/List';
+import * as ROUTE from './constants/routes';
 
 const randomInt = () => {
   return Math.floor(Math.random() * 96843);
@@ -18,13 +19,13 @@ const manager = [
       {
         id: randomInt(),
         name: 'Create ',
-        url: '/create-project',
+        url: ROUTE.CREATEPROJECT,
         icon: <AddIcon className="text-white" />,
       },
       {
         id: randomInt(),
         name: 'View Projects ',
-        url: '/projects',
+        url: ROUTE.PROJECTS,
         icon: <ListIcon className="text-white" />,
       },
     ],
@@ -37,30 +38,30 @@ const manager = [
       {
         id: randomInt(),
         name: 'Create User ',
-        url: '/create-user',
+        url: ROUTE.CREATEUSER,
         icon: <AddIcon className="text-white" />,
       },
       {
         id: randomInt(),
         name: 'View Users ',
-        url: '/view-users',
+        url: ROUTE.USERS,
         icon: <ListIcon className="text-white" />,
       },
     ],
   },
-  {
-    id: randomInt(),
-    name: 'Messages',
-    icon: <MailOutlineIcon className="text-white" />,
-    subMenu: [
-      {
-        id: randomInt(),
-        name: 'Create ',
-        url: '/create-message',
-        icon: <AddIcon className="text-white" />,
-      },
-    ],
-  },
+  // {
+  //   id: randomInt(),
+  //   name: 'Messages',
+  //   icon: <MailOutlineIcon className="text-white" />,
+  //   subMenu: [
+  //     {
+  //       id: randomInt(),
+  //       name: 'Create ',
+  //       url: '/create-message',
+  //       icon: <AddIcon className="text-white" />,
+  //     },
+  //   ],
+  // },
 ];
 
 // const supervisor = [
@@ -83,11 +84,11 @@ const client = [
     name: 'My projects',
     icon: <FolderOpenIcon className="text-white" />,
   },
-  {
-    id: randomInt(),
-    name: 'Messages',
-    icon: <MailOutlineIcon className="text-white" />,
-  },
+  // {
+  //   id: randomInt(),
+  //   name: 'Messages',
+  //   icon: <MailOutlineIcon className="text-white" />,
+  // },
 ];
 
 export { manager, client };

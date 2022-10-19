@@ -19,23 +19,29 @@ import ViewUsers from './pages/User/ViewUsers';
 import ViewUser from './pages/User/ViewUser';
 import MyProjects from './pages/client/MyProjects';
 import TrackOrder from './pages/client/TrackOrder';
+import * as ROUTE from './assets/constants/routes';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="" element={<Login />} />
-        <Route path="/create-project" element={<CreateProject />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/create-user" element={<CreateUser />} />
-        <Route path="/view-users" element={<ViewUsers />} />
-        <Route path="/view-user/:userID" element={<ViewUser />} />
-        <Route path="/projects/:projectID" element={<Project />} />
-        <Route path="/projects/:projectID/:taskID" element={<Task />} />
-        <Route path="/my-projects/" element={<MyProjects />} />
-        <Route path="/my-projects/track/:projectID" element={<TrackOrder />} />
+        {/* General Routes */}
+        <Route path={ROUTE.LANDING} element={<Login />} />
+        <Route path={ROUTE.NOTFOUND} element={<NotFoundPage />} />
 
-        <Route path="*" element={<NotFoundPage />} />
+        {/* Admin Routes */}
+        <Route path={ROUTE.CREATEPROJECT} element={<CreateProject />} />
+        <Route path={ROUTE.PROJECTS} element={<Projects />} />
+        <Route path={ROUTE.PROJECT} element={<Project />} />
+        <Route path={ROUTE.CREATEUSER} element={<CreateUser />} />
+        <Route path={ROUTE.USERS} element={<ViewUsers />} />
+        <Route path={ROUTE.USER} element={<ViewUser />} />
+
+        {/* Customer Routes */}
+
+        <Route path={ROUTE.TASK} element={<Task />} />
+        <Route path={ROUTE.CLIENTPROJECTS} element={<MyProjects />} />
+        <Route path={ROUTE.TRACKPROJECT} element={<TrackOrder />} />
       </Routes>
     </Router>
   );
