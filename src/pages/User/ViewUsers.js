@@ -8,6 +8,8 @@ import Modal from '@mui/material/Modal';
 import UseListHeader from '../../components/user/UseListHeader';
 import UserListComp from '../../components/user/UserListComp';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import * as ROUTE from '../../assets/constants/routes';
 
 const style = {
   position: 'absolute',
@@ -33,8 +35,11 @@ const ViewUsers = () => {
     <Page>
       <Container>
         <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+          <Link to={ROUTE.CREATEUSER}>
+            <Button>Create New USER</Button>
+          </Link>
+
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <UseListHeader />
             <tbody>
               {companies.map((company) => (
                 <UserListComp

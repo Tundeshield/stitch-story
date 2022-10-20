@@ -10,14 +10,14 @@ import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
 import TaskModal from '../../components/TaskModal';
 
 const Project = () => {
-  const { projectID } = useParams();
+  const { pid } = useParams();
   const [project, setProject] = useState({});
   const [error, setError] = React.useState(null);
   const { id, projectName, projectDescription, status } = project;
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/projects/${projectID}`)
+      .get(`http://localhost:3000/projects/${pid}`)
       .then((response) => {
         setProject(response.data);
         console.log(project);

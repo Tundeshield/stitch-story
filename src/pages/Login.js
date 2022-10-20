@@ -12,23 +12,47 @@ import sewingMachine from '../assets/images/cloth.jpg';
 import { Link } from 'react-router-dom';
 import Copyright from '../components/Copyright';
 import { ErrorAlert } from '../components/Feedback';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../utils/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const theme = createTheme();
 
 export default function LogIn() {
   const [authorized, setAuthorized] = useState(false);
+  const [user, loading, error] = useAuthState(auth);
+
+  // const addProductionManager = () => {
+  //   getAuth()
+  //     .getUserByEmail('tundeshield@gmail.com')
+  //     .then((user) => {
+  //       // Confirm user is verified.
+  //       if (user.emailVerified) {
+  //         // Add custom claims for additional privileges.
+  //         // This will be picked up by the user on token refresh or next sign in on new device.
+  //         return getAuth().setCustomUserClaims(user.uid, {
+  //           admin: true,
+  //         });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 
   //Handle login function
   const handleSignInLink = (event) => {
     event.preventDefault();
+    // grantModRole('tundeshield@gmail.com');
     const data = new FormData(event.currentTarget);
+    const email = data.get('email');
+    const password = data.get('password');
     console.log({
       email: data.get('email'),
+      password: data.get('password'),
     });
-
-    //Find user password in database
-    //If data not seen in DB return error
-    //Else send login link to email
+    signInWithEmailAndPassword(auth, email, password);
+    console.log(user);
   };
 
   return (
@@ -52,6 +76,7 @@ export default function LogIn() {
             backgroundPosition: 'center',
           }}
         />
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{
@@ -83,19 +108,29 @@ export default function LogIn() {
                 autoComplete="email"
                 autoFocus
               />
+              <TextField
+                margin="normal"
+                fullWidth
+                label="Password"
+                type="password"
+                name="password"
+                autoComplete="current-password"
+                autoFocus
+              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Send Sign-in link
+                Sign in
               </Button>
-              {!authorized && (
+              {error && (
                 <ErrorAlert>
                   Unauthorized user, contact production team!
                 </ErrorAlert>
               )}
+              {user && <h1>there is a user {user.email}</h1>}
 
               <Copyright sx={{ mt: 5 }} />
             </Box>

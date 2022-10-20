@@ -8,6 +8,7 @@ import StatusBadge from './StatusBadge';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import TaskModal from './TaskModal';
 import Button from './Button';
+import * as ROUTE from '../assets/constants/routes';
 
 const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
   const [open, setOpen] = React.useState(false);
@@ -15,7 +16,7 @@ const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
   const navigate = useNavigate();
 
   const handleOpenProject = () => {
-    navigate(`/projects/${id}`);
+    navigate(`${ROUTE.PROJECTS}/${id}`);
   };
 
   const handleOpen = () => setOpen(true);

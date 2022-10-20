@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as ROUTES from '../../assets/constants/routes';
 
 const ProjectItem = ({ projectName, status, id }) => {
   return (
@@ -11,7 +12,7 @@ const ProjectItem = ({ projectName, status, id }) => {
         >
           <span class={`flex-1 ml-3  '}`}>{projectName}</span>
           <Link
-            to={id}
+            to={`${ROUTES.TASKS}/${id}`}
             className="text-xs text-blue-600 dark:text-blue-500 hover:underline"
           >
             View Details

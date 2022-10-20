@@ -1,14 +1,13 @@
 export const LANDING = '/';
-export const CREATEPROJECT = '/create-project';
+export const CREATEPROJECT = '/projects/create-project';
 export const PROJECTS = '/projects';
-export const PROJECT = '/projects/:id';
-export const TASK = '/projects/:projectid/:taskid';
-export const CREATEUSER = '/create-user';
-export const USER = '/view-users/:id';
-export const USERS = '/view-users';
-export const CLIENTPROJECTS = '/clients/:clientid/projects';
+export const TASKS = '/tasks';
+export const CREATEUSER = '/users/create-user';
+export const USERS = '/users';
+export const CLIENTS = '/clients';
 export const TRACKPROJECT = '/clients/:clientid/:projectid/track';
 export const NOTFOUND = '*';
+export const RESETPASSWORD = '/reset-password';
 
 // <Route path={ROUTE.LANDING} element={<Login />} />
 // <Route path="*" element={<NotFoundPage />} />

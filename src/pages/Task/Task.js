@@ -7,13 +7,13 @@ import TaskInfoCard from '../../components/task/TaskInfoCard';
 
 const Task = () => {
   ///projects/:projectID/:taskID
-  const { projectID, taskID } = useParams();
+  const { projectID, tid } = useParams();
   return (
     <Page>
       <Container>
         <div className="flex flex-col">
           <section>
-            <TaskInfoCard />
+            <TaskInfoCard tid={tid} />
           </section>
           <section>
             <TaskComments />

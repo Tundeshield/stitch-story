@@ -32,18 +32,18 @@ const manager = [
   },
   {
     id: randomInt(),
-    name: 'People',
+    name: 'Customers',
     icon: <PermIdentityIcon className="text-white" />,
     subMenu: [
       {
         id: randomInt(),
-        name: 'Create User ',
+        name: 'Add Customer ',
         url: ROUTE.CREATEUSER,
         icon: <AddIcon className="text-white" />,
       },
       {
         id: randomInt(),
-        name: 'View Users ',
+        name: 'View Customers ',
         url: ROUTE.USERS,
         icon: <ListIcon className="text-white" />,
       },
@@ -83,6 +83,7 @@ const client = [
     id: randomInt(),
     name: 'My projects',
     icon: <FolderOpenIcon className="text-white" />,
+    url: ROUTE.CLIENTS,
   },
   // {
   //   id: randomInt(),

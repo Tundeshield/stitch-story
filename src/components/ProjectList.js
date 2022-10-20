@@ -6,6 +6,9 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ProjectListItem from './ProjectListItem';
 import StatusBadge from './StatusBadge';
 import axios from 'axios';
+import Button from './Button';
+import { Link, Routes } from 'react-router-dom';
+import * as ROUTE from '../assets/constants/routes';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
@@ -18,7 +21,7 @@ const ProjectList = () => {
 
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-      <div className="p-4 bg-white dark:bg-gray-900">
+      <div className="p-4 flex justify-between items-center bg-white dark:bg-gray-900">
         <label for="table-search" className="sr-only">
           Search
         </label>
@@ -44,6 +47,11 @@ const ProjectList = () => {
             className="block p-2 pl-10 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search for items"
           />
+        </div>
+        <div>
+          <Link to={ROUTE.CREATEPROJECT}>
+            <Button>Create New Project</Button>
+          </Link>
         </div>
       </div>
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

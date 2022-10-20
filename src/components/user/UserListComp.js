@@ -6,6 +6,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteIcon from '@mui/icons-material/Delete';
 import TaskModal from '../TaskModal';
+import * as ROUTES from '../../assets/constants/routes';
 
 const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
   const [open, setOpen] = React.useState(false);
@@ -34,7 +35,7 @@ const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
       <td class="py-4 px-6">{phone}</td>
       <td class="py-4 px-6">
         <Link
-          to={`/view-user/${id}`}
+          to={`${ROUTES.USERS}/${id}`}
           class="mr-4 text-blue-600 dark:text-blue-500 hover:underline"
         >
           <VisibilityIcon fontSize="small" />

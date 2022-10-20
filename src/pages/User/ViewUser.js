@@ -15,10 +15,10 @@ const ViewUser = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const { userID } = useParams();
+  const { uid } = useParams();
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/users/${userID}`).then((response) => {
+    axios.get(`http://localhost:3000/users/${uid}`).then((response) => {
       setUser(response.data);
     });
   }, []);
