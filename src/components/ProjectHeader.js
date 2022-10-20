@@ -9,7 +9,7 @@ const ProjectHeader = ({ header }) => {
             <a
               href={head.url}
               aria-current="page"
-              class="inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
+              class="inline-block p-4 text-myBlue bg-white rounded-t-lg active dark:bg-gray-800 dark:text-blue-500"
             >
               {head.title}
             </a>

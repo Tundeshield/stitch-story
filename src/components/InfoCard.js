@@ -1,10 +1,16 @@
+import { IconButton } from '@mui/material';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+
 const InfoCard = ({ id, projectName, projectDescription, status }) => {
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
-      <div className="px-4 py-5 sm:px-6">
+      <div className="px-4 py-5 flex justify-between items-center sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
           Production Contract Details
         </h3>
+        <IconButton>
+          <ModeEditIcon />
+        </IconButton>
       </div>
       <div className="border-t border-gray-200">
         <dl>

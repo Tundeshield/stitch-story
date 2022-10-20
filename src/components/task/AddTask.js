@@ -8,7 +8,7 @@ import { addDays } from 'date-fns';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { addTask, removeTask } from '../../features/task/taskSlice';
-import TaskModal from '../Modal';
+import TaskModal from '../TaskModal';
 
 const AddTask = ({ handleClose, open, title }) => {
   const [staff, setStaff] = useState([]);

@@ -40,7 +40,7 @@ const Menu = ({ name, icon, subMenu, url }) => {
               <li>
                 <Link
                   to={item.url}
-                  className="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-myBlue dark:text-white dark:hover:bg-gray-700"
+                  className="flex items-center justify-around p-2 pl-4 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-myBlue dark:text-white dark:hover:bg-gray-700"
                 >
                   <span className="text-buttonBlue text-sm">{item.icon}</span>
                   <span className="pl-3 text-white text-xs font-semibold mr-2">

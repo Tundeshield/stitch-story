@@ -4,11 +4,12 @@ import RadioComp from '../RadioComp';
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import { IconButton } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
+import * as ROUTES from '../../assets/constants/routes';
 
 const TaskItem = ({ taskName, id }) => {
   const [checked, setChecked] = useState(false);
 
-  const { projectID } = useParams();
+  const { pid } = useParams();
 
   const handleChange = (e) => {
     setChecked(e.target.checked);
@@ -31,7 +32,7 @@ const TaskItem = ({ taskName, id }) => {
             {taskName}
           </span>
           <Link
-            to={id}
+            to={`${ROUTES.TASKS}/${id}`}
             className="text-xs text-blue-600 dark:text-blue-500 hover:underline"
           >
             View Details

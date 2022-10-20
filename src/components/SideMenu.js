@@ -4,6 +4,8 @@ import { client, manager, supervisor } from '../assets/MenuData';
 import Logo from '../assets/images/Logo.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { Link } from 'react-router-dom';
+import { auth } from '../utils/firebase';
+import { signOut } from 'firebase/auth';
 
 const SideMenu = () => {
   const [menu, setMenu] = useState(manager);
@@ -30,7 +32,7 @@ const SideMenu = () => {
             />
           ))}
         </span>
-        <span>
+        <span onClick={() => signOut(auth)}>
           <Menu
             name="Logout"
             icon={<PowerSettingsNewIcon className="text-myRed" />}
