@@ -3,7 +3,7 @@ import Menu from './Menu';
 import { client, admin, supervisor } from '../assets/MenuData';
 import Logo from '../assets/images/Logo.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,6 +14,7 @@ const SideMenu = () => {
 
   const userCat = useSelector((state) => state.user.isAdmin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (userCat === false) {
@@ -26,6 +27,7 @@ const SideMenu = () => {
   const logoutUser = () => {
     dispatch(removeUserDetails());
     signOut(auth);
+    navigate('/');
   };
 
   return (

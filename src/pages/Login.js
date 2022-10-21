@@ -17,7 +17,7 @@ import { auth, app } from '../utils/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import useAuthClaims from '../hooks/useAuthClaims';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logUserDetails } from '../features/user/userSlice';
 import { signOut } from 'firebase/auth';
 
@@ -29,6 +29,7 @@ export default function LogIn() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const admin = useSelector((state) => state.user.isAdmin);
 
   //Handle login function
   const handleSignInLink = (event) => {
@@ -48,7 +49,6 @@ export default function LogIn() {
             } else {
               loggedinuser.admin = false;
             }
-
             // Add the user details to redux
             dispatch(
               logUserDetails({
@@ -58,7 +58,7 @@ export default function LogIn() {
                 uid: loggedinuser.uid,
               }),
             );
-            console.log(loggedinuser);
+            loggedinuser.admin ? navigate('/projects') : navigate('/orders');
           });
         });
       })
@@ -67,8 +67,7 @@ export default function LogIn() {
       });
 
     //check auth state of user if admin, redirect to admin routes, is client, redirect to client routes
-
-    //navigate('/projects');
+    //Check user auth to redirect
   };
 
   return (

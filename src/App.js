@@ -21,43 +21,29 @@ import MyProjects from './pages/client/MyProjects';
 import TrackOrder from './pages/client/TrackOrder';
 import * as ROUTE from './assets/constants/routes';
 import ResetPassword from './pages/ResetPassword';
-import { AdminRoutes, ClientRoutes } from './assets/PrivateRoutes';
+import { AdminRoutes, UserRoutes } from './assets/PrivateRoutes';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* General Routes */}
-        <Route path={ROUTE.LANDING} element={<Login />} />
+        <Route path="/" element={<Login />} />
         <Route path={ROUTE.NOTFOUND} element={<NotFoundPage />} />
         <Route path={ROUTE.RESETPASSWORD} element={<ResetPassword />} />
 
-        {/* Admin Routes */}
         <Route element={<AdminRoutes />}>
-          <Route path={ROUTE.CREATEPROJECT} element={<CreateProject />} />
-          <Route path={ROUTE.PROJECTS} element={<Projects />} />
-          <Route path={`${ROUTE.PROJECTS}/:pid`} element={<Project />} />
-          <Route path={ROUTE.CREATEUSER} element={<CreateUser />} />
-          <Route path={ROUTE.USERS} element={<ViewUsers />} />
-          <Route path={`${ROUTE.USERS}/:uid`} element={<ViewUser />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/create" element={<CreateProject />} />
+          <Route path="/users" element={<ViewUsers />} />
         </Route>
 
-        {/* Customer Routes */}
-        <Route element={<ClientRoutes />}>
-          <Route path={`${ROUTE.TASKS}/:tid`} element={<Task />} />
-          <Route path={`${ROUTE.CLIENTS}/projects`} element={<MyProjects />} />
-          {/* <Route
-          path={`${ROUTE.CLIENTS}/:uid/projects`}
-          element={<MyProjects />}
-        /> */}
-          <Route
-            path={`${ROUTE.CLIENTS}/projects/track/:pid`}
-            element={<TrackOrder />}
-          />
-          {/* <Route
-          path={`${ROUTE.CLIENTS}/:uid/projects/track/:pid`}
-          element={<TrackOrder />}
-        /> */}
+        <Route element={<UserRoutes />}>
+          <Route path="/projects/:id" element={<Project />} />
+          <Route path="/users/:id" element={<ViewUser />} />
+          <Route path="/tasks" />
+          <Route path="/tasks/:id" element={<Task />} />
+          <Route path="/orders" element={<MyProjects />} />
+          <Route path="/orders/:id" element={<TrackOrder />} />
         </Route>
       </Routes>
     </Router>

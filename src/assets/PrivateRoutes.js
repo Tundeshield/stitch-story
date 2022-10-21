@@ -4,17 +4,27 @@ import { useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebase';
 import * as ROUTES from '../assets/constants/routes';
+import LogIn from '../pages/Login';
 
 export const AdminRoutes = () => {
   const admin = useSelector((state) => state.user.isAdmin);
-
   const [user] = useAuthState(auth);
-  console.log(admin, user);
-  return admin ? <Outlet /> : <Navigate to={ROUTES.LANDING} />;
+
+  return user && admin ? <Outlet /> : <Navigate to={<LogIn />} />;
 };
 
-export const ClientRoutes = () => {
+export const UserRoutes = () => {
+  const [user] = useAuthState(auth);
+  return user ? <Outlet /> : <Navigate to={<LogIn />} />;
+};
+
+// if user is admin and homepage is clicked, redirect to projects
+export const LoggedInClaim = () => {
   const admin = useSelector((state) => state.user.isAdmin);
   const [user] = useAuthState(auth);
-  return user ? <Outlet /> : <Navigate to={ROUTES.LANDING} />;
+
+
+  
 };
+
+// if user is not admin and homepage is clicked, redirect to myprojects

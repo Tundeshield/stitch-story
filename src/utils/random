@@ -1,0 +1,40 @@
+{
+  /* General Routes */
+}
+{
+  /* <Route path={ROUTE.LANDING} element={<Login />} />
+        <Route path={ROUTE.NOTFOUND} element={<NotFoundPage />} />
+        <Route path={ROUTE.RESETPASSWORD} element={<ResetPassword />} /> */
+}
+
+{
+  /* Routes for only authenticated users */
+}
+{
+  /* <Route element={<UserRoutes />}>
+          <Route path={`${ROUTE.TASKS}/:tid`} element={<Task />} />
+          <Route path={`${ROUTE.USER}/projects`} element={<MyProjects />} />
+
+          <Route
+            path={`${ROUTE.USER}/projects/track/:pid`}
+            element={<TrackOrder />}
+          /> */
+}
+{
+  /* <Route element={<AdminRoutes />}>
+            <Route path={ROUTE.CREATEPROJECT} element={<CreateProject />} />
+            <Route path={ROUTE.PROJECTS} element={<Projects />} />
+            <Route path={`${ROUTE.PROJECTS}/:pid`} element={<Project />} />
+            <Route path={ROUTE.CREATEUSER} element={<CreateUser />} />
+            <Route path={ROUTE.USERS} element={<ViewUsers />} />
+            <Route path={`${ROUTE.USERS}/:uid`} element={<ViewUser />} />
+            <Route path={`${ROUTE.TASKS}/:tid`} element={<Task />} />
+            <Route
+              path={`${ROUTE.CLIENTS}/projects`}
+              element={<MyProjects />}
+            />
+          </Route> */
+}
+{
+  /* </Route> */
+}

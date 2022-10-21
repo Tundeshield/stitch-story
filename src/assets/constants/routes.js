@@ -8,6 +8,7 @@ export const CLIENTS = '/clients';
 export const TRACKPROJECT = '/clients/:clientid/:projectid/track';
 export const NOTFOUND = '*';
 export const RESETPASSWORD = '/reset-password';
+export const USER = '/user';
 
 // <Route path={ROUTE.LANDING} element={<Login />} />
 // <Route path="*" element={<NotFoundPage />} />
