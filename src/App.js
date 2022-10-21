@@ -21,6 +21,7 @@ import MyProjects from './pages/client/MyProjects';
 import TrackOrder from './pages/client/TrackOrder';
 import * as ROUTE from './assets/constants/routes';
 import ResetPassword from './pages/ResetPassword';
+import { AdminRoutes, ClientRoutes } from './assets/PrivateRoutes';
 
 function App() {
   return (
@@ -32,29 +33,32 @@ function App() {
         <Route path={ROUTE.RESETPASSWORD} element={<ResetPassword />} />
 
         {/* Admin Routes */}
-        <Route path={ROUTE.CREATEPROJECT} element={<CreateProject />} />
-        <Route path={ROUTE.PROJECTS} element={<Projects />} />
-        <Route path={`${ROUTE.PROJECTS}/:pid`} element={<Project />} />
-        <Route path={ROUTE.CREATEUSER} element={<CreateUser />} />
-        <Route path={ROUTE.USERS} element={<ViewUsers />} />
-        <Route path={`${ROUTE.USERS}/:uid`} element={<ViewUser />} />
+        <Route element={<AdminRoutes />}>
+          <Route path={ROUTE.CREATEPROJECT} element={<CreateProject />} />
+          <Route path={ROUTE.PROJECTS} element={<Projects />} />
+          <Route path={`${ROUTE.PROJECTS}/:pid`} element={<Project />} />
+          <Route path={ROUTE.CREATEUSER} element={<CreateUser />} />
+          <Route path={ROUTE.USERS} element={<ViewUsers />} />
+          <Route path={`${ROUTE.USERS}/:uid`} element={<ViewUser />} />
+        </Route>
 
         {/* Customer Routes */}
-
-        <Route path={`${ROUTE.TASKS}/:tid`} element={<Task />} />
-        <Route path={`${ROUTE.CLIENTS}/projects`} element={<MyProjects />} />
-        {/* <Route
+        <Route element={<ClientRoutes />}>
+          <Route path={`${ROUTE.TASKS}/:tid`} element={<Task />} />
+          <Route path={`${ROUTE.CLIENTS}/projects`} element={<MyProjects />} />
+          {/* <Route
           path={`${ROUTE.CLIENTS}/:uid/projects`}
           element={<MyProjects />}
         /> */}
-        <Route
-          path={`${ROUTE.CLIENTS}/projects/track/:pid`}
-          element={<TrackOrder />}
-        />
-        {/* <Route
+          <Route
+            path={`${ROUTE.CLIENTS}/projects/track/:pid`}
+            element={<TrackOrder />}
+          />
+          {/* <Route
           path={`${ROUTE.CLIENTS}/:uid/projects/track/:pid`}
           element={<TrackOrder />}
         /> */}
+        </Route>
       </Routes>
     </Router>
   );

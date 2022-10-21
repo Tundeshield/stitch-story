@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import Menu from './Menu';
-import { client, manager, supervisor } from '../assets/MenuData';
+import { client, admin, supervisor } from '../assets/MenuData';
 import Logo from '../assets/images/Logo.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { Link } from 'react-router-dom';
 import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeUserDetails } from '../features/user/userSlice';
 
 const SideMenu = () => {
-  const [menu, setMenu] = useState(manager);
-  const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState([{}]);
 
-  const toggleClick = () => {
-    setOpen(!open);
+  const userCat = useSelector((state) => state.user.isAdmin);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userCat === false) {
+      setMenu(client);
+    } else {
+      setMenu(admin);
+    }
+  }, []);
+
+  const logoutUser = () => {
+    dispatch(removeUserDetails());
+    signOut(auth);
   };
 
   return (
@@ -32,7 +45,7 @@ const SideMenu = () => {
             />
           ))}
         </span>
-        <span onClick={() => signOut(auth)}>
+        <span onClick={logoutUser}>
           <Menu
             name="Logout"
             icon={<PowerSettingsNewIcon className="text-myRed" />}

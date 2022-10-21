@@ -13,18 +13,10 @@ const firebaseConfig = {
   appId: '1:528282301455:web:e4e19b62c90cd6651e9f7a',
 };
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore(app);
+export const functions = require('firebase/functions');
 
-//Test function, dont forget to remove.
 
-// export async function grantModRole(email) {
-//   const user = await admin.auth().getUserByEmail(email);
-//   if (user.customClaims && user.customClaims.moderator === true) {
-//     return;
-//   }
-//   return admin.auth().setCustomUserClaims(user.uid, {
-//     productionManager: true,
-//   });
-// }
+
