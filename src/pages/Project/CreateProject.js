@@ -11,19 +11,21 @@ import {
 import axios from 'axios';
 import ProjectHeader from '../../components/ProjectHeader';
 import Button from '../../components/Button';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
 import AddTask from '../../components/task/AddTask';
-import DatePicker from '../../components/DatePicker';
+
 import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
-import Modal from '../../components/TaskModal';
-import TaskModal from '../../components/TaskModal';
+
 import AddIcon from '@mui/icons-material/Add';
 import { useForm } from 'react-hook-form';
-import { IconButton } from '@mui/material';
+
 import SaveIcon from '@mui/icons-material/Save';
+import { db } from '../../utils/firebase';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { addDoc, collection, getDocs, onSnapshot } from 'firebase/firestore';
 
 const CreateProject = () => {
-  const [clients, setClient] = useState([]);
+  const [clients, setClients] = useState([]);
   const [open, setOpen] = React.useState(false);
   const headers = [
     {
@@ -33,6 +35,10 @@ const CreateProject = () => {
     },
   ];
 
+  const [value, loading, error] = useCollection(collection(db, 'clients'), {
+    snapshotListenOptions: { includeMetadataChanges: true },
+  });
+
   const {
     register,
     handleSubmit,
@@ -41,20 +47,25 @@ const CreateProject = () => {
     mode: 'onBlur',
   });
 
+  const getData = async () => {
+    const colRef = collection(db, 'clients');
+    const snapshot = await getDocs(colRef);
+    const data = snapshot.docs.map((doc) => doc.data());
+    setClients(data);
+  };
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/users').then((response) => {
-      setClient(response.data);
-    });
+    getData();
   }, []);
 
   const handleSaveProject = (data) => {
-    //Get all the tasks
-    // Join the tasks and form data
-    // Send the data to the database
-    console.log(data);
+    const { title, client, description } = data;
+    const colRef = collection(db, 'projects');
+    const docRef = addDoc(colRef, { title, client, description });
+    return docRef;
   };
   return (
     <Page>
