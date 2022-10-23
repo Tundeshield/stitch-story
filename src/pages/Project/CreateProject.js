@@ -27,6 +27,7 @@ const CreateProject = () => {
   const [open, setOpen] = React.useState(false);
   const headers = [
     {
+      id: 1235768,
       title: 'Create New Project',
       url: '#',
     },
@@ -93,7 +94,9 @@ const CreateProject = () => {
                   >
                     <option selected>Select customer</option>
                     {clients.map((option) => (
-                      <option value={option.id}>{option.companyName}</option>
+                      <option key={option.id} value={option.id}>
+                        {option.companyName}
+                      </option>
                     ))}
                   </select>
                   {errors.client && <ErrorDisplay title="customer" />}

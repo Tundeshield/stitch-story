@@ -3,9 +3,9 @@ import React from 'react';
 const ProjectHeader = ({ header }) => {
   return (
     <>
-      <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+      <ul className="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
         {header.map((head) => (
-          <li class="mr-2">
+          <li class="mr-2" key={head.id}>
             <a
               href={head.url}
               aria-current="page"

@@ -21,7 +21,7 @@ const ViewUser = () => {
     axios.get(`http://localhost:3000/users/${uid}`).then((response) => {
       setUser(response.data);
     });
-  }, []);
+  }, [uid]);
 
   return (
     <Page>

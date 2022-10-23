@@ -47,7 +47,7 @@ const UserListComp = ({ companyName, contactPerson, email, phone, id }) => {
       <TaskModal
         open={open}
         handleClose={handleClose}
-        title="Are you sure you want to delete this project?"
+        title="Are you sure you want to delete this customer?"
       >
         <span className="flex justify-between items-center">
           <button

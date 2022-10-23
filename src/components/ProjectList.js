@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { Avatar, IconButton } from '@mui/material';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+
 import ProjectListItem from './ProjectListItem';
-import StatusBadge from './StatusBadge';
+
 import axios from 'axios';
 import Button from './Button';
-import { Link, Routes } from 'react-router-dom';
-import * as ROUTE from '../assets/constants/routes';
+import { Link,  } from 'react-router-dom';
+
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
@@ -17,7 +14,7 @@ const ProjectList = () => {
     axios.get('http://localhost:3000/projects').then((response) => {
       setProjects(response.data);
     });
-  }, []);
+  }, [projects]);
 
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
@@ -49,7 +46,7 @@ const ProjectList = () => {
           />
         </div>
         <div>
-          <Link to={ROUTE.CREATEPROJECT}>
+          <Link to="/projects/create">
             <Button>Create New Project</Button>
           </Link>
         </div>
@@ -91,6 +88,7 @@ const ProjectList = () => {
               projectName={item.projectName}
               projectDescription={item.projectDescription}
               status={item.status}
+              key={item.id}
             />
           ))}
         </tbody>

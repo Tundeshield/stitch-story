@@ -27,6 +27,7 @@ export default function LogIn() {
   const [user, loading] = useAuthState(auth);
   const [isAdmin, setIsAdmin] = useState();
   const [error, setError] = useState('');
+  const [dispatchedUser, setDispatchedUser] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const admin = useSelector((state) => state.user.isAdmin);
@@ -58,7 +59,7 @@ export default function LogIn() {
                 uid: loggedinuser.uid,
               }),
             );
-            loggedinuser.admin ? navigate('/projects') : navigate('/orders');
+            loggedinuser.admin ? navigate('/users') : navigate('/orders');
           });
         });
       })
@@ -154,15 +155,6 @@ export default function LogIn() {
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
-          <Button
-            onClick={() => signOut(auth)}
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign out
-          </Button>
         </Grid>
       </Grid>
     </ThemeProvider>

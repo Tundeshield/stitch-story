@@ -48,6 +48,7 @@ const ViewUsers = () => {
                   email={company.Email}
                   phone={company.phone}
                   id={company.id}
+                  key={company.id}
                 />
               ))}
             </tbody>

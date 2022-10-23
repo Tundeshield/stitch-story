@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import BreadCrumb from './BreadCrumb';
-import Header from './Header';
-import axios from 'axios';
+import { ChangePassword } from './Alerts';
 import SideMenu from './SideMenu';
 
 const Container = ({ children }) => {
@@ -9,6 +7,7 @@ const Container = ({ children }) => {
     <div className="flex bg-myGray">
       <SideMenu />
       <div className="w-screen py-8 px-14">{children}</div>
+     
     </div>
   );
 };

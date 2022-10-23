@@ -8,6 +8,7 @@ import axios from 'axios';
 import TaskContainer from '../../components/task/TaskContainer';
 import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
 import TaskModal from '../../components/TaskModal';
+import CommentBox from '../../components/CommentBox';
 
 const Project = () => {
   const { pid } = useParams();
@@ -25,7 +26,7 @@ const Project = () => {
       .catch((error) => {
         setError(error);
       });
-  }, []);
+  }, [pid, project]);
 
   return (
     <Page>
@@ -77,9 +78,6 @@ const Project = () => {
               <TaskContainer />
             </div>
           </div>
-        </div>
-        <div>
-          <TaskModal />
         </div>
       </Container>
     </Page>

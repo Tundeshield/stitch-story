@@ -22,7 +22,7 @@ const SideMenu = () => {
     } else {
       setMenu(admin);
     }
-  }, []);
+  }, [userCat]);
 
   const logoutUser = () => {
     dispatch(removeUserDetails());
@@ -38,13 +38,15 @@ const SideMenu = () => {
       >
         <span>
           {menu.map((item) => (
-            <Menu
-              name={item.name}
-              icon={item.icon}
-              subMenu={item.subMenu}
-              url={item.url}
-              key={item.id}
-            />
+            <span key={item.id}>
+              <Menu
+                name={item.name}
+                icon={item.icon}
+                subMenu={item.subMenu}
+                url={item.url}
+                key={item.id}
+              />
+            </span>
           ))}
         </span>
         <span onClick={logoutUser}>

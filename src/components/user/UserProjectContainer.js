@@ -21,11 +21,12 @@ const UserProjectContainer = () => {
         </p>
         <ul class="my-4 space-y-3">
           {userProjects.map((item) => (
-            <span key={item.id}>
+            <span>
               <ProjectItem
                 projectName={item.projectName}
                 id={item.id}
                 status={item.status}
+                key={item.id}
               />
             </span>
           ))}

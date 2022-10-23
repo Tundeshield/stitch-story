@@ -118,7 +118,9 @@ const AddTask = ({ handleClose, open, title }) => {
               >
                 <option selected>Choose a supervisor</option>
                 {staff.map((option) => (
-                  <option value={option.id}>{option.companyName}</option>
+                  <option key={option.id} value={option.id}>
+                    {option.companyName}
+                  </option>
                 ))}
               </select>
               {errors.supervisor && <ErrorDisplay title="description" />}
