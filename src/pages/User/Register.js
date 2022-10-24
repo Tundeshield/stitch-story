@@ -10,6 +10,10 @@ import img from '../../assets/images/loginLogo.png';
 import { useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { IconButton } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
+import googleIcon from '../../assets/images/googleIcon.png';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
   const [success, setSuccess] = useState(false);
@@ -25,44 +29,40 @@ const Register = () => {
     useCreateUserWithEmailAndPassword(auth);
   const [user] = useAuthState(auth);
 
+  const [makeError, setMakeError] = useState(false);
+
   const handleRegister = async (data) => {
-    const {
-      companyName,
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-    } = data;
+    const { email, password, confirmPassword } = data;
     if (password !== confirmPassword) {
       return error;
     }
 
-    await createUserWithEmailAndPassword(email, password).then(() => {
-      if (!loading) {
-        const userId = auth.currentUser.uid;
-
-        // Create user in the clients table
-        const docRef = doc(db, 'clients', userId);
-        const dataReg = {
-          companyName: data.companyName,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email,
-        };
-
-        //Set the user data to the clients database
-        setDoc(docRef, dataReg)
-          .then((docRef) => {
-            console.log('Entire Document has been updated successfully');
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-
-        navigate('/orders');
-      }
-    });
+    if (!error) {
+      await createUserWithEmailAndPassword(email, password).then(() => {
+        if (!loading) {
+          const userId = auth.currentUser.uid;
+          // Create user in the clients table
+          const docRef = doc(db, 'clients', userId);
+          const dataReg = {
+            companyName: data.companyName,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+          };
+          //Set the user data to the clients database
+          setDoc(docRef, dataReg)
+            .then((docRef) => {
+              console.log('Entire Document has been updated successfully');
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+          navigate('/orders');
+        }
+      });
+    } else {
+      return error;
+    }
   };
 
   return (
@@ -201,11 +201,20 @@ const Register = () => {
               </div>
             )}
           </div>
-          {loading ? (
-            <LoadingButton>Saving Company ...</LoadingButton>
-          ) : (
-            <Button>Register...</Button>
-          )}
+          <div></div>
+          <div className="flex justify-between">
+            {loading ? (
+              <LoadingButton>Saving Company ...</LoadingButton>
+            ) : (
+              <Button>Register...</Button>
+            )}
+
+            <div>
+              <IconButton>
+                <img src={googleIcon} alt="" className="w-8" />
+              </IconButton>
+            </div>
+          </div>
         </form>
         {error && (
           <ErrorAlert

@@ -33,15 +33,18 @@ const CreateProject = () => {
   } = useForm({
     mode: 'onBlur',
   });
+  const navigate = useNavigate();
 
   const getData = async () => {
     const colRef = collection(db, 'clients');
     const snapshot = await getDocs(colRef);
-    const data = snapshot.docs.map((doc) => doc.data());
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+
+      ...doc.data(),
+    }));
     setClients(data);
   };
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     getData();

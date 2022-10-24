@@ -33,7 +33,11 @@ const Header = () => {
         </span>
 
         <IconButton>
-          <Avatar alt="Remy Sharp" src={userImg} className="cursor-pointer" />
+          <Avatar
+            alt="Remy Sharp"
+            src={user?.photoURL ? user?.photoURL : userImg}
+            className="cursor-pointer"
+          />
         </IconButton>
         <span
           className="cursor-pointer text-myDarkBlue md:hidden"

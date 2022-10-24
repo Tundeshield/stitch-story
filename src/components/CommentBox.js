@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { auth, db } from '../utils/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-const CommentBox = ({ handleClose }) => {
+const CommentBox = ({ handleClose, id }) => {
   const [comment, setComment] = useState('');
+  const [error, setError] = useState(false);
   const [sentComment, setSentComment] = useState(false);
+  const [user, loading] = useAuthState(auth);
 
-  const postComment = (e) => {
+  const postComment = async (e) => {
     e.preventDefault();
+    if (comment === '') {
+      setError(true);
+      return;
+    } else {
+      const docRef = await addDoc(collection(db, 'comments'), {
+        sender: 'Production Manager',
+        comment: comment,
+        timePosted: Timestamp.now(),
+      });
+      console.log('Document written with ID: ', docRef.id);
+    }
+    setError(false);
+    // Add a new document with a generated id.
     setSentComment(true);
     setComment('');
-    setTimeout(() => {
-      setSentComment(false);
-      handleClose();
-    }, 3000);
+    if (comment) {
+      setTimeout(() => {
+        setSentComment(false);
+        handleClose();
+      }, 3000);
+    }
   };
+
   return (
     <div>
       <form onSubmit={postComment}>
-        <div class="relative">
+        <div class="relative mb-6">
           <input
             type="text"
             value={comment}
@@ -32,6 +53,14 @@ const CommentBox = ({ handleClose }) => {
             <SendIcon className="text-white" />
           </button>
         </div>
+        {error && (
+          <div
+            class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
+            role="alert"
+          >
+            <span class="font-medium">Error!</span> Please enter a comment.
+          </div>
+        )}
       </form>
       {sentComment && (
         <div

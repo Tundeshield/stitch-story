@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logUserDetails } from '../features/user/userSlice';
 import { signOut } from 'firebase/auth';
 import { Timestamp } from 'firebase/firestore';
+import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 
 const theme = createTheme();
 
@@ -149,11 +150,20 @@ export default function LogIn() {
                   Unauthorized user, contact production team!
                 </ErrorAlert>
               )}
-              {user && (
-                <h1>
-                  there is a user {user.email} and {isAdmin}
-                </h1>
-              )}
+              <Link to="/register">
+                <div className="flex justify-center">
+                  <div
+                    id="toast-simple"
+                    class="flex items-center p-4 space-x-4 w-full max-w-xs text-myBlue bg-white rounded-lg divide-x divide-gray-200 shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                    role="alert"
+                  >
+                    <AssuredWorkloadIcon />
+                    <div class="pl-4 text-sm font-normal">
+                      New Client? Please register here...
+                    </div>
+                  </div>
+                </div>
+              </Link>
 
               <Copyright sx={{ mt: 5 }} />
             </Box>

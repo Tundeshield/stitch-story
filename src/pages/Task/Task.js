@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '../../components/Container';
 import Page from '../../components/Page';
-import { TaskComments } from '../../components/comment/TaskComments';
 import TaskInfoCard from '../../components/task/TaskInfoCard';
 
 const Task = () => {

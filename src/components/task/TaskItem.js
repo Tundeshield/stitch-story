@@ -93,7 +93,7 @@ const TaskItem = ({ taskName, id }) => {
         handleClose={handleClose}
         title="Update the customer about the task..."
       >
-        <CommentBox handleClose={handleClose} />
+        <CommentBox handleClose={handleClose} id={id} />
       </TaskModal>
     </>
   );
