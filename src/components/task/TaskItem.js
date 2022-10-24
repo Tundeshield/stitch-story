@@ -12,8 +12,8 @@ import { async } from '@firebase/util';
 import { deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
 
-const TaskItem = ({ taskName, id }) => {
-  const [checked, setChecked] = useState(false);
+const TaskItem = ({ taskName, id, completed }) => {
+  const [checked, setChecked] = useState(completed);
   const [open, setOpen] = React.useState(false);
 
   const navigate = useNavigate();

@@ -46,7 +46,7 @@ const Milestone = ({ task }) => {
           id="panel1a-header"
         >
           {task.completed ? (
-            <CheckCircleIcon className="text-myDarkBlue mr-2" />
+            <CheckCircleIcon className="text-green-500 mr-2" />
           ) : (
             <PendingActionsIcon className="text-red-400 mr-2" />
           )}
