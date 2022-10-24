@@ -1,29 +1,28 @@
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import AddIcon from '@mui/icons-material/Add';
 import ListIcon from '@mui/icons-material/List';
+import SettingsIcon from '@mui/icons-material/Settings';
 import * as ROUTE from './constants/routes';
 
 const randomInt = () => {
   return Math.floor(Math.random() * 96843);
 };
 
-const manager = [
+const admin = [
   {
-    id: randomInt(),
+    id: 1909008,
     name: 'Projects',
     icon: <FolderOpenIcon className="text-white" />,
     subMenu: [
       {
-        id: randomInt(),
+        id: 9405848,
         name: 'Create ',
-        url: ROUTE.CREATEPROJECT,
+        url: '/projects/create',
         icon: <AddIcon className="text-white" />,
       },
       {
-        id: randomInt(),
+        id: 357654,
         name: 'View Projects ',
         url: ROUTE.PROJECTS,
         icon: <ListIcon className="text-white" />,
@@ -31,65 +30,33 @@ const manager = [
     ],
   },
   {
-    id: randomInt(),
+    id: 463633536,
     name: 'Customers',
     icon: <PermIdentityIcon className="text-white" />,
     subMenu: [
       {
-        id: randomInt(),
+        id: 45246543732,
         name: 'Add Customer ',
         url: ROUTE.CREATEUSER,
         icon: <AddIcon className="text-white" />,
       },
       {
-        id: randomInt(),
+        id: 76574675436262,
         name: 'View Customers ',
         url: ROUTE.USERS,
         icon: <ListIcon className="text-white" />,
       },
     ],
   },
-  // {
-  //   id: randomInt(),
-  //   name: 'Messages',
-  //   icon: <MailOutlineIcon className="text-white" />,
-  //   subMenu: [
-  //     {
-  //       id: randomInt(),
-  //       name: 'Create ',
-  //       url: '/create-message',
-  //       icon: <AddIcon className="text-white" />,
-  //     },
-  //   ],
-  // },
 ];
-
-// const supervisor = [
-//   {
-//     id: randomInt(),
-//     name: 'Tasks',
-//     icon: <FormatListBulletedIcon fontSize="small" />,
-//   },
-
-//   {
-//     id: randomInt(),
-//     name: 'Messages',
-//     icon: <MailOutlineIcon fontSize="small" />,
-//   },
-// ];
 
 const client = [
   {
-    id: randomInt(),
+    id: 426253735,
     name: 'My projects',
     icon: <FolderOpenIcon className="text-white" />,
-    url: ROUTE.CLIENTS,
+    url: '/orders',
   },
-  // {
-  //   id: randomInt(),
-  //   name: 'Messages',
-  //   icon: <MailOutlineIcon className="text-white" />,
-  // },
 ];
 
-export { manager, client };
+export { admin, client };

@@ -1,36 +1,41 @@
-import { findByLabelText } from '@testing-library/react';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { Avatar, IconButton } from '@mui/material';
-import Drawer from './Drawer';
 import logo from '../assets/images/Logo.png';
+import { useSelector } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../utils/firebase';
+import userImg from '../assets/images/user-default.png';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const user = {
-    name: 'Tom Cook',
-    email: 'tom@example.com',
-    imageUrl:
-      'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  };
+
+  const [user] = useAuthState(auth);
+  const admin = useSelector((state) => state.user.isAdmin);
 
   return (
     <header className="shadow bg-white flex py-3 px-4 justify-between items-center">
       <div className="max-w-7xl  sm:px-6 lg:px-8">
-        <img src={logo} alt="" className="w-64" />
+        <Link
+          to={user && admin ? '/projects' : user && !admin ? '/orders' : '/'}
+          className="cursor-pointer"
+        >
+          <img src={logo} alt="" className="w-64" />
+        </Link>
       </div>
       <div className="flex items-center px-8">
-        <IconButton>
-          <NotificationsNoneIcon className="mr-2 cursor-pointer text-myDarkBlue" />
-        </IconButton>
+        <span className="mr-2 cursor-pointer text-myDarkBlue">
+          <IconButton>
+            <NotificationsNoneIcon />
+          </IconButton>
+        </span>
+
         <IconButton>
           <Avatar
             alt="Remy Sharp"
-            src={user.imageUrl}
+            src={user?.photoURL ? user?.photoURL : userImg}
             className="cursor-pointer"
           />
         </IconButton>

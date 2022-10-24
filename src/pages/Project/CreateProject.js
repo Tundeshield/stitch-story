@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/Header';
 import Page from '../../components/Page';
 import Container from '../../components/Container';
-import {
-  Input,
-  Dropdown,
-  TextArea,
-  ErrorDisplay,
-} from '../../components/Form/Form';
-import axios from 'axios';
+import { ErrorDisplay } from '../../components/Form/Form';
 import ProjectHeader from '../../components/ProjectHeader';
 import Button from '../../components/Button';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import AddTask from '../../components/task/AddTask';
-import DatePicker from '../../components/DatePicker';
-import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
-import Modal from '../../components/TaskModal';
-import TaskModal from '../../components/TaskModal';
-import AddIcon from '@mui/icons-material/Add';
 import { useForm } from 'react-hook-form';
-import { IconButton } from '@mui/material';
 import SaveIcon from '@mui/icons-material/Save';
+import { db, timestamp } from '../../utils/firebase';
+import { addDoc, collection, getDocs, Timestamp } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 const CreateProject = () => {
-  const [clients, setClient] = useState([]);
-  const [open, setOpen] = React.useState(false);
+  const tasks = useSelector((state) => state.task);
+
+  const [clients, setClients] = useState([]);
+
   const headers = [
     {
+      id: 1235768,
       title: 'Create New Project',
       url: '#',
     },
@@ -36,30 +29,43 @@ const CreateProject = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     mode: 'onBlur',
   });
+  const navigate = useNavigate();
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const getData = async () => {
+    const colRef = collection(db, 'clients');
+    const snapshot = await getDocs(colRef);
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+
+      ...doc.data(),
+    }));
+    setClients(data);
+  };
 
   useEffect(() => {
-    axios.get('http://localhost:3000/users').then((response) => {
-      setClient(response.data);
-    });
+    getData();
   }, []);
 
-  const handleSaveProject = (data) => {
-    //Get all the tasks
-    // Join the tasks and form data
-    // Send the data to the database
-    console.log(data);
+  const handleSaveProject = async (data) => {
+    const { title, client, description } = data;
+    const colRef = collection(db, 'projects');
+    const docRef = await addDoc(colRef, {
+      title,
+      client,
+      description,
+      createdAt: Timestamp.now(),
+    });
+    navigate(`/tasks/create/${docRef.id}`);
+    console.log('Document written with ID: ', docRef.id);
   };
   return (
     <Page>
       <Container>
         <ProjectHeader header={headers} />
-
         <div className="flex flex-col md:flex  justify-between relative">
           <div className="flex justify-between">
             <section className=" p-4 bg-white rounded-lg dark:bg-gray-800 md:w-full">
@@ -93,7 +99,9 @@ const CreateProject = () => {
                   >
                     <option selected>Select customer</option>
                     {clients.map((option) => (
-                      <option value={option.id}>{option.companyName}</option>
+                      <option key={option.id} value={option.id}>
+                        {option.companyName}
+                      </option>
                     ))}
                   </select>
                   {errors.client && <ErrorDisplay title="customer" />}
@@ -118,34 +126,12 @@ const CreateProject = () => {
                   {errors.description && <ErrorDisplay title="description" />}
                 </div>
                 <span className="flex justify-between">
-                  <div className="flex">
-                    <p>
-                      <strong>Add New Task:</strong>{' '}
-                    </p>
-                    <span onClick={handleOpen} className="animate-bounce ml-4">
-                      <span>
-                        <p
-                          type="button"
-                          class="focus:outline-none text-white bg-blue-700 hover:bg-blue-700  cursor-pointer focus:ring-4 focus:ring-blue-100 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                        >
-                          <AddIcon />{' '}
-                        </p>
-                      </span>
-                    </span>
-                  </div>
-
                   <Button>
-                    <SaveIcon /> Save New Project And Tasks
+                    Save New Project And Tasks Next <NavigateNextIcon />
                   </Button>
                 </span>
               </form>
             </section>
-            <div className="pt-4 ml-6">
-              <OnCreateTaskContainer />
-            </div>
-          </div>
-          <div className="absolute left-1/4 w-3/4 ">
-            <AddTask open={open} handleClose={handleClose} />
           </div>
         </div>
       </Container>

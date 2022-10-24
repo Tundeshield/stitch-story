@@ -37,7 +37,7 @@ const Menu = ({ name, icon, subMenu, url }) => {
         <React.Fragment>
           {subMenu.map((item) => (
             <ul className="py-2 space-y-2">
-              <li>
+              <li key={item.id}>
                 <Link
                   to={item.url}
                   className="flex items-center justify-around p-2 pl-4 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-myBlue dark:text-white dark:hover:bg-gray-700"

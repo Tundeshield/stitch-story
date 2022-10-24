@@ -1,18 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import Menu from './Menu';
-import { client, manager, supervisor } from '../assets/MenuData';
+import { client, admin, supervisor } from '../assets/MenuData';
 import Logo from '../assets/images/Logo.png';
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeUserDetails } from '../features/user/userSlice';
 
 const SideMenu = () => {
-  const [menu, setMenu] = useState(manager);
-  const [open, setOpen] = useState(false);
+  const [menu, setMenu] = useState([{}]);
 
-  const toggleClick = () => {
-    setOpen(!open);
+  const userCat = useSelector((state) => state.user.isAdmin);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userCat === false) {
+      setMenu(client);
+    } else {
+      setMenu(admin);
+    }
+  }, [userCat]);
+
+  const logoutUser = () => {
+    dispatch(removeUserDetails());
+    signOut(auth);
+    navigate('/');
   };
 
   return (
@@ -23,16 +38,18 @@ const SideMenu = () => {
       >
         <span>
           {menu.map((item) => (
-            <Menu
-              name={item.name}
-              icon={item.icon}
-              subMenu={item.subMenu}
-              url={item.url}
-              key={item.id}
-            />
+            <span key={item.id}>
+              <Menu
+                name={item.name}
+                icon={item.icon}
+                subMenu={item.subMenu}
+                url={item.url}
+                key={item.id}
+              />
+            </span>
           ))}
         </span>
-        <span onClick={() => signOut(auth)}>
+        <span onClick={logoutUser}>
           <Menu
             name="Logout"
             icon={<PowerSettingsNewIcon className="text-myRed" />}

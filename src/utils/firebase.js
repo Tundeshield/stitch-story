@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
+import { Timestamp } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -13,18 +15,10 @@ const firebaseConfig = {
   appId: '1:528282301455:web:e4e19b62c90cd6651e9f7a',
 };
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore(app);
-
-//Test function, dont forget to remove.
-
-// export async function grantModRole(email) {
-//   const user = await admin.auth().getUserByEmail(email);
-//   if (user.customClaims && user.customClaims.moderator === true) {
-//     return;
-//   }
-//   return admin.auth().setCustomUserClaims(user.uid, {
-//     productionManager: true,
-//   });
-// }
+export const functions = require('firebase/functions');
+export const storage = getStorage(app);
+export const timestamp = Timestamp.now();
+export const googleProvider = new GoogleAuthProvider();

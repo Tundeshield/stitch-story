@@ -3,15 +3,14 @@ import './index.css';
 import {
   BrowserRouter as Router,
   Routes,
-  Switch,
   Route,
-  Link,
+  Navigate,
 } from 'react-router-dom';
 import Login from './pages/Login';
 import CreateProject from './pages/Project/CreateProject';
 import Projects from './pages/Project/Projects';
 import Project from './pages/Project/Project';
-import People from './pages/People';
+
 import Task from './pages/Task/Task';
 import NotFoundPage from './pages/NotFoundPage';
 import CreateUser from './pages/User/CreateUser';
@@ -21,40 +20,80 @@ import MyProjects from './pages/client/MyProjects';
 import TrackOrder from './pages/client/TrackOrder';
 import * as ROUTE from './assets/constants/routes';
 import ResetPassword from './pages/ResetPassword';
+import { AdminRoutes, UserRoutes } from './assets/PrivateRoutes';
+import EditTask from './pages/Task/EditTask';
+import Register from './pages/User/Register';
+import { useSelector } from 'react-redux';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './utils/firebase';
+import UpdateUser from './pages/User/UpdateUser';
+import CreateTask from './pages/Task/CreateTask';
 
 function App() {
+  const admin = useSelector((state) => state.user.isAdmin);
+  const [user] = useAuthState(auth);
+
   return (
     <Router>
       <Routes>
-        {/* General Routes */}
-        <Route path={ROUTE.LANDING} element={<Login />} />
+        <Route
+          path="/"
+          element={user ? <Navigate to="/orders" /> : <Login />}
+        />
         <Route path={ROUTE.NOTFOUND} element={<NotFoundPage />} />
         <Route path={ROUTE.RESETPASSWORD} element={<ResetPassword />} />
+        <Route path="/register" element={<Register />} />
 
-        {/* Admin Routes */}
-        <Route path={ROUTE.CREATEPROJECT} element={<CreateProject />} />
-        <Route path={ROUTE.PROJECTS} element={<Projects />} />
-        <Route path={`${ROUTE.PROJECTS}/:pid`} element={<Project />} />
-        <Route path={ROUTE.CREATEUSER} element={<CreateUser />} />
-        <Route path={ROUTE.USERS} element={<ViewUsers />} />
-        <Route path={`${ROUTE.USERS}/:uid`} element={<ViewUser />} />
-
-        {/* Customer Routes */}
-
-        <Route path={`${ROUTE.TASKS}/:tid`} element={<Task />} />
-        <Route path={`${ROUTE.CLIENTS}/projects`} element={<MyProjects />} />
-        {/* <Route
-          path={`${ROUTE.CLIENTS}/:uid/projects`}
-          element={<MyProjects />}
-        /> */}
         <Route
-          path={`${ROUTE.CLIENTS}/projects/track/:pid`}
-          element={<TrackOrder />}
+          path="/projects"
+          element={admin ? <Projects /> : <Navigate to="/" />}
         />
-        {/* <Route
-          path={`${ROUTE.CLIENTS}/:uid/projects/track/:pid`}
-          element={<TrackOrder />}
-        /> */}
+        <Route
+          path="/projects/create"
+          element={
+            !admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateProject />
+          }
+        />
+        <Route
+          path="/users"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <ViewUsers />}
+        />
+        <Route
+          path="/users/create-user"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateUser />}
+        />
+        <Route
+          path="/users/update/:id"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <UpdateUser />}
+        />
+        <Route
+          path="/projects/:id"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <Project />}
+        />
+        <Route
+          path="/users/:id"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <ViewUser />}
+        />
+        <Route
+          path="/tasks/create/:id"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateTask />}
+        />
+        <Route
+          path="/tasks/edit/:id"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <EditTask />}
+        />
+        <Route
+          path="/tasks/:id"
+          element={admin ? <Task /> : <Navigate to={ROUTE.NOTFOUND} />}
+        />
+        <Route
+          path="/orders"
+          element={user ? <MyProjects /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/orders/:id"
+          element={!user ? <Navigate to="/" /> : <TrackOrder />}
+        />
       </Routes>
     </Router>
   );

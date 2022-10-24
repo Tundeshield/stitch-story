@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -13,47 +13,67 @@ import { Link } from 'react-router-dom';
 import Copyright from '../components/Copyright';
 import { ErrorAlert } from '../components/Feedback';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../utils/firebase';
+import { auth, app, timestamp } from '../utils/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import useAuthClaims from '../hooks/useAuthClaims';
+import { useDispatch, useSelector } from 'react-redux';
+import { logUserDetails } from '../features/user/userSlice';
+import { signOut } from 'firebase/auth';
+import { Timestamp } from 'firebase/firestore';
+import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 
 const theme = createTheme();
 
 export default function LogIn() {
-  const [authorized, setAuthorized] = useState(false);
-  const [user, loading, error] = useAuthState(auth);
-
-  // const addProductionManager = () => {
-  //   getAuth()
-  //     .getUserByEmail('tundeshield@gmail.com')
-  //     .then((user) => {
-  //       // Confirm user is verified.
-  //       if (user.emailVerified) {
-  //         // Add custom claims for additional privileges.
-  //         // This will be picked up by the user on token refresh or next sign in on new device.
-  //         return getAuth().setCustomUserClaims(user.uid, {
-  //           admin: true,
-  //         });
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+  const [user, loading] = useAuthState(auth);
+  const [isAdmin, setIsAdmin] = useState();
+  const [error, setError] = useState('');
+  const [dispatchedUser, setDispatchedUser] = useState();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const admin = useSelector((state) => state.user.isAdmin);
 
   //Handle login function
   const handleSignInLink = (event) => {
     event.preventDefault();
-    // grantModRole('tundeshield@gmail.com');
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    signInWithEmailAndPassword(auth, email, password);
-    console.log(user);
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) => {
+        auth.onAuthStateChanged((loggedinuser) => {
+          loggedinuser.getIdTokenResult().then((idTokenResult) => {
+            setIsAdmin(idTokenResult.claims.admin);
+            let loggedinuser = user.user;
+            let adminClaim = idTokenResult.claims.admin;
+            if (adminClaim) {
+              loggedinuser.admin = idTokenResult.claims.admin;
+            } else {
+              loggedinuser.admin = false;
+            }
+            // Add the user details to redux
+            dispatch(
+              logUserDetails({
+                displayName: loggedinuser.displayName,
+                email: loggedinuser.email,
+                isAdmin: loggedinuser.admin,
+                uid: loggedinuser.uid,
+              }),
+            );
+            loggedinuser.admin ? navigate('/users') : navigate('/orders');
+          });
+        });
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+
+    //check auth state of user if admin, redirect to admin routes, is client, redirect to client routes
+    //Check user auth to redirect
   };
+
+  console.log(Timestamp.now());
 
   return (
     <ThemeProvider theme={theme}>
@@ -130,7 +150,20 @@ export default function LogIn() {
                   Unauthorized user, contact production team!
                 </ErrorAlert>
               )}
-              {user && <h1>there is a user {user.email}</h1>}
+              <Link to="/register">
+                <div className="flex justify-center">
+                  <div
+                    id="toast-simple"
+                    class="flex items-center p-4 space-x-4 w-full max-w-xs text-myBlue bg-white rounded-lg divide-x divide-gray-200 shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                    role="alert"
+                  >
+                    <AssuredWorkloadIcon />
+                    <div class="pl-4 text-sm font-normal">
+                      New Client? Please register here...
+                    </div>
+                  </div>
+                </div>
+              </Link>
 
               <Copyright sx={{ mt: 5 }} />
             </Box>

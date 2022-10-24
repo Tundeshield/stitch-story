@@ -1,30 +1,38 @@
 import { IconButton } from '@mui/material';
 import React from 'react';
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import StatusBadge from './StatusBadge';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import TaskModal from './TaskModal';
-import Button from './Button';
 import * as ROUTE from '../assets/constants/routes';
+import { doc, deleteDoc } from 'firebase/firestore';
+import { db } from '../utils/firebase';
 
-const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
+const ProjectListItem = ({ project }) => {
   const [open, setOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   const navigate = useNavigate();
 
   const handleOpenProject = () => {
-    navigate(`${ROUTE.PROJECTS}/${id}`);
+    navigate(`${ROUTE.PROJECTS}/${project.id}`);
   };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     console.log(id, 'has been deleted!');
-    handleClose();
+    try {
+      setLoading(true);
+      await deleteDoc(doc(db, 'projects', id));
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+    navigate(ROUTE.PROJECTS);
   };
 
   return (
@@ -46,13 +54,13 @@ const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
           scope="row"
           className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
         >
-          {projectName}
+          {project.title}
         </th>
+        <td className="py-4 px-6">{project.description.substring(0, 30)}...</td>
         <td className="py-4 px-6">
-          {projectDescription.substring(0, 10) + '...'}
-        </td>
-        <td className="py-4 px-6">
-          <StatusBadge status={status} />
+          <StatusBadge
+            status={project.status ? project.status : 'In progress'}
+          />
         </td>
         <td className="py-4 px-6">
           <IconButton onClick={handleOpenProject}>
@@ -70,7 +78,7 @@ const ProjectListItem = ({ id, projectName, projectDescription, status }) => {
       >
         <span className="flex justify-between items-center">
           <button
-            onClick={() => handleDelete(id)}
+            onClick={() => handleDelete(project.id)}
             type="button"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >

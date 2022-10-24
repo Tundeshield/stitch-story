@@ -10,6 +10,8 @@ import UserListComp from '../../components/user/UserListComp';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import * as ROUTE from '../../assets/constants/routes';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../../utils/firebase';
 
 const style = {
   position: 'absolute',
@@ -25,12 +27,22 @@ const style = {
 
 const ViewUsers = () => {
   const [companies, setCompanies] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const getData = () => {
+    const colRef = collection(db, 'clients');
+    onSnapshot(colRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
+      setCompanies(data);
+    });
+  };
 
   useEffect(() => {
-    axios.get('http://localhost:3000/users').then((response) => {
-      setCompanies(response.data);
-    });
+    getData();
   }, []);
+
   return (
     <Page>
       <Container>
@@ -42,13 +54,7 @@ const ViewUsers = () => {
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <tbody>
               {companies.map((company) => (
-                <UserListComp
-                  companyName={company.companyName}
-                  contactPerson={`${company.firstName} ${company.lastName}`}
-                  email={company.Email}
-                  phone={company.phone}
-                  id={company.id}
-                />
+                <UserListComp company={company} id={company.id} />
               ))}
             </tbody>
           </table>

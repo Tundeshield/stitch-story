@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../../components/Button';
 import Container from '../../components/Container';
 import { ErrorDisplay } from '../../components/Form/Form';
 import Page from '../../components/Page';
 import { useForm } from 'react-hook-form';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '../../utils/firebase';
+import {
+  useCreateUserWithEmailAndPassword,
+  useAuthState,
+} from 'react-firebase-hooks/auth';
+import { auth, db } from '../../utils/firebase';
 import LoadingButton from '../../components/task/LoadingButton';
+import { ErrorAlert, SuccessAlert } from '../../components/Alerts';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 
 const CreateUser = () => {
   const {
@@ -15,28 +23,38 @@ const CreateUser = () => {
     formState: { errors },
     getValues,
   } = useForm();
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
-  const password = process.env.REACT_TEST_PASS;
-
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
 
+  const [user, loading, error] = useAuthState(auth);
+
   //Create the company
-  const handleCreateUser = (data) => {
-    //Get the data from the form
+  const handleCreateUser = async (data) => {
     const { companyName, firstName, lastName, email } = data;
-    console.log(companyName, email);
-    //use the data to creat user in db
-    createUserWithEmailAndPassword(email, password);
-    //send password reset to the user so they can change login details
-    //Redirect to list of companies page
+    //Save current user
+    const originalUser = auth.currentUser;
+  };
+
+  const passwordReset = (auth, email) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        console.log('Password reset sent.');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
   };
 
   return (
     <Page>
       <Container>
         <div className="flex  justify-between relative p-4">
-          <section className="w-3/5 p-4 bg-white   rounded-lg dark:bg-gray-800">
+          <section className="w-3/5 p-4 bg-white rounded-lg dark:bg-gray-800">
             <form
               className="overflow-hidden bg-white drop-shadow-lg sm:rounded-lg px-4 py-5 sm:px-6"
               onSubmit={handleSubmit((data) => handleCreateUser(data))}
@@ -143,6 +161,18 @@ const CreateUser = () => {
                 <LoadingButton>Saving Company ...</LoadingButton>
               ) : (
                 <Button>Add company</Button>
+              )}
+              {error && (
+                <ErrorAlert
+                  primary="Oops!"
+                  secondary={`Something went wrong. ${error}`}
+                />
+              )}
+              {success && (
+                <SuccessAlert
+                  main="User successfully added."
+                  secondary="User will get a confirmation email."
+                />
               )}
             </form>
           </section>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import SendIcon from '@mui/icons-material/Send';
-import TrackOrder from '../../pages/client/TrackOrder';
+
 
 const OrderCard = () => {
   return (
@@ -29,10 +29,15 @@ const OrderCard = () => {
             Due to be completed on the 16th, march, 2022
           </p>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col space-y-2">
           <Button>
-            <Link to={`/my-projects/track/${2}`}>
+            <Link to={`/orders/${2}`}>
               Track your project <TimelineIcon className="ml-4" />
+            </Link>
+          </Button>
+          <Button>
+            <Link to={`/orders/${2}`}>
+              Message Team <SendIcon className="ml-4" />
             </Link>
           </Button>
         </div>

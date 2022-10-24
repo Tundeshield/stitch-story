@@ -1,16 +1,11 @@
 import Edit from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import TaskModal from '../TaskModal';
 
-const UserInfoCard = ({
-  id,
-  fullName,
-  companyName,
-  email,
-  phone,
-  handleEditPopup,
-}) => {
+const UserInfoCard = ({ fullName, companyName, email, phone }) => {
+  const { id } = useParams();
   return (
     <div className="overflow-hidden relative bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 flex justify-between items-center sm:px-6">
@@ -18,8 +13,10 @@ const UserInfoCard = ({
           User Details
         </h3>
         <span>
-          <IconButton onClick={handleEditPopup}>
-            <Edit />
+          <IconButton>
+            <Link to={`/users/update/${id}`}>
+              <Edit />
+            </Link>
           </IconButton>
         </span>
       </div>
