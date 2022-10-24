@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -9,9 +9,34 @@ import PendingIcon from '@mui/icons-material/Pending';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
 import MilestoneUpdate from './MilestoneUpdateContainer';
 import MilestoneUpdateContainer from './MilestoneUpdateContainer';
+import {
+  collection,
+  onSnapshot,
+  query,
+  where,
+  getDocs,
+} from 'firebase/firestore';
+import { db } from '../../utils/firebase';
 
-const Milestone = () => {
-  const [done, setDone] = useState(true);
+const Milestone = ({ task }) => {
+  const [comments, setComments] = useState([]);
+  //Fetch task comments
+
+  const fetchComments = async () => {
+    const commentRef = collection(db, 'comments');
+    const q = query(commentRef, where('taskId', '==', task.id));
+    onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
+      setComments(data);
+    });
+  };
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
   return (
     <div className="mb-4">
       <Accordion>
@@ -20,16 +45,16 @@ const Milestone = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          {done ? (
+          {task.completed ? (
             <CheckCircleIcon className="text-myDarkBlue mr-2" />
           ) : (
             <PendingActionsIcon className="text-red-400 mr-2" />
           )}
 
-          <Typography>Sew Clothes</Typography>
+          <Typography>{task.taskName}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <MilestoneUpdateContainer />
+          <MilestoneUpdateContainer comments={comments} />
         </AccordionDetails>
       </Accordion>
     </div>

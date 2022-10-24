@@ -64,11 +64,11 @@ const TaskItem = ({ taskName, id }) => {
             </span>
 
             <span
-              class={`flex flex-col flex-1 ml-7 items-start justify-center  whitespace-nowrap ${
+              class={`flex flex-col flex-1 ml-7 items-start justify-center break-words ${
                 checked && 'line-through'
               }`}
             >
-              <span className="text-sm">{taskName}</span>
+              <span className="text-sm ">{taskName}</span>
             </span>
             <span>
               <IconButton onClick={handleOpen}>
