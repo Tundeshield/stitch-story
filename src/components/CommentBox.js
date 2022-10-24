@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 
-const CommentBox = () => {
+const CommentBox = ({ handleClose }) => {
   const [comment, setComment] = useState('');
   const [sentComment, setSentComment] = useState(false);
 
@@ -9,6 +9,10 @@ const CommentBox = () => {
     e.preventDefault();
     setSentComment(true);
     setComment('');
+    setTimeout(() => {
+      setSentComment(false);
+      handleClose();
+    }, 3000);
   };
   return (
     <div>

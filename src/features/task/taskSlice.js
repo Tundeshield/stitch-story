@@ -13,7 +13,6 @@ export const taskSlice = createSlice({
         ...state,
         taskName: '',
         taskDescription: '',
-        supervisor: '',
         startDate: '',
         endDate: '',
       };

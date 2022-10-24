@@ -4,24 +4,33 @@ import { useParams } from 'react-router-dom';
 import Container from '../../components/Container';
 import TaskModal from '../../components/TaskModal';
 import Page from '../../components/Page';
-import TaskContainer from '../../components/task/TaskContainer';
-import UserEditForm from '../../components/user/UserEditForm';
+
 import UserInfoCard from '../../components/user/UserInfoCard';
 import UserProjectContainer from '../../components/user/UserProjectContainer';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../../utils/firebase';
 
 const ViewUser = () => {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState({});
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
-  const { uid } = useParams();
+  const { id } = useParams();
+
+  const getUser = async () => {
+    const colRef = collection(db, 'clients');
+    onSnapshot(colRef, (snapshot) => {
+      const data = snapshot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
+      const user = data.find((user) => user.id === id);
+      setUser(user);
+    });
+  };
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/users/${uid}`).then((response) => {
-      setUser(response.data);
-    });
-  }, [uid]);
+    console.log(user);
+    getUser();
+  }, []);
 
   return (
     <Page>
@@ -60,11 +69,10 @@ const ViewUser = () => {
                 >
                   <p class="text-sm text-gray-500 dark:text-gray-400">
                     <UserInfoCard
-                      email={user.Email}
+                      email={user.email}
                       companyName={user.companyName}
                       phone={user.phone}
                       fullName={`${user.firstName} ${user.lastName}`}
-                      handleEditPopup={handleOpen}
                     />
                   </p>
                 </div>
@@ -74,11 +82,7 @@ const ViewUser = () => {
               <UserProjectContainer />
             </div>
           </div>
-          <div>
-            <TaskModal open={open} handleClose={handleClose} title="Edit User">
-              <UserEditForm />
-            </TaskModal>
-          </div>
+          <div></div>
         </div>
       </Container>
     </Page>

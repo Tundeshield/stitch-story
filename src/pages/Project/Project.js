@@ -9,24 +9,28 @@ import TaskContainer from '../../components/task/TaskContainer';
 import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
 import TaskModal from '../../components/TaskModal';
 import CommentBox from '../../components/CommentBox';
+import { db } from '../../utils/firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Project = () => {
-  const { pid } = useParams();
+  const { id } = useParams();
   const [project, setProject] = useState({});
   const [error, setError] = React.useState(null);
-  const { id, projectName, projectDescription, status } = project;
+
+  const getProject = async () => {
+    const docRef = doc(db, 'projects', id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      setProject(docSnap.data());
+    } else {
+      setError('No such document!');
+    }
+  };
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:3000/projects/${pid}`)
-      .then((response) => {
-        setProject(response.data);
-        console.log(project);
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  }, [pid, project]);
+    getProject();
+    console.log(project);
+  }, []);
 
   return (
     <Page>
@@ -64,18 +68,13 @@ const Project = () => {
                   aria-labelledby="profile-tab"
                 >
                   <p class="text-sm text-gray-500 dark:text-gray-400">
-                    <InfoCard
-                      id={id}
-                      projectName={projectName}
-                      projectDescription={projectDescription}
-                      status={status}
-                    />
+                    <InfoCard id={project.id} project={project} />
                   </p>
                 </div>
               </div>
             </div>
             <div>
-              <TaskContainer />
+              <TaskContainer project={project} />
             </div>
           </div>
         </div>

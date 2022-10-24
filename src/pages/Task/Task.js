@@ -6,17 +6,13 @@ import { TaskComments } from '../../components/comment/TaskComments';
 import TaskInfoCard from '../../components/task/TaskInfoCard';
 
 const Task = () => {
-  ///projects/:projectID/:taskID
-  const { projectID, tid } = useParams();
+  const { id } = useParams();
   return (
     <Page>
       <Container>
         <div className="flex flex-col">
           <section>
-            <TaskInfoCard tid={tid} />
-          </section>
-          <section>
-            <TaskComments />
+            <TaskInfoCard id={id} />
           </section>
         </div>
       </Container>

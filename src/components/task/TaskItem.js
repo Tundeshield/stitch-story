@@ -8,22 +8,46 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import CommentIcon from '@mui/icons-material/Comment';
 import CommentBox from '../CommentBox';
 import TaskModal from '../TaskModal';
+import { async } from '@firebase/util';
+import { deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
+import { db } from '../../utils/firebase';
 
 const TaskItem = ({ taskName, id }) => {
   const [checked, setChecked] = useState(false);
   const [open, setOpen] = React.useState(false);
-  const { tid } = useParams();
+
   const navigate = useNavigate();
 
-  const handleCompletedTask = (e) => {
+  //Complete task function
+  const handleCompletedTask = async (e) => {
     setChecked(e.target.checked);
     console.log(e.target.checked);
+    //Refrence the database
+    const taskCompletedRef = doc(db, 'tasks', id);
+    if (e.target.checked) {
+      // Set the task to completed
+      await updateDoc(taskCompletedRef, {
+        completed: true,
+        completedAt: Timestamp.now(),
+      });
+      console.log(id, 'has been completed!');
+      //Send Email notification to user
+    } else {
+      await updateDoc(taskCompletedRef, {
+        completed: false,
+        completedAt: null,
+      });
+      console.log(id, 'has been uncompleted!');
+    }
   };
 
-  const handleDelete = () => {
-    console.log('Item deleted.');
+  //Delete task
+  const handleDelete = async () => {
+    await deleteDoc(doc(db, 'tasks', id));
+    console.log(id);
   };
 
+  //For the modal
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -58,9 +82,6 @@ const TaskItem = ({ taskName, id }) => {
             <IconButton onClick={() => navigate(`/tasks/${id}`)}>
               <VisibilityIcon className=" text-myBlue " fontSize="small" />
             </IconButton>
-            <IconButton onClick={() => navigate(`/tasks/edit/${id}`)}>
-              <EditIcon className=" text-blue-500" fontSize="small" />
-            </IconButton>
             <IconButton onClick={handleDelete}>
               <DeleteForeverIcon className=" text-myRed" fontSize="small" />
             </IconButton>
@@ -72,7 +93,7 @@ const TaskItem = ({ taskName, id }) => {
         handleClose={handleClose}
         title="Update the customer about the task..."
       >
-        <CommentBox />
+        <CommentBox handleClose={handleClose} />
       </TaskModal>
     </>
   );

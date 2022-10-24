@@ -36,14 +36,6 @@ const CreateUser = () => {
     const { companyName, firstName, lastName, email } = data;
     //Save current user
     const originalUser = auth.currentUser;
-
-    {
-      /* Add customer would simply send the customer email a registration link email. 
-2 Create a registration page
-3 registration page will take in user details for authorization.
-4 registratin page would also add user to users collection.
-*/
-    }
   };
 
   const passwordReset = (auth, email) => {

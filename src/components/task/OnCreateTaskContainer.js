@@ -1,9 +1,38 @@
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  query,
+  where,
+} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { db } from '../../utils/firebase';
 import OnCreateTaskItem from './OnCreateTaskItem';
 
 const OnCreateTaskContainer = () => {
   const tasks = useSelector((state) => state.task);
+  const { id } = useParams();
+
+  const [tasksList, setTasksList] = useState([]);
+
+  const getData = async () => {
+    const taskRef = collection(db, 'tasks');
+    const q = query(taskRef, where('projectId', '==', id));
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      const data = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setTasksList(data);
+    });
+    return unsub;
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <div>
@@ -15,16 +44,11 @@ const OnCreateTaskContainer = () => {
           Outline of the list of tasks required to complete the listed project.
         </p>
         <ul class="my-4 space-y-3">
-          {!tasks ? (
+          {!tasksList ? (
             <p>There are no tasks to display. Please create some..</p>
           ) : (
-            tasks.map((item) => (
-              <OnCreateTaskItem
-                taskName={item.taskName}
-                id={item.id}
-                key={item.id}
-                supervisor={item.supervisor}
-              />
+            tasksList.map((item) => (
+              <OnCreateTaskItem item={item} key={item.id} />
             ))
           )}
         </ul>

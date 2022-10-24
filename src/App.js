@@ -26,10 +26,13 @@ import Register from './pages/User/Register';
 import { useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './utils/firebase';
+import UpdateUser from './pages/User/UpdateUser';
+import CreateTask from './pages/Task/CreateTask';
 
 function App() {
   const admin = useSelector((state) => state.user.isAdmin);
   const [user] = useAuthState(auth);
+
   return (
     <Router>
       <Routes>
@@ -43,7 +46,7 @@ function App() {
 
         <Route
           path="/projects"
-          element={!user ? <Navigate to="/" /> : <Projects />}
+          element={admin ? <Projects /> : <Navigate to="/" />}
         />
         <Route
           path="/projects/create"
@@ -60,6 +63,10 @@ function App() {
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateUser />}
         />
         <Route
+          path="/users/update/:id"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <UpdateUser />}
+        />
+        <Route
           path="/projects/:id"
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <Project />}
         />
@@ -67,18 +74,21 @@ function App() {
           path="/users/:id"
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <ViewUser />}
         />
-        <Route path="/tasks" />
+        <Route
+          path="/tasks/create/:id"
+          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateTask />}
+        />
         <Route
           path="/tasks/edit/:id"
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <EditTask />}
         />
         <Route
           path="/tasks/:id"
-          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <Task />}
+          element={admin ? <Task /> : <Navigate to={ROUTE.NOTFOUND} />}
         />
         <Route
           path="/orders"
-          element={!user ? <Navigate to="/" /> : <MyProjects />}
+          element={user ? <MyProjects /> : <Navigate to="/" />}
         />
         <Route
           path="/orders/:id"

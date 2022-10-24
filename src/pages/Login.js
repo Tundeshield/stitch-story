@@ -13,13 +13,14 @@ import { Link } from 'react-router-dom';
 import Copyright from '../components/Copyright';
 import { ErrorAlert } from '../components/Feedback';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, app } from '../utils/firebase';
+import { auth, app, timestamp } from '../utils/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 import useAuthClaims from '../hooks/useAuthClaims';
 import { useDispatch, useSelector } from 'react-redux';
 import { logUserDetails } from '../features/user/userSlice';
 import { signOut } from 'firebase/auth';
+import { Timestamp } from 'firebase/firestore';
 
 const theme = createTheme();
 
@@ -70,6 +71,8 @@ export default function LogIn() {
     //check auth state of user if admin, redirect to admin routes, is client, redirect to client routes
     //Check user auth to redirect
   };
+
+  console.log(Timestamp.now());
 
   return (
     <ThemeProvider theme={theme}>

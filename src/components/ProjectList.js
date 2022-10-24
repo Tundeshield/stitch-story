@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react';
-
 import ProjectListItem from './ProjectListItem';
-
-import axios from 'axios';
 import Button from './Button';
-import { Link,  } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { auth, db } from '../utils/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
+  const [user, loading, error] = useAuthState(auth);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/projects').then((response) => {
-      setProjects(response.data);
-    });
-  }, [projects]);
+    const getData = async () => {
+      const colRef = collection(db, 'projects');
+      onSnapshot(colRef, (snapshot) => {
+        const data = snapshot.docs.map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+        setProjects(data);
+      });
+    };
 
+    getData();
+  }, []);
+  console.log(projects);
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
       <div className="p-4 flex justify-between items-center bg-white dark:bg-gray-900">
@@ -82,14 +90,8 @@ const ProjectList = () => {
           </tr>
         </thead>
         <tbody>
-          {projects.map((item) => (
-            <ProjectListItem
-              id={item.id}
-              projectName={item.projectName}
-              projectDescription={item.projectDescription}
-              status={item.status}
-              key={item.id}
-            />
+          {projects.map((project) => (
+            <ProjectListItem key={project.id} project={project} />
           ))}
         </tbody>
       </table>
