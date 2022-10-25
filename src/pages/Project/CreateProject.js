@@ -6,18 +6,23 @@ import ProjectHeader from '../../components/ProjectHeader';
 import Button from '../../components/Button';
 import { useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
-import { db, timestamp } from '../../utils/firebase';
+import { db, storage, timestamp } from '../../utils/firebase';
 import { addDoc, collection, getDocs, Timestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { generatePath, useNavigate } from 'react-router-dom';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import qrcode from 'qrcode';
-import img from '../../assets/images/googleIcon.png';
+import img1 from '../../assets/images/googleIcon.png';
+import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
+import { v4 } from 'uuid';
+import { useUploadFile } from 'react-firebase-hooks/storage';
 
 const CreateProject = () => {
   const tasks = useSelector((state) => state.task);
   const [clients, setClients] = useState([]);
   const [qrSrc, setQrSrc] = useState('');
+
+  const [uploadFile, uploading, snapshot, error] = useUploadFile();
 
   const headers = [
     {
@@ -27,16 +32,28 @@ const CreateProject = () => {
     },
   ];
 
+  //Qr CODE OPTIONS
+  var opts = {
+    errorCorrectionLevel: 'H',
+    type: 'image/jpeg',
+    quality: 0.3,
+    margin: 1,
+    color: {
+      dark: '#0B0B46', // Blue dots
+      light: '#FFFFFF', // Transparent background
+    },
+  };
+  //QrCode generator
   const generateQr = async (path) => {
-    const qr = await qrcode.toDataURL(path);
-    setQrSrc(qr);
+    const qr = await qrcode.toDataURL(path, opts);
+    console.log(qr);
+    return qr;
   };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     mode: 'onBlur',
   });
@@ -79,14 +96,20 @@ const CreateProject = () => {
     let p = generateProjectPath(docRef.id);
     const path = window.location.origin + p;
     //Set qr code for new project
-    const qr = generateQr(path);
+
+    const qr = await qrcode.toDataURL(path, opts);
     setQrSrc(qr);
 
+    // Upload qr code to firebase storage
+    const blob = await fetch(qr).then((r) => r.blob());
+    const storageRef = ref(storage, `qrCodes/${docRef.id}/${client + v4()}`);
+    const uploadTask = await uploadBytes(storageRef, blob);
+    const downloadUrl = await getDownloadURL(uploadTask.ref);
+    console.log(downloadUrl);
+
     navigate(`/tasks/create/${docRef.id}`);
-    console.log('Document written with ID: ', docRef.id);
   };
 
-  console.log(window.location.origin);
   return (
     <Page>
       <Container>
@@ -156,7 +179,7 @@ const CreateProject = () => {
                     Save New Project And Tasks Next <NavigateNextIcon />
                   </Button>
                 </span>
-
+                <img src={img1} alt="" />
                 <img src={qrSrc} alt="" />
               </form>
             </section>
