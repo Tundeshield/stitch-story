@@ -6,16 +6,23 @@ import ProjectHeader from '../../components/ProjectHeader';
 import Button from '../../components/Button';
 import { useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
-import { db, timestamp } from '../../utils/firebase';
+import { db, storage, timestamp } from '../../utils/firebase';
 import { addDoc, collection, getDocs, Timestamp } from 'firebase/firestore';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import qrcode from 'qrcode';
+import img1 from '../../assets/images/googleIcon.png';
+import { ref, uploadBytes, getDownloadURL, getStorage } from 'firebase/storage';
+import { v4 } from 'uuid';
+import { useUploadFile } from 'react-firebase-hooks/storage';
 
 const CreateProject = () => {
   const tasks = useSelector((state) => state.task);
-
   const [clients, setClients] = useState([]);
+  const [qrSrc, setQrSrc] = useState('');
+
+  const [uploadFile, uploading, snapshot, error] = useUploadFile();
 
   const headers = [
     {
@@ -25,15 +32,40 @@ const CreateProject = () => {
     },
   ];
 
+  //Qr CODE OPTIONS
+  var opts = {
+    errorCorrectionLevel: 'H',
+    type: 'image/jpeg',
+    quality: 0.3,
+    margin: 1,
+    color: {
+      dark: '#0B0B46', // Blue dots
+      light: '#FFFFFF', // Transparent background
+    },
+  };
+  //QrCode generator
+  const generateQr = async (path) => {
+    const qr = await qrcode.toDataURL(path, opts);
+    console.log(qr);
+    return qr;
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm({
     mode: 'onBlur',
   });
   const navigate = useNavigate();
+
+  //Generate path for new projects - a precursor for implementing qr codes
+  const generateProjectPath = (id) => {
+    const path = generatePath('/projects/:id/', {
+      id: id,
+    });
+    return path;
+  };
 
   const getData = async () => {
     const colRef = collection(db, 'clients');
@@ -59,9 +91,25 @@ const CreateProject = () => {
       description,
       createdAt: Timestamp.now(),
     });
+
+    //Generate path for new projects - a precursor for implementing qr codes
+    let p = generateProjectPath(docRef.id);
+    const path = window.location.origin + p;
+    //Set qr code for new project
+
+    const qr = await qrcode.toDataURL(path, opts);
+    setQrSrc(qr);
+
+    // Upload qr code to firebase storage
+    const blob = await fetch(qr).then((r) => r.blob());
+    const storageRef = ref(storage, `qrCodes/${docRef.id}/${client + v4()}`);
+    const uploadTask = await uploadBytes(storageRef, blob);
+    const downloadUrl = await getDownloadURL(uploadTask.ref);
+    console.log(downloadUrl);
+
     navigate(`/tasks/create/${docRef.id}`);
-    console.log('Document written with ID: ', docRef.id);
   };
+
   return (
     <Page>
       <Container>
@@ -81,9 +129,10 @@ const CreateProject = () => {
                     Project Title
                   </label>
                   <input
-                    {...register('title', { required: true, maxLength: 30 })}
+                    {...register('title', { required: true, maxLength: 70 })}
                     type="text"
                     id="base-input"
+                    placeholder="Enter Project Title, not more than 70 characters"
                     class="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                   {errors.title && <ErrorDisplay title="title" />}
@@ -116,12 +165,12 @@ const CreateProject = () => {
                   <textarea
                     {...register('description', {
                       required: true,
-                      maxLength: 60,
+                      maxLength: 150,
                     })}
                     id="message"
                     rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder={`Write a description ...`}
+                    placeholder={`Write a description of not more than 150 characters ...`}
                   />
                   {errors.description && <ErrorDisplay title="description" />}
                 </div>
@@ -130,6 +179,8 @@ const CreateProject = () => {
                     Save New Project And Tasks Next <NavigateNextIcon />
                   </Button>
                 </span>
+                <img src={img1} alt="" />
+                <img src={qrSrc} alt="" />
               </form>
             </section>
           </div>

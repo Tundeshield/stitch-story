@@ -1,17 +1,12 @@
 import * as React from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Milestone from './Milestone';
 
-export default function MilestoneAccordion() {
+export default function MilestoneAccordion({ tasks }) {
   return (
     <div>
-      <Milestone />
-      <Milestone />
-      <Milestone />
+      {tasks.map((task) => (
+        <Milestone task={task} />
+      ))}
     </div>
   );
 }

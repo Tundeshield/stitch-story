@@ -26,20 +26,19 @@ const MyProjects = () => {
   //   setMyOrders(data);
   // };
 
-  const getData = async () => {
-    const q = query(
-      collection(db, 'projects'),
-      where('client', '==', user.uid),
-    );
-
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
-      setMyOrders((prev) => [...prev, doc.data()]);
-    });
+  const getProjects = async (id) => {
+    const colRef = collection(db, 'projects');
+    const q = query(colRef, where('client', '==', user.uid));
+    const snapshot = await getDocs(q);
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setMyOrders(data);
   };
 
   useEffect(() => {
-    getData();
+    getProjects();
   }, []);
 
   console.log(user);

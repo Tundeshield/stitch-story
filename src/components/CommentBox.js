@@ -20,6 +20,7 @@ const CommentBox = ({ handleClose, id }) => {
         sender: 'Production Manager',
         comment: comment,
         timePosted: Timestamp.now(),
+        taskId: id,
       });
       console.log('Document written with ID: ', docRef.id);
     }

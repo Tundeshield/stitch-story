@@ -26,13 +26,13 @@ export const ErrorAlert = ({ primary, secondary }) => {
   );
 };
 
-export const ChangePassword = () => {
+export const OpenInfo = ({ children }) => {
   const [open, setOpen] = useState(false);
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '40%' }}>
       <Collapse in={open}>
         <Alert
-          severity="error"
+          severity="info"
           action={
             <IconButton
               aria-label="close"
@@ -47,10 +47,7 @@ export const ChangePassword = () => {
           }
           sx={{ mb: 2 }}
         >
-          To change your password —{' '}
-          <Link to="/reset-password">
-            <strong>Update now!</strong>{' '}
-          </Link>
+          {children}
         </Alert>
       </Collapse>
       <Button
@@ -60,7 +57,7 @@ export const ChangePassword = () => {
           setOpen(true);
         }}
       >
-        Open to change password
+        Open to view and print the QR code
       </Button>
     </Box>
   );
@@ -74,6 +71,17 @@ export const DoneAlert = ({ primary, secondary }) => {
     >
       <span className="font-extrabold">Info alert!</span> The customer would get
       a notification when you mark any task as done.
+    </div>
+  );
+};
+export const QrAlert = ({ primary, secondary }) => {
+  return (
+    <div
+      className="p-4 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
+      role="alert"
+    >
+      <span className="font-extrabold">Info alert!</span> Click print icon to
+      print.
     </div>
   );
 };

@@ -2,20 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Page from '../../components/Page';
 import Container from '../../components/Container';
-import ProjectHeader from '../../components/ProjectHeader';
 import InfoCard from '../../components/InfoCard';
-import axios from 'axios';
 import TaskContainer from '../../components/task/TaskContainer';
-import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
-import TaskModal from '../../components/TaskModal';
-import CommentBox from '../../components/CommentBox';
-import { db } from '../../utils/firebase';
+import { db, storage } from '../../utils/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { useDownloadURL } from 'react-firebase-hooks/storage';
+import { getDownloadURL, listAll, ref } from 'firebase/storage';
+import { Link } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
+import {
+  ChangePassword,
+  DoneAlert,
+  OpenInfo,
+  QrAlert,
+} from '../../components/Alerts';
+import QrCode from '../../components/qrcode/QrCode';
 
 const Project = () => {
   const { id } = useParams();
   const [project, setProject] = useState({});
   const [error, setError] = React.useState(null);
+  const [value, loading] = useDownloadURL(ref(storage, `qrCodes/${id}/`));
+  const [qrCode, setQrCode] = useState('');
 
   const getProject = async () => {
     const docRef = doc(db, 'projects', id);
@@ -25,11 +34,16 @@ const Project = () => {
     } else {
       setError('No such document!');
     }
+    const qrs = await listAll(ref(storage, `qrCodes/${id}/`));
+    console.log(qrs['items'][0]);
+    getDownloadURL(qrs['items'][0]).then((url) => {
+      console.log(url);
+      setQrCode(url);
+    });
   };
 
   useEffect(() => {
     getProject();
-    console.log(project);
   }, []);
 
   return (
@@ -58,24 +72,31 @@ const Project = () => {
               </li>
             </ul>
           </div>
-          <div className="flex justify-around">
-            <div className="w-3/5">
-              <div id="myTabContent">
-                <div
-                  class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
-                  id="profile"
-                  role="tabpanel"
-                  aria-labelledby="profile-tab"
-                >
-                  <p class="text-sm text-gray-500 dark:text-gray-400">
-                    <InfoCard id={project.id} project={project} />
-                  </p>
+          <div className="flex flex-col space-y-4">
+            <div className="flex justify-around">
+              <div className="w-3/5">
+                <div id="myTabContent">
+                  <div
+                    class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
+                    id="profile"
+                    role="tabpanel"
+                    aria-labelledby="profile-tab"
+                  >
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                      <InfoCard id={project.id} project={project} />
+                    </p>
+                  </div>
                 </div>
               </div>
+              <div>
+                <TaskContainer project={project} />
+              </div>
             </div>
-            <div>
-              <TaskContainer project={project} />
-            </div>
+            <span className="ml-16">
+              <OpenInfo>
+                <QrCode qrCode={qrCode} id={id} />
+              </OpenInfo>
+            </span>
           </div>
         </div>
       </Container>

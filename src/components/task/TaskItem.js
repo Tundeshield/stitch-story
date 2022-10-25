@@ -12,8 +12,8 @@ import { async } from '@firebase/util';
 import { deleteDoc, doc, Timestamp, updateDoc } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
 
-const TaskItem = ({ taskName, id }) => {
-  const [checked, setChecked] = useState(false);
+const TaskItem = ({ taskName, id, completed }) => {
+  const [checked, setChecked] = useState(completed);
   const [open, setOpen] = React.useState(false);
 
   const navigate = useNavigate();
@@ -64,11 +64,11 @@ const TaskItem = ({ taskName, id }) => {
             </span>
 
             <span
-              class={`flex flex-col flex-1 ml-7 items-start justify-center  whitespace-nowrap ${
+              class={`flex flex-col flex-1 ml-7 items-start justify-center break-words ${
                 checked && 'line-through'
               }`}
             >
-              <span className="text-sm">{taskName}</span>
+              <span className="text-sm ">{taskName}</span>
             </span>
             <span>
               <IconButton onClick={handleOpen}>

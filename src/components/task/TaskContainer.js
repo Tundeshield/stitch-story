@@ -48,7 +48,7 @@ const TaskContainer = () => {
         </p>
         <ul class="my-4 space-y-3">
           {tasks.map((item) => (
-            <TaskItem taskName={item.taskName} id={item.id} key={item.id} />
+            <TaskItem taskName={item.taskName} id={item.id} key={item.id} completed={item.completed} />
           ))}
         </ul>
         <DoneAlert />
