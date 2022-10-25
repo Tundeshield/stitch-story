@@ -94,7 +94,7 @@ const Project = () => {
             </div>
             <span className="ml-16">
               <OpenInfo>
-                <QrCode qrCode={qrCode} id={id} />
+                <QrCode qrCode={qrCode} id={id} project={project} />
               </OpenInfo>
             </span>
           </div>
