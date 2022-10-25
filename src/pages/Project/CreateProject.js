@@ -43,12 +43,6 @@ const CreateProject = () => {
       light: '#FFFFFF', // Transparent background
     },
   };
-  //QrCode generator
-  const generateQr = async (path) => {
-    const qr = await qrcode.toDataURL(path, opts);
-    console.log(qr);
-    return qr;
-  };
 
   const {
     register,
@@ -95,8 +89,8 @@ const CreateProject = () => {
     //Generate path for new projects - a precursor for implementing qr codes
     let p = generateProjectPath(docRef.id);
     const path = window.location.origin + p;
-    //Set qr code for new project
 
+    //Generate QR code
     const qr = await qrcode.toDataURL(path, opts);
     setQrSrc(qr);
 
@@ -179,8 +173,6 @@ const CreateProject = () => {
                     Save New Project And Tasks Next <NavigateNextIcon />
                   </Button>
                 </span>
-                <img src={img1} alt="" />
-                <img src={qrSrc} alt="" />
               </form>
             </section>
           </div>
