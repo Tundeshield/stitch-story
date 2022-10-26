@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { toDateTime } from '../../assets/timeConvert';
+import React from 'react';
 
 const MilestoneUpdate = ({ comment }) => {
   console.log(comment);
