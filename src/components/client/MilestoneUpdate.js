@@ -9,10 +9,10 @@ const MilestoneUpdate = ({ comment }) => {
         <div class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -left-1.5 border border-white dark:border-gray-900 dark:bg-gray-700"></div>
         <div className="flex flex-col">
           <time class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-            Date Posted: {comment.timePosted.toDate().toLocaleDateString()}
+            Date Posted: {comment.timestamp.toDate().toLocaleDateString()}
           </time>
           <time class="mb-0 text-sm font-normal leading-none text-myBlue dark:text-gray-500">
-            Time Posted: {comment.timePosted.toDate().toLocaleTimeString()}
+            Time Posted: {comment.timestamp.toDate().toLocaleTimeString()}
           </time>
         </div>
         <p class=" text-md pl-2  text-gray-400 dark:text-gray-600 mt-4">

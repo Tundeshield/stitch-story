@@ -73,8 +73,6 @@ export default function LogIn() {
     //Check user auth to redirect
   };
 
-  console.log(Timestamp.now());
-
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>

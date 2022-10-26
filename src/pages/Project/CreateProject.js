@@ -7,7 +7,12 @@ import Button from '../../components/Button';
 import { useForm } from 'react-hook-form';
 import SaveIcon from '@mui/icons-material/Save';
 import { db, storage, timestamp } from '../../utils/firebase';
-import { addDoc, collection, getDocs, Timestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  getDocs,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { useSelector } from 'react-redux';
 import { generatePath, useNavigate } from 'react-router-dom';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
@@ -83,7 +88,7 @@ const CreateProject = () => {
       title,
       client,
       description,
-      createdAt: Timestamp.now(),
+      timestamp: serverTimestamp(),
     });
 
     //Generate path for new projects - a precursor for implementing qr codes

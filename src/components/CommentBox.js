@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../utils/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
@@ -19,7 +19,7 @@ const CommentBox = ({ handleClose, id }) => {
       const docRef = await addDoc(collection(db, 'comments'), {
         sender: 'Production Manager',
         comment: comment,
-        timePosted: Timestamp.now(),
+        timestamp: serverTimestamp(),
         taskId: id,
       });
       setSentComment(true);
