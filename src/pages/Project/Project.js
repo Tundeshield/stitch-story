@@ -25,6 +25,7 @@ const Project = () => {
   const [error, setError] = React.useState(null);
   const [value, loading] = useDownloadURL(ref(storage, `qrCodes/${id}/`));
   const [qrCode, setQrCode] = useState('');
+  const [client, setClient] = useState({});
 
   const getProject = async () => {
     const docRef = doc(db, 'projects', id);
@@ -34,6 +35,7 @@ const Project = () => {
     } else {
       setError('No such document!');
     }
+   
     const qrs = await listAll(ref(storage, `qrCodes/${id}/`));
     console.log(qrs['items'][0]);
     getDownloadURL(qrs['items'][0]).then((url) => {
@@ -67,7 +69,7 @@ const Project = () => {
                   role="tab"
                   aria-controls="profile"
                 >
-                  Profile
+                  Profile :{client.companyName}
                 </button>
               </li>
             </ul>
@@ -83,7 +85,11 @@ const Project = () => {
                     aria-labelledby="profile-tab"
                   >
                     <p class="text-sm text-gray-500 dark:text-gray-400">
-                      <InfoCard id={project.id} project={project} />
+                      <InfoCard
+                        id={project.id}
+                        project={project}
+                        client={client}
+                      />
                     </p>
                   </div>
                 </div>

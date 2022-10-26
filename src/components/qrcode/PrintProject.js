@@ -7,13 +7,15 @@ const PrintProject = ({ qrCode, project }) => {
   const { id } = useParams();
   return (
     <>
-      <div className="sm: flex flex-col justify-center items-center p-14 w-full">
+      <div
+        className=" flex flex-col justify-center items-center p-14 w-full"
+        style={{ width: '100%', height: window.innerHeight }}
+      >
         <div className="w-80 mb-4">
           <img src={logo} alt="App Logo" />
           PPROJECT: {id}
         </div>
-
-        <body className=" md:flex justify-between mt-4 space-x-6">
+        <body className="flex mt-4 space-x-6">
           <div>
             <InfoCard id={project.id} project={project} />
           </div>
@@ -25,7 +27,6 @@ const PrintProject = ({ qrCode, project }) => {
           </div>
         </body>
       </div>
-      ;
     </>
   );
 };
