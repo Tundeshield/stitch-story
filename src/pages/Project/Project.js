@@ -8,22 +8,14 @@ import { db, storage } from '../../utils/firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { useDownloadURL } from 'react-firebase-hooks/storage';
 import { getDownloadURL, listAll, ref } from 'firebase/storage';
-import { Link } from 'react-router-dom';
-import { IconButton } from '@mui/material';
-import LocalPrintshopIcon from '@mui/icons-material/LocalPrintshop';
-import {
-  ChangePassword,
-  DoneAlert,
-  OpenInfo,
-  QrAlert,
-} from '../../components/Alerts';
+
+import { OpenInfo } from '../../components/Alerts';
 import QrCode from '../../components/qrcode/QrCode';
 
 const Project = () => {
   const { id } = useParams();
   const [project, setProject] = useState({});
   const [error, setError] = React.useState(null);
-  const [value, loading] = useDownloadURL(ref(storage, `qrCodes/${id}/`));
   const [qrCode, setQrCode] = useState('');
   const [client, setClient] = useState({});
 
@@ -35,7 +27,7 @@ const Project = () => {
     } else {
       setError('No such document!');
     }
-   
+
     const qrs = await listAll(ref(storage, `qrCodes/${id}/`));
     console.log(qrs['items'][0]);
     getDownloadURL(qrs['items'][0]).then((url) => {
@@ -69,7 +61,7 @@ const Project = () => {
                   role="tab"
                   aria-controls="profile"
                 >
-                  Profile :{client.companyName}
+                  Profile
                 </button>
               </li>
             </ul>
@@ -85,11 +77,7 @@ const Project = () => {
                     aria-labelledby="profile-tab"
                   >
                     <p class="text-sm text-gray-500 dark:text-gray-400">
-                      <InfoCard
-                        id={project.id}
-                        project={project}
-                        client={client}
-                      />
+                      <InfoCard id={project.id} project={project} />
                     </p>
                   </div>
                 </div>

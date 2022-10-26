@@ -3,10 +3,13 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../utils/firebase';
+import { useSelector } from 'react-redux';
 
 const InfoCard = ({ project }) => {
   const [client, setClient] = useState({});
   const [loading, setLoading] = useState(true);
+  const viewedProjectClient = useSelector((state) => state.viewedProject);
+
   useEffect(() => {
     const fetchClient = async () => {
       const clientRef = doc(db, 'clients', project.client);
@@ -23,7 +26,6 @@ const InfoCard = ({ project }) => {
     fetchClient();
   }, [project]);
 
- 
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 flex justify-between items-center sm:px-6">
@@ -45,7 +47,7 @@ const InfoCard = ({ project }) => {
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Company Name</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {project.client}
+              {loading ? 'Loading...' : viewedProjectClient.companyName}
             </dd>
           </div>
 
@@ -54,7 +56,7 @@ const InfoCard = ({ project }) => {
               Contact Person
             </dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              Tunde Adepegba
+              {loading ? 'Loading...' : viewedProjectClient.contactPerson}
             </dd>
           </div>
           <div className="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

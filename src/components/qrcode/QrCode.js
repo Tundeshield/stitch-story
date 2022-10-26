@@ -27,16 +27,19 @@ const QrCode = ({ id, qrCode, project }) => {
         </span>
       </span>
 
-      <p class="text-sm font-normal p-2 mb-2 text-gray-500 dark:text-gray-400">
-        Print the QR code to update the project task from the shopfloor.
-      </p>
-      <span className="w-40 flex justify-center mb-2" ref={componentRef}>
-        <img src={qrCode} alt="" />
-      </span>
-      <QrAlert />
-      <span ref={componentRef}>
-        <PrintProject id={id} qrCode={qrCode} project={project} />
-      </span>
+      <div className="flex flex-col items-center">
+        <p class="text-sm font-normal p-2 mb-2 text-gray-500 dark:text-gray-400">
+          Print the QR code to update the project task from the shopfloor.
+        </p>
+        <span className="w-40 flex justify-center mb-2" ref={componentRef}>
+          <img src={qrCode} alt="" />
+        </span>
+
+        <QrAlert />
+        <span ref={componentRef}>
+          <PrintProject id={id} qrCode={qrCode} project={project} />
+        </span>
+      </div>
     </div>
   );
 };
