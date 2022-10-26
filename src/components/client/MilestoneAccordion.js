@@ -5,7 +5,9 @@ export default function MilestoneAccordion({ tasks }) {
   return (
     <div>
       {tasks.map((task) => (
-        <Milestone task={task} />
+        <span key={task.id}>
+          <Milestone task={task} key={task.id} />
+        </span>
       ))}
     </div>
   );

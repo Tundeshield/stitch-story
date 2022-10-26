@@ -13,7 +13,7 @@ import { ErrorDisplay } from '../../components/Form/Form';
 import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addDoc, collection, Timestamp } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db, timestamp } from '../../utils/firebase';
 
 const CreateTask = () => {
@@ -58,7 +58,7 @@ const CreateTask = () => {
       endDate,
       projectId: id,
       completed: false,
-      createdAt: Timestamp.now(),
+      timestamp: serverTimestamp(),
     });
     setTasksIds([...taskIds, docRef.id]);
     dispatch(addTask(task));

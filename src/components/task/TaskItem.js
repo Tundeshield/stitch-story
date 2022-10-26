@@ -13,7 +13,7 @@ import {
   deleteDoc,
   doc,
   getDoc,
-  Timestamp,
+  serverTimestamp,
   updateDoc,
 } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
@@ -66,7 +66,7 @@ const TaskItem = ({ taskName, id, completed, project }) => {
       // Set the task to completed
       await updateDoc(taskCompletedRef, {
         completed: true,
-        completedAt: Timestamp.now(),
+        timestamp: serverTimestamp(),
       });
 
       //Send Email notification to user
