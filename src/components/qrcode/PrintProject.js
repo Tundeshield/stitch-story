@@ -2,28 +2,30 @@ import React, { useRef } from 'react';
 import InfoCard from '../InfoCard';
 import logo from '../../assets/images/loginLogo.png';
 import { useParams } from 'react-router-dom';
+import QrInfo from './QrInfo';
 
 const PrintProject = ({ qrCode, project }) => {
   const { id } = useParams();
   return (
     <>
       <div
-        className=" flex flex-col justify-center items-center p-14 w-full"
-        style={{ width: '100%', height: window.innerHeight }}
+        className=" flex flex-col  items-center  p-6 w-full"
+        // style={{ width: '100%', height: window.innerHeight }}
       >
-        <div className="w-80 mb-4">
+        <div className="w-80 mb-4 flex flex-col items-center ">
           <img src={logo} alt="App Logo" />
           PPROJECT: {id}
         </div>
-        <body className="flex mt-4 space-x-6">
+        <div className="flex flex-col items-center justify-center">
+          <img src={qrCode} alt="" />
+          <p className="text-xs break-normal text-center text-myDarkBlue">
+            Scan this QR code to update project milestone from shop floor.
+          </p>
+        </div>
+        <body className="flex mt-4 flex-col items-center justify-center">
           <div>
-            <InfoCard id={project.id} project={project} />
-          </div>
-          <div>
-            <img src={qrCode} alt="" />
-            <p className="text-xs break-normal text-myDarkBlue">
-              Scan this QR code to update project milestone from shop floor.
-            </p>
+            <QrInfo id={project.id} project={project} />
+            {/* <InfoCard id={project.id} project={project} /> */}
           </div>
         </body>
       </div>

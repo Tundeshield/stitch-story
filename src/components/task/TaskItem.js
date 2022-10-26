@@ -19,6 +19,8 @@ import {
 import { db } from '../../utils/firebase';
 import emailjs from '@emailjs/browser';
 import LoadingComp from '../Form/Form';
+import { useDispatch, useSelector } from 'react-redux';
+import { viewedProjectDetails } from '../../features/project/projectSlice';
 
 const TaskItem = ({ taskName, id, completed, project }) => {
   const [checked, setChecked] = useState(completed);
@@ -26,6 +28,8 @@ const TaskItem = ({ taskName, id, completed, project }) => {
   const navigate = useNavigate();
   const [client, setClient] = useState({});
   const [loading, setLoading] = useState(true);
+  const companyDetails = useSelector((state) => state.companyDetails);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchClient = async () => {
@@ -33,6 +37,15 @@ const TaskItem = ({ taskName, id, completed, project }) => {
       const clientSnap = await getDoc(clientRef);
       if (clientSnap.exists()) {
         setClient(clientSnap.data());
+        dispatch(
+          viewedProjectDetails({
+            // ...client,
+            companyName: clientSnap.data().companyName,
+            companyEmail: clientSnap.data().email,
+            contactPerson:
+              clientSnap.data().firstName + ' ' + clientSnap.data().lastName,
+          }),
+        );
         setLoading(false);
       } else {
         console.log('No such document!');
