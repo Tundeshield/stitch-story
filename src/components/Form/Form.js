@@ -1,3 +1,7 @@
+import * as React from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 const Input = ({ children, name, ref }) => {
   return (
     <div class="mb-6 w-full">
@@ -163,6 +167,14 @@ const ErrorDisplay = ({ title }) => {
     </div>
   );
 };
+
+export default function LoadingComp() {
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <CircularProgress />
+    </Box>
+  );
+}
 
 export {
   Input,

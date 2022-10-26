@@ -1,7 +1,29 @@
 import { IconButton } from '@mui/material';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import { useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../utils/firebase';
 
 const InfoCard = ({ project }) => {
+  const [client, setClient] = useState({});
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const fetchClient = async () => {
+      const clientRef = doc(db, 'clients', project.client);
+      const clientSnap = await getDoc(clientRef);
+      if (clientSnap.exists()) {
+        setClient(clientSnap.data());
+        setLoading(false);
+      } else {
+        console.log('No such document!');
+      }
+
+      console.log('Loading things', client);
+    };
+    fetchClient();
+  }, [project]);
+
+ 
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg">
       <div className="px-4 py-5 flex justify-between items-center sm:px-6">
@@ -38,17 +60,9 @@ const InfoCard = ({ project }) => {
           <div className="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Email</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              christopher.adepegba@gmail.com
+              {loading ? 'Loading...' : client.email}
             </dd>
           </div>
-          {/* <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">
-              Project Status
-            </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-              {status}
-            </dd>
-          </div> */}
           <div className="bg-white-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Details</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
