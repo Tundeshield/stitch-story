@@ -22,7 +22,7 @@ const CommentBox = ({ handleClose, id }) => {
         timePosted: Timestamp.now(),
         taskId: id,
       });
-      console.log('Document written with ID: ', docRef.id);
+      setSentComment(true);
     }
     setError(false);
     // Add a new document with a generated id.

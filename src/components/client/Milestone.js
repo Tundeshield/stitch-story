@@ -7,36 +7,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
 import PendingActionsIcon from '@mui/icons-material/PendingActions';
-import MilestoneUpdate from './MilestoneUpdateContainer';
 import MilestoneUpdateContainer from './MilestoneUpdateContainer';
-import {
-  collection,
-  onSnapshot,
-  query,
-  where,
-  getDocs,
-} from 'firebase/firestore';
-import { db } from '../../utils/firebase';
 
 const Milestone = ({ task }) => {
-  const [comments, setComments] = useState([]);
-  //Fetch task comments
-
-  const fetchComments = async () => {
-    const commentRef = collection(db, 'comments');
-    const q = query(commentRef, where('taskId', '==', task.id));
-    onSnapshot(q, (snapshot) => {
-      const data = snapshot.docs.map((doc) => {
-        return { ...doc.data(), id: doc.id };
-      });
-      setComments(data);
-    });
-  };
-
-  useEffect(() => {
-    fetchComments();
-  }, []);
-
   return (
     <div className="mb-4">
       <Accordion>
@@ -54,7 +27,7 @@ const Milestone = ({ task }) => {
           <Typography>{task.taskName}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <MilestoneUpdateContainer comments={comments} />
+          <MilestoneUpdateContainer task={task} />
         </AccordionDetails>
       </Accordion>
     </div>
