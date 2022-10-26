@@ -64,7 +64,7 @@ function App() {
         />
         <Route
           path="/users/update/:id"
-          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <UpdateUser />}
+          element={!user ? <Navigate to={ROUTE.NOTFOUND} /> : <UpdateUser />}
         />
         <Route
           path="/projects/:id"
