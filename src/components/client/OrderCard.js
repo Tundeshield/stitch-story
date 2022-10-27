@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import Button from '../Button';
 import TimelineIcon from '@mui/icons-material/Timeline';
 import SendIcon from '@mui/icons-material/Send';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../../utils/firebase';
 
 const OrderCard = ({ order }) => {
+  const [user] = useAuthState(auth);
   return (
     <div className="flex flex-col justify-between mb-8 drop-shadow-lg h-80 bg-white rounded-2xl  w-full lg:w-4/5">
       <div className="flex justify-between p-3 bg-white border-b-2 border-gray-200 rounded shadow-sm items-center">
@@ -35,7 +38,7 @@ const OrderCard = ({ order }) => {
             </Link>
           </Button>
           <Button>
-            <Link to={`/orders/${order.id}`}>
+            <Link to={`/client/chat/${user.uid}`}>
               Message Team <SendIcon className="ml-4" />
             </Link>
           </Button>
