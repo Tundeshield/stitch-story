@@ -28,6 +28,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './utils/firebase';
 import UpdateUser from './pages/User/UpdateUser';
 import CreateTask from './pages/Task/CreateTask';
+import ClientChat from './pages/clientChat/ClientChat';
 
 function App() {
   const admin = useSelector((state) => state.user.isAdmin);
@@ -81,6 +82,10 @@ function App() {
         <Route
           path="/tasks/create/:id"
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateTask />}
+        />
+        <Route
+          path="/client/chat/:id"
+          element={!user ? <Navigate to={ROUTE.NOTFOUND} /> : <ClientChat />}
         />
         <Route
           path="/tasks/edit/:id"
