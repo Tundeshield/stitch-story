@@ -30,8 +30,16 @@ import UpdateUser from './pages/User/UpdateUser';
 import CreateTask from './pages/Task/CreateTask';
 import ClientChat from './pages/clientChat/ClientChat';
 
+import StaffConfirmationPage from './pages/staff/StaffConfirmationPage';
+import StaffRegistrationPage from './pages/staff/StaffRegistrationPage';
+import StaffTasks from './pages/staff/StaffTasks';
+
+
 function App() {
   const admin = useSelector((state) => state.user.isAdmin);
+  const isSupervisor = useSelector(
+    (state) => state.supervisorConfirmed.isSupervisor,
+  );
   const [user] = useAuthState(auth);
 
   return (
@@ -80,12 +88,30 @@ function App() {
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <ViewUser />}
         />
         <Route
-          path="/client/chat/:id"
-          element={!user ? <Navigate to={ROUTE.NOTFOUND} /> : <ClientChat />}
+
+          path="/staff/secret-registration"
+          element={
+            !isSupervisor ? (
+              <Navigate to={ROUTE.NOTFOUND} />
+            ) : (
+              <StaffRegistrationPage />
+            )
+          }
         />
         <Route
+          path="/staff/staff-tasks"
+          element={
+            !isSupervisor ? <Navigate to={ROUTE.NOTFOUND} /> : <StaffTasks />
+          }
+        />
+        <Route path="/StaffConfirmation" element={<StaffConfirmationPage />} />
+
           path="/tasks/create/:id"
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateTask />}
+        />
+        <Route
+          path="/client/chat/:id"
+          element={!user ? <Navigate to={ROUTE.NOTFOUND} /> : <ClientChat />}
         />
         <Route
           path="/tasks/edit/:id"

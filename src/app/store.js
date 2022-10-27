@@ -6,6 +6,7 @@ import projectReducer from '../features/project/projectSlice';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
+import supervisorConfirmedSlice from '../features/staff/supervisorConfirmSlice';
 
 const persistConfig = {
   key: 'root',
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   task: taskReducer,
   user: userReducer,
   viewedProject: projectReducer,
+  supervisorConfirmed: supervisorConfirmedSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

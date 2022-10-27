@@ -58,5 +58,13 @@ const client = [
     url: '/orders',
   },
 ];
+const supervisor = [
+  {
+    id: 95384983434,
+    name: 'My Tasks',
+    icon: <FolderOpenIcon className="text-white" />,
+    url: '/orders',
+  },
+];
 
-export { admin, client };
+export { admin, client, supervisor };

@@ -9,7 +9,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const TaskContainer = ({ project, client }) => {
+const TaskContainer = ({ project }) => {
   const [tasks, setTasks] = useState([]);
   const { id } = useParams();
 
@@ -51,6 +51,7 @@ const TaskContainer = ({ project, client }) => {
           {tasks.map((item) => (
             <TaskItem
               taskName={item.taskName}
+              supervisor={item.supervisor}
               id={item.id}
               key={item.id}
               completed={item.completed}
