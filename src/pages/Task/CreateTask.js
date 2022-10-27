@@ -20,6 +20,7 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { db, timestamp } from '../../utils/firebase';
+import emailjs from '@emailjs/browser';
 
 const CreateTask = () => {
   const [supervisors, setSupervisors] = useState([]);
@@ -79,6 +80,34 @@ const CreateTask = () => {
       completed: false,
       timestamp: serverTimestamp(),
     });
+
+    //Get supervisor email
+    const supervisorEmail = supervisors.find(
+      (supervisor) => supervisor.id === task.supervisor,
+    ).email;
+
+    //Send Email notification to supervisor
+    const emailParams = {
+      taskTitle: taskName,
+      supervisor: supervisorEmail,
+      message: taskDescription,
+      startDate: startDate,
+      endDate: endDate,
+    };
+    emailjs
+      .send(
+        'service_ms3fmaf',
+        'template_j8bylvw',
+        emailParams,
+        'user_7l1U0vUgTYflZnqSMoxVG',
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setTasksIds([...taskIds, docRef.id]);
     dispatch(addTask(task));
     reset({
