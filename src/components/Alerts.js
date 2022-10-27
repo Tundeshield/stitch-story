@@ -74,6 +74,17 @@ export const DoneAlert = ({ primary, secondary }) => {
     </div>
   );
 };
+export const DoneAlertSecondary = ({ primary, secondary }) => {
+  return (
+    <div
+      className="p-2 mb-4 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800"
+      role="alert"
+    >
+      <span className="font-extrabold">Info alert!</span> Customer would be
+      notified when mark as done.
+    </div>
+  );
+};
 export const QrAlert = ({ primary, secondary }) => {
   return (
     <div

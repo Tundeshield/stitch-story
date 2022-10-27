@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { addDays } from 'date-fns';
@@ -13,10 +13,16 @@ import { ErrorDisplay } from '../../components/Form/Form';
 import OnCreateTaskContainer from '../../components/task/OnCreateTaskContainer';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
 import { useNavigate, useParams } from 'react-router-dom';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  getDocs,
+  serverTimestamp,
+} from 'firebase/firestore';
 import { db, timestamp } from '../../utils/firebase';
 
 const CreateTask = () => {
+  const [supervisors, setSupervisors] = useState([]);
   const [range, setRange] = useState([
     {
       startDate: new Date(),
@@ -38,9 +44,20 @@ const CreateTask = () => {
   } = useForm();
   const { id } = useParams();
 
+  const getSupervisorData = async () => {
+    const colRef = collection(db, 'supervisors');
+    const snapshot = await getDocs(colRef);
+    const data = snapshot.docs.map((doc) => ({
+      id: doc.id,
+
+      ...doc.data(),
+    }));
+    setSupervisors(data);
+  };
+
   //Create new task
   const submitTask = async (data) => {
-    const { taskName, taskDescription } = data;
+    const { taskName, taskDescription, supervisor } = data;
     const { startDate, endDate } = range[0];
 
     var task = {
@@ -48,12 +65,14 @@ const CreateTask = () => {
       taskDescription: taskDescription,
       startDate: startDate,
       endDate: endDate,
+      supervisor: supervisor,
     };
 
     const colRef = collection(db, 'tasks');
     const docRef = await addDoc(colRef, {
       taskName,
       taskDescription,
+      supervisor,
       startDate,
       endDate,
       projectId: id,
@@ -65,8 +84,13 @@ const CreateTask = () => {
     reset({
       taskName: '',
       taskDescription: '',
+      supervisor: '',
     });
   };
+
+  useEffect(() => {
+    getSupervisorData();
+  }, []);
 
   return (
     <Page>
@@ -94,6 +118,24 @@ const CreateTask = () => {
                 {errors.taskName && <ErrorDisplay title="task name" />}
               </div>
 
+              <div className="mb-6">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+                  Select task supervisor
+                </label>
+                <select
+                  {...register('supervisor', { required: true })}
+                  id="countries"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                  <option selected>Select supervisor</option>
+                  {supervisors.map((option) => (
+                    <option key={option.id} value={option.id}>
+                      {option.firstName} {option.lastName}
+                    </option>
+                  ))}
+                </select>
+                {errors.client && <ErrorDisplay title="customer" />}
+              </div>
               <div className="mb-6">
                 <label
                   for="message"

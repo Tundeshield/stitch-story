@@ -8,24 +8,31 @@ import { auth } from '../utils/firebase';
 import { signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeUserDetails } from '../features/user/userSlice';
+import { confirmedSupervisor } from '../features/staff/supervisorConfirmSlice';
 
 const SideMenu = () => {
   const [menu, setMenu] = useState([{}]);
 
   const userCat = useSelector((state) => state.user.isAdmin);
+  const isSupervisor = useSelector(
+    (state) => state.supervisorConfirmed.isSupervisor,
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userCat === false) {
-      setMenu(client);
-    } else {
+    if (userCat) {
       setMenu(admin);
+    } else if (isSupervisor) {
+      setMenu(supervisor);
+    } else {
+      setMenu(client);
     }
   }, [userCat]);
 
   const logoutUser = () => {
     dispatch(removeUserDetails());
+    dispatch(confirmedSupervisor({ isSupervisor: false }));
     signOut(auth);
     navigate('/');
   };

@@ -22,12 +22,14 @@ import LoadingComp from '../Form/Form';
 import { useDispatch, useSelector } from 'react-redux';
 import { viewedProjectDetails } from '../../features/project/projectSlice';
 
-const TaskItem = ({ taskName, id, completed, project }) => {
+const TaskItem = ({ taskName, id, completed, project, supervisor }) => {
   const [checked, setChecked] = useState(completed);
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
   const [client, setClient] = useState({});
+  const [supervisorData, setSupervisorData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [supervisorLoad, setSupervisorLoad] = useState(true);
   const companyDetails = useSelector((state) => state.companyDetails);
   const dispatch = useDispatch();
 
@@ -54,7 +56,20 @@ const TaskItem = ({ taskName, id, completed, project }) => {
       console.log('Loading things', client);
     };
     fetchClient();
+    fetchSupervisor();
   }, [project]);
+
+  const fetchSupervisor = async () => {
+    const supervisorRef = doc(db, 'supervisors', supervisor);
+    const supervisorSnap = await getDoc(supervisorRef);
+
+    if (supervisorSnap.exists()) {
+      setSupervisorLoad(false);
+      setSupervisorData(supervisorSnap.data());
+    } else {
+      console.log('No such document!');
+    }
+  };
 
   //Complete task function
   const handleCompletedTask = async (e) => {
@@ -103,7 +118,6 @@ const TaskItem = ({ taskName, id, completed, project }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(client.email);
   return (
     <>
       <li className="flex flex-col">
@@ -133,6 +147,22 @@ const TaskItem = ({ taskName, id, completed, project }) => {
               </IconButton>
             </span>
           </div>
+        </span>
+        <span className="text-xs flex justify-center">
+          <span className="mr-2">
+            {' '}
+            <i> Task supervisor :</i>{' '}
+          </span>{' '}
+          <span className="text-myBlue">
+            {supervisorLoad ? (
+              <LoadingComp />
+            ) : (
+              <strong>
+                {' '}
+                {`${supervisorData.firstName} ${supervisorData.lastName}`}
+              </strong>
+            )}
+          </span>
         </span>
         <span className="flex justify-center space-y-2">
           <span className="flex space-x-1 ">

@@ -22,6 +22,7 @@ import { logUserDetails } from '../features/user/userSlice';
 import { signOut } from 'firebase/auth';
 import { Timestamp } from 'firebase/firestore';
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
+import AddModeratorIcon from '@mui/icons-material/AddModerator';
 
 const theme = createTheme();
 
@@ -148,20 +149,36 @@ export default function LogIn() {
                   Unauthorized user, contact production team!
                 </ErrorAlert>
               )}
-              <Link to="/register">
-                <div className="flex justify-center">
-                  <div
-                    id="toast-simple"
-                    class="flex items-center p-4 space-x-4 w-full max-w-xs text-myBlue bg-white rounded-lg divide-x divide-gray-200 shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
-                    role="alert"
-                  >
-                    <AssuredWorkloadIcon />
-                    <div class="pl-4 text-sm font-normal">
-                      New Client? Please register here...
+              <div className="flex justify-between">
+                <Link to="/register" className="mb-4">
+                  <div className="flex justify-center">
+                    <div
+                      id="toast-simple"
+                      class="flex items-center p-4 space-x-4 w-full max-w-xs text-myBlue bg-white rounded-lg divide-x divide-gray-200 shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                      role="alert"
+                    >
+                      <AssuredWorkloadIcon />
+                      <div class="pl-4 text-sm font-normal">
+                        New Client? Register here...
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+                <Link to="/StaffConfirmation">
+                  <div className="flex justify-center">
+                    <div
+                      id="toast-simple"
+                      class="flex items-center p-4 space-x-4 w-full max-w-xs text-myBlue bg-white rounded-lg divide-x divide-gray-200 shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                      role="alert"
+                    >
+                      <AddModeratorIcon />
+                      <div class="pl-4 text-sm font-normal">
+                        New staff only ...
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
 
               <Copyright sx={{ mt: 5 }} />
             </Box>

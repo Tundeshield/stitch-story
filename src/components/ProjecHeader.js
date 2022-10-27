@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProjecHeader = () => {
+const ProjecHeader = ({ header }) => {
   return (
     <div>
       <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
@@ -20,7 +20,7 @@ const ProjecHeader = () => {
               role="tab"
               aria-controls="profile"
             >
-              Profile
+              {header}
             </button>
           </li>
         </ul>
