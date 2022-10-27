@@ -52,9 +52,6 @@ const MyProjects = () => {
             <OrderCard order={order} />
           ))}
           {myOrders.length === 0 && <img src={img} alt="checkback" />}
-          {/* <span>
-            <ChangePassword />
-          </span> */}
         </div>
       </Container>
     </Page>

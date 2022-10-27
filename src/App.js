@@ -74,13 +74,16 @@ function App() {
           path="/users/update/:id"
           element={!user ? <Navigate to={ROUTE.NOTFOUND} /> : <UpdateUser />}
         />
+
         <Route
           path="/projects/:id"
-          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <Project />}
-        />
-        <Route
-          path="/projects/:id"
-          element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <Project />}
+          element={
+            !admin || !isSupervisor ? (
+              <Navigate to={ROUTE.NOTFOUND} />
+            ) : (
+              <Project />
+            )
+          }
         />
         <Route
           path="/users/:id"
@@ -98,9 +101,7 @@ function App() {
         />
         <Route
           path="/staff/staff-tasks"
-          element={
-            !isSupervisor ? <Navigate to={ROUTE.NOTFOUND} /> : <StaffTasks />
-          }
+          element={user ? <StaffTasks /> : null}
         />
         <Route path="/StaffConfirmation" element={<StaffConfirmationPage />} />
 
