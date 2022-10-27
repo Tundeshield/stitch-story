@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Container from '../../components/Container';
 import Page from '../../components/Page';
 
@@ -393,6 +394,7 @@ const ClientChat = () => {
         </div>
       </Container>
     </Page>
+
   );
 };
 

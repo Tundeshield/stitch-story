@@ -29,9 +29,11 @@ import { auth } from './utils/firebase';
 import UpdateUser from './pages/User/UpdateUser';
 import CreateTask from './pages/Task/CreateTask';
 import ClientChat from './pages/clientChat/ClientChat';
+
 import StaffConfirmationPage from './pages/staff/StaffConfirmationPage';
 import StaffRegistrationPage from './pages/staff/StaffRegistrationPage';
 import StaffTasks from './pages/staff/StaffTasks';
+
 
 function App() {
   const admin = useSelector((state) => state.user.isAdmin);
@@ -86,6 +88,7 @@ function App() {
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <ViewUser />}
         />
         <Route
+
           path="/staff/secret-registration"
           element={
             !isSupervisor ? (
@@ -102,7 +105,7 @@ function App() {
           }
         />
         <Route path="/StaffConfirmation" element={<StaffConfirmationPage />} />
-        <Route
+
           path="/tasks/create/:id"
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateTask />}
         />
