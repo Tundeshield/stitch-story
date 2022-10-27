@@ -34,7 +34,6 @@ import StaffConfirmationPage from './pages/staff/StaffConfirmationPage';
 import StaffRegistrationPage from './pages/staff/StaffRegistrationPage';
 import StaffTasks from './pages/staff/StaffTasks';
 
-
 function App() {
   const admin = useSelector((state) => state.user.isAdmin);
   const isSupervisor = useSelector(
@@ -88,7 +87,6 @@ function App() {
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <ViewUser />}
         />
         <Route
-
           path="/staff/secret-registration"
           element={
             !isSupervisor ? (
@@ -106,6 +104,7 @@ function App() {
         />
         <Route path="/StaffConfirmation" element={<StaffConfirmationPage />} />
 
+        <Route
           path="/tasks/create/:id"
           element={!admin ? <Navigate to={ROUTE.NOTFOUND} /> : <CreateTask />}
         />

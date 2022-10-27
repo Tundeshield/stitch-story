@@ -34,6 +34,9 @@ export default function LogIn() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const admin = useSelector((state) => state.user.isAdmin);
+  const isSupervisor = useSelector(
+    (state) => state.supervisorConfirmed.isSupervisor,
+  );
 
   //Handle login function
   const handleSignInLink = (event) => {
@@ -62,7 +65,13 @@ export default function LogIn() {
                 uid: loggedinuser.uid,
               }),
             );
-            loggedinuser.admin ? navigate('/users') : navigate('/orders');
+            if (loggedinuser.admin) {
+              navigate('/users');
+            } else if (isSupervisor) {
+              navigate('/staff/staff-tasks');
+            } else {
+              navigate('/client');
+            }
           });
         });
       })
