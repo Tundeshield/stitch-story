@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '../utils/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import img from '../assets/images/client_default.png';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
@@ -95,6 +96,11 @@ const ProjectList = () => {
           ))}
         </tbody>
       </table>
+      {projects.length === 0 && (
+        <div className="flex justify-center m-auto items-center w-5/6 mt-4 ">
+          <img src={img} alt="checkback" />
+        </div>
+      )}
     </div>
   );
 };
