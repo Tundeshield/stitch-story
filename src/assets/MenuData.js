@@ -63,7 +63,7 @@ const supervisor = [
     id: 95384983434,
     name: 'My Tasks',
     icon: <FolderOpenIcon className="text-white" />,
-    url: '/orders',
+    url: '/staff/staff-tasks',
   },
 ];
 
