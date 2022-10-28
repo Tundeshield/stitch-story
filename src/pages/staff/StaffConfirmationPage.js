@@ -30,7 +30,7 @@ const StaffConfirmationPage = () => {
     const data = new FormData(event.currentTarget);
     const code = data.get('securityCode');
 
-    if (code !== 'testcode1234') {
+    if (code !== process.env.REACT_APP_SUPERVISOR_SECRET_PASS) {
       setError('Security code is incorrect');
       dispatch(confirmedSupervisor({ isSupervisor: false }));
       return;
