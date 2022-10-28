@@ -9,6 +9,7 @@ import { auth, db } from '../../utils/firebase';
 import { collection, onSnapshot, query, where } from 'firebase/firestore';
 import LoadingComp from '../Form/Form';
 import { useSelector } from 'react-redux';
+import img from '../../assets/images/supervisor_default.png';
 
 export default function TaskTable() {
   const [taskList, setTasksList] = React.useState([]);
@@ -64,6 +65,11 @@ export default function TaskTable() {
                 <LoadingComp />
               ) : (
                 taskList.map((item) => <StaffTask task={item} />)
+              )}
+              {taskList.length === 0 && (
+                <div className="flex flex-col justify-center items-center w-5/6 mt-4 ">
+                  <img src={img} alt="checkback" />
+                </div>
               )}
             </tbody>
           </table>
