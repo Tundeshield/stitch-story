@@ -1,10 +1,7 @@
 import { IconButton } from '@mui/material';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
-import {
-  useAuthState,
-  useCreateUserWithEmailAndPassword,
-} from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '../../components/Alerts';
@@ -14,9 +11,15 @@ import LoadingButton from '../../components/task/LoadingButton';
 import { auth, db } from '../../utils/firebase';
 import img from '../../assets/images/loginLogo.png';
 import googleIcon from '../../assets/images/googleIcon.png';
+import { logUserDetails } from '../../features/user/userSlice';
+import { useDispatch } from 'react-redux';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const StaffRegistrationPage = () => {
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -25,42 +28,50 @@ const StaffRegistrationPage = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  const [createUserWithEmailAndPassword, loading, error] =
-    useCreateUserWithEmailAndPassword(auth);
-  const [user] = useAuthState(auth);
-  const [makeError, setMakeError] = useState(false);
+  const dispatch = useDispatch();
 
   const handleRegister = async (data) => {
     const { email, password, confirmPassword } = data;
     if (password !== confirmPassword) {
-      return error;
+      return setError(true);
     }
+    //Create user with email and password
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
 
-    if (!error) {
-      await createUserWithEmailAndPassword(email, password).then(() => {
-        if (!loading) {
-          const userId = auth.currentUser.uid;
-          // Create user in the staff table
-          const docRef = doc(db, 'supervisors', userId);
-          const dataReg = {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            email: data.email,
-          };
-          //Set the user data to the clients database
-          setDoc(docRef, dataReg)
-            .then((docRef) => {
-              console.log('Entire Document has been updated successfully');
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-          navigate('/staff/staff-tasks');
-        }
+        const supervisorData = {
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          role: 'supervisor',
+        };
+
+        const supevisorRef = doc(db, 'supervisors', user.uid);
+        setDoc(supevisorRef, supervisorData);
+        console.log('User created successfully');
+        const userRef = doc(db, 'users', user.uid);
+        setDoc(userRef, supervisorData);
+
+        //Dispatch user details to the store
+        dispatch(
+          logUserDetails({
+            uid: user.uid,
+            email: user.email,
+            role: 'supervisor',
+            fullName: data.firstName + ' ' + data.lastName,
+          }),
+        );
+
+        //Navigate to the dashboard
+        navigate('/staff/staff-tasks');
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
       });
-    } else {
-      return error;
-    }
   };
   return (
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">

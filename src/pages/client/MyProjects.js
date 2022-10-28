@@ -19,13 +19,6 @@ const MyProjects = () => {
   const [user, loading, error] = useAuthState(auth);
   const [myOrders, setMyOrders] = useState([]);
 
-  // const getData = async () => {
-  //   const colRef = collection(db, 'projects');
-  //   const snapshot = await getDocs(colRef);
-  //   const data = snapshot.docs.map((doc) => doc.data());
-  //   setMyOrders(data);
-  // };
-
   const getProjects = async (id) => {
     const colRef = collection(db, 'projects');
     const q = query(colRef, where('client', '==', user.uid));
@@ -40,8 +33,6 @@ const MyProjects = () => {
   useEffect(() => {
     getProjects();
   }, []);
-
-  console.log(user);
 
   return (
     <Page>

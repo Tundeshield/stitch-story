@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
@@ -12,75 +13,65 @@ import sewingMachine from '../assets/images/cloth.jpg';
 import { Link } from 'react-router-dom';
 import Copyright from '../components/Copyright';
 import { ErrorAlert } from '../components/Feedback';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, app, timestamp } from '../utils/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, app, timestamp, db } from '../utils/firebase';
 import { useNavigate } from 'react-router-dom';
-import useAuthClaims from '../hooks/useAuthClaims';
 import { useDispatch, useSelector } from 'react-redux';
 import { logUserDetails } from '../features/user/userSlice';
-import { signOut } from 'firebase/auth';
-import { Timestamp } from 'firebase/firestore';
+import { doc, getDoc, Timestamp } from 'firebase/firestore';
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
 
 const theme = createTheme();
 
 export default function LogIn() {
-  const [user, loading] = useAuthState(auth);
-  const [isAdmin, setIsAdmin] = useState();
-  const [error, setError] = useState('');
-  const [dispatchedUser, setDispatchedUser] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const admin = useSelector((state) => state.user.isAdmin);
-  const isSupervisor = useSelector(
-    (state) => state.supervisorConfirmed.isSupervisor,
-  );
 
-  //Handle login function
-  const handleSignInLink = (event) => {
+  const [error, setError] = useState(false);
+
+  const handleLogin = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const email = data.get('email');
     const password = data.get('password');
+
     signInWithEmailAndPassword(auth, email, password)
-      .then((user) => {
-        auth.onAuthStateChanged((loggedinuser) => {
-          loggedinuser.getIdTokenResult().then((idTokenResult) => {
-            setIsAdmin(idTokenResult.claims.admin);
-            let loggedinuser = user.user;
-            let adminClaim = idTokenResult.claims.admin;
-            if (adminClaim) {
-              loggedinuser.admin = idTokenResult.claims.admin;
-            } else {
-              loggedinuser.admin = false;
-            }
-            // Add the user details to redux
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+        //Get user details from the database
+        //rETURN BACK TO THIS
+        const userRef = doc(db, 'users', user.uid);
+
+        getDoc(userRef).then((doc) => {
+          if (doc.exists()) {
+            const userData = doc.data();
             dispatch(
               logUserDetails({
-                displayName: loggedinuser.displayName,
-                email: loggedinuser.email,
-                isAdmin: loggedinuser.admin,
-                uid: loggedinuser.uid,
+                uid: user.uid,
+                email: user.email,
+                role: doc.data().role,
+                fullName: doc.data().firstName + ' ' + doc.data().lastName,
               }),
             );
-            if (loggedinuser.admin) {
-              navigate('/users');
-            } else if (isSupervisor) {
+            if (doc.data().role === 'admin') {
+              navigate('/projects');
+            } else if (doc.data().role === 'supervisor') {
               navigate('/staff/staff-tasks');
-            } else {
-              navigate('/client');
+            } else if (doc.data().role === 'client') {
+              navigate('/orders');
             }
-          });
+          } else {
+            navigate('/');
+            console.log('No such document!');
+          }
         });
       })
       .catch((error) => {
-        setError(error.message);
+        const errorCode = error.code;
+        const errorMessage = error.message;
       });
-
-    //check auth state of user if admin, redirect to admin routes, is client, redirect to client routes
-    //Check user auth to redirect
   };
 
   return (
@@ -123,7 +114,7 @@ export default function LogIn() {
             <Box
               component="form"
               noValidate
-              onSubmit={handleSignInLink}
+              onSubmit={handleLogin}
               sx={{ mt: 1 }}
             >
               <TextField
@@ -153,11 +144,7 @@ export default function LogIn() {
               >
                 Sign in
               </Button>
-              {error && (
-                <ErrorAlert>
-                  Unauthorized user, contact production team!
-                </ErrorAlert>
-              )}
+
               <div className="flex justify-between">
                 <Link to="/register" className="mb-4">
                   <div className="flex justify-center">
@@ -188,6 +175,12 @@ export default function LogIn() {
                   </div>
                 </Link>
               </div>
+              {error && (
+                <ErrorAlert>
+                  Unauthorized user, contact production team! or check your
+                  login details.
+                </ErrorAlert>
+              )}
 
               <Copyright sx={{ mt: 5 }} />
             </Box>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Menu from './Menu';
 import { client, admin, supervisor } from '../assets/MenuData';
-import Logo from '../assets/images/Logo.png';
+
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../utils/firebase';
@@ -9,11 +9,13 @@ import { signOut } from 'firebase/auth';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeUserDetails } from '../features/user/userSlice';
 import { confirmedSupervisor } from '../features/staff/supervisorConfirmSlice';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const SideMenu = () => {
   const [menu, setMenu] = useState([{}]);
+  const user = useSelector((state) => state.user);
+  const loggedInUser = useAuthState(auth);
 
-  const userCat = useSelector((state) => state.user.isAdmin);
   const isSupervisor = useSelector(
     (state) => state.supervisorConfirmed.isSupervisor,
   );
@@ -21,14 +23,16 @@ const SideMenu = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userCat) {
+    if (user.role === 'admin') {
       setMenu(admin);
-    } else if (isSupervisor) {
+    } else if (user.role === 'supervisor') {
       setMenu(supervisor);
-    } else {
+    } else if (user.role === 'client') {
       setMenu(client);
+    } else {
+      return;
     }
-  }, [userCat]);
+  }, [user]);
 
   const logoutUser = () => {
     dispatch(removeUserDetails());
