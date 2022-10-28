@@ -3,6 +3,8 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import AddIcon from '@mui/icons-material/Add';
 import ListIcon from '@mui/icons-material/List';
 import SettingsIcon from '@mui/icons-material/Settings';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import * as ROUTE from './constants/routes';
 
 const randomInt = () => {
@@ -47,6 +49,12 @@ const admin = [
         icon: <ListIcon className="text-white" />,
       },
     ],
+  },
+  {
+    id: 463668947536,
+    name: 'Chats',
+    icon: <QuestionAnswerIcon className="text-white" />,
+    url: '/admin-chats',
   },
 ];
 
