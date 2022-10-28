@@ -4,10 +4,40 @@ import ChatIcon from '@mui/icons-material/Chat';
 import StaffTask from './StaffTask';
 import { DoneAlert, DoneAlertSecondary } from '../Alerts';
 import { Link } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth, db } from '../../utils/firebase';
+import { collection, onSnapshot, query, where } from 'firebase/firestore';
+import LoadingComp from '../Form/Form';
+import { useSelector } from 'react-redux';
 
 export default function TaskTable() {
+  const [taskList, setTasksList] = React.useState([]);
+
+  const [loading, setLoading] = React.useState(false);
+  const user = useSelector((state) => state.user);
+
+  const fetchSupervisorTasks = async () => {
+    const taskRef = collection(db, 'tasks');
+    const q = query(taskRef, where('supervisor', '==', user.uid));
+    setLoading(true);
+    const unsub = onSnapshot(q, (querySnapshot) => {
+      const data = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setTasksList(data);
+      setLoading(false);
+    });
+    return unsub;
+  };
+
+  React.useEffect(() => {
+    fetchSupervisorTasks();
+  }, []);
+  console.log(taskList);
+  console.log(user.uid);
   return (
-    <div class="sm:px-6 w-full">
+    <div class="overflow-hidden sm:px-6 w-full">
       <div class="px-4 md:px-6 py-4 md:py-7"></div>
       <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
         <div class="sm:flex items-center justify-between">
@@ -28,10 +58,13 @@ export default function TaskTable() {
           </div>
         </div>
         <div class="mt-7 overflow-x-auto">
-          <table class="w-full whitespace-nowrap">
+          <table class="w-full whitespace-nowrap overflow-hidden">
             <tbody>
-              <StaffTask />
-              <StaffTask />
+              {loading ? (
+                <LoadingComp />
+              ) : (
+                taskList.map((item) => <StaffTask task={item} />)
+              )}
             </tbody>
           </table>
         </div>

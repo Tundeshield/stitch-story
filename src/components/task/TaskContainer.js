@@ -8,10 +8,12 @@ import { DoneAlert } from '../Alerts';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { IconButton } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const TaskContainer = ({ project }) => {
   const [tasks, setTasks] = useState([]);
   const { id } = useParams();
+  const user = useSelector((state) => state.user.role);
 
   const getData = async () => {
     const taskRef = collection(db, 'tasks');
@@ -37,11 +39,13 @@ const TaskContainer = ({ project }) => {
           <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
             Task List
           </h5>
-          <Link to={`/tasks/create/${id}`}>
-            <IconButton>
-              <AddCircleOutlineIcon />
-            </IconButton>
-          </Link>
+          {user === 'admin' && (
+            <Link to={`/tasks/create/${id}`}>
+              <IconButton>
+                <AddCircleOutlineIcon />
+              </IconButton>
+            </Link>
+          )}
         </span>
 
         <p class="text-sm font-normal text-gray-500 dark:text-gray-400">

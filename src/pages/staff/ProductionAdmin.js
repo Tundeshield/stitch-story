@@ -1,28 +1,26 @@
+import { IconButton } from '@mui/material';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 import React, { useState } from 'react';
-
+import {
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+} from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { ErrorAlert, SuccessAlert } from '../../components/Alerts';
 import Button from '../../components/Button';
 import { ErrorDisplay } from '../../components/Form/Form';
 import LoadingButton from '../../components/task/LoadingButton';
-
+import { auth, db } from '../../utils/firebase';
 import img from '../../assets/images/loginLogo.png';
-import { useNavigate } from 'react-router-dom';
-import { doc, setDoc } from 'firebase/firestore';
-
-import { IconButton } from '@mui/material';
-
 import googleIcon from '../../assets/images/googleIcon.png';
-import { signOut, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { logUserDetails } from '../../features/user/userSlice';
-import { auth, db } from '../../utils/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-const Register = () => {
+const ProductionAdmin = () => {
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -30,47 +28,47 @@ const Register = () => {
     getValues,
   } = useForm();
   const navigate = useNavigate();
+
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
 
   const handleRegister = async (data) => {
     const { email, password, confirmPassword } = data;
-    console.log(data);
     if (password !== confirmPassword) {
-      return error;
+      return setError(true);
     }
-    //Create user with email and password
+    setLoading(true);
     //Create user with email and password
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
 
-        const clientData = {
+        const supervisorData = {
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,
-          role: 'client',
-          companyName: data.companyName,
+          role: 'admin',
         };
 
-        const clientRef = doc(db, 'clients', user.uid);
-        setDoc(clientRef, clientData);
+        const supevisorRef = doc(db, 'admins', user.uid);
+        setDoc(supevisorRef, supervisorData);
         console.log('User created successfully');
         const userRef = doc(db, 'users', user.uid);
-        setDoc(userRef, clientData);
+        setDoc(userRef, supervisorData);
 
         //Dispatch user details to the store
         dispatch(
           logUserDetails({
             uid: user.uid,
             email: user.email,
-            role: 'client',
+            role: 'admin',
             fullName: data.firstName + ' ' + data.lastName,
           }),
         );
 
         //Navigate to the dashboard
-        navigate('/orders');
+        navigate('/projects');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -78,7 +76,6 @@ const Register = () => {
         // ..
       });
   };
-
   return (
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
       <span classNameName="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -93,24 +90,6 @@ const Register = () => {
           className="overflow-hidden bg-white drop-shadow-lg sm:rounded-lg px-4 py-5 sm:px-6"
           onSubmit={handleSubmit((data) => handleRegister(data))}
         >
-          <div className="mb-4 w-full">
-            <label
-              for="base-input"
-              className="block mb-1 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              Company Name
-            </label>
-            <input
-              {...register('companyName', {
-                required: true,
-                maxLength: 30,
-              })}
-              type="text"
-              id="base-input"
-              className="bg-gray-50  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
-            {errors.companyName && <ErrorDisplay title="companyName" />}
-          </div>
           <div className="mb-6 w-full">
             <label
               for="base-input"
@@ -220,7 +199,7 @@ const Register = () => {
             {loading ? (
               <LoadingButton>Saving Company ...</LoadingButton>
             ) : (
-              <Button>Register...</Button>
+              <Button>Register</Button>
             )}
 
             <div>
@@ -247,4 +226,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default ProductionAdmin;

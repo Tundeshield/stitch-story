@@ -3,12 +3,13 @@ import SendIcon from '@mui/icons-material/Send';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../utils/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useSelector } from 'react-redux';
 
 const CommentBox = ({ handleClose, id }) => {
   const [comment, setComment] = useState('');
   const [error, setError] = useState(false);
   const [sentComment, setSentComment] = useState(false);
-  const [user, loading] = useAuthState(auth);
+  const user = useSelector((state) => state.user);
 
   const postComment = async (e) => {
     e.preventDefault();
@@ -17,7 +18,8 @@ const CommentBox = ({ handleClose, id }) => {
       return;
     } else {
       const docRef = await addDoc(collection(db, 'comments'), {
-        sender: 'Production Manager',
+        sender: user.fullName,
+        senderRole: user.role,
         comment: comment,
         timestamp: serverTimestamp(),
         taskId: id,

@@ -12,15 +12,24 @@ import AccountMenu from './menu/AccountMenu';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const user = useSelector((state) => state.user.role);
 
-  const [user] = useAuthState(auth);
-  const admin = useSelector((state) => state.user.isAdmin);
+  // const [user] = useAuthState(auth);
+  const admin = useSelector((state) => state.user.role);
 
   return (
     <header className="shadow bg-white flex py-3 px-4 justify-between items-center">
       <div className="max-w-7xl  sm:px-6 lg:px-8">
         <Link
-          to={user && admin ? '/projects' : user && !admin ? '/orders' : '/'}
+          to={
+            user === 'admin'
+              ? '/projects'
+              : user === 'supervisor'
+              ? '/staff/staff-tasks'
+              : user === 'client'
+              ? '/orders'
+              : '/'
+          }
           className="cursor-pointer"
         >
           <img src={logo} alt="" className="w-64" />

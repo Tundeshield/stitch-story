@@ -1,9 +1,9 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  displayName: '',
   email: '',
-  isAdmin: false,
+  fullName: '',
+  role: '',
   uid: '',
 };
 
@@ -15,9 +15,9 @@ export const userSlice = createSlice({
     logUserDetails: (state, action) => {
       return {
         ...state,
-        displayName: action.payload.displayName,
         email: action.payload.email,
-        isAdmin: action.payload.isAdmin,
+        fullName: action.payload.fullName,
+        role: action.payload.role,
         uid: action.payload.uid,
       };
     },

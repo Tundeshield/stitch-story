@@ -19,7 +19,7 @@ export default function AccountMenu({ children }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const [user] = useAuthState(auth);
-//   const user = useSelector((state) => state.user.uid);
+  //   const user = useSelector((state) => state.user.uid);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -27,7 +27,7 @@ export default function AccountMenu({ children }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(user);
+
   return (
     <React.Fragment>
       <Tooltip title="Account settings">
