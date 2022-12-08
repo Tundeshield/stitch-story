@@ -1,0 +1,254 @@
+[debug] [2022-12-08T16:52:18.002Z] ----------------------------------------------------------------------
+[debug] [2022-12-08T16:52:18.004Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\tunde\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-12-08T16:52:18.004Z] CLI Version:   11.16.0
+[debug] [2022-12-08T16:52:18.004Z] Platform:      win32
+[debug] [2022-12-08T16:52:18.004Z] Node Version:  v16.15.0
+[debug] [2022-12-08T16:52:18.009Z] Time:          Thu Dec 08 2022 16:52:18 GMT+0000 (Greenwich Mean Time)
+[debug] [2022-12-08T16:52:18.009Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-08T16:52:18.086Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-08T16:52:18.087Z] > authorizing via signed-in user (christopher.adepegba@gmail.com)
+[debug] [2022-12-08T16:52:18.087Z] [iam] checking project stitch-story for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-12-08T16:52:18.088Z] > refreshing access token with scopes: []
+[debug] [2022-12-08T16:52:18.090Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-12-08T16:52:18.090Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-08T16:52:18.221Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-12-08T16:52:18.221Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-12-08T16:52:18.229Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/stitch-story:testIamPermissions [none]
+[debug] [2022-12-08T16:52:18.229Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/stitch-story:testIamPermissions x-goog-quota-user=projects/stitch-story
+[debug] [2022-12-08T16:52:18.230Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/stitch-story:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-08T16:52:18.403Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/stitch-story:testIamPermissions 200
+[debug] [2022-12-08T16:52:18.404Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/stitch-story:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-12-08T16:52:18.404Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/stitch-story/serviceAccounts/stitch-story@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2022-12-08T16:52:18.404Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/stitch-story/serviceAccounts/stitch-story@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-12-08T16:52:18.959Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/stitch-story/serviceAccounts/stitch-story@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2022-12-08T16:52:18.960Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/stitch-story/serviceAccounts/stitch-story@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2022-12-08T16:52:18.961Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story [none]
+[debug] [2022-12-08T16:52:19.186Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story 200
+[debug] [2022-12-08T16:52:19.186Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story {"projectId":"stitch-story","projectNumber":"528282301455","displayName":"stitch-story","name":"projects/stitch-story","resources":{"hostingSite":"stitch-story","storageBucket":"stitch-story.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_36f8a847-250e-4b60-9006-72bef2823824"}
+[info] 
+[info] === Deploying to 'stitch-story'...
+[info] 
+[info] i  deploying functions, hosting 
+[debug] [2022-12-08T16:52:19.191Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story [none]
+[debug] [2022-12-08T16:52:19.519Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story 200
+[debug] [2022-12-08T16:52:19.519Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story {"projectId":"stitch-story","projectNumber":"528282301455","displayName":"stitch-story","name":"projects/stitch-story","resources":{"hostingSite":"stitch-story","storageBucket":"stitch-story.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_36f8a847-250e-4b60-9006-72bef2823824"}
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2022-12-08T16:52:19.522Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudfunctions.googleapis.com [none]
+[debug] [2022-12-08T16:52:19.522Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/stitch-story
+[debug] [2022-12-08T16:52:19.523Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/runtimeconfig.googleapis.com [none]
+[debug] [2022-12-08T16:52:19.523Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/stitch-story
+[debug] [2022-12-08T16:52:19.524Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudbuild.googleapis.com [none]
+[debug] [2022-12-08T16:52:19.524Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudbuild.googleapis.com x-goog-quota-user=projects/stitch-story
+[debug] [2022-12-08T16:52:19.525Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/artifactregistry.googleapis.com [none]
+[debug] [2022-12-08T16:52:19.525Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/artifactregistry.googleapis.com x-goog-quota-user=projects/stitch-story
+[debug] [2022-12-08T16:52:20.290Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/runtimeconfig.googleapis.com 200
+[debug] [2022-12-08T16:52:20.291Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2022-12-08T16:52:20.316Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/artifactregistry.googleapis.com 200
+[debug] [2022-12-08T16:52:20.316Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/artifactregistry.googleapis.com [omitted]
+[info] +  artifactregistry: required API artifactregistry.googleapis.com is enabled 
+[debug] [2022-12-08T16:52:20.317Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudbuild.googleapis.com 200
+[debug] [2022-12-08T16:52:20.318Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudbuild.googleapis.com [omitted]
+[info] +  functions: required API cloudbuild.googleapis.com is enabled 
+[debug] [2022-12-08T16:52:20.326Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudfunctions.googleapis.com 200
+[debug] [2022-12-08T16:52:20.326Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/stitch-story/services/cloudfunctions.googleapis.com [omitted]
+[info] +  functions: required API cloudfunctions.googleapis.com is enabled 
+[debug] [2022-12-08T16:52:20.327Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story/adminSdkConfig [none]
+[debug] [2022-12-08T16:52:20.520Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story/adminSdkConfig 200
+[debug] [2022-12-08T16:52:20.520Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story/adminSdkConfig {"projectId":"stitch-story","storageBucket":"stitch-story.appspot.com","locationId":"europe-west"}
+[debug] [2022-12-08T16:52:20.521Z] >>> [apiv2][query] GET https://runtimeconfig.googleapis.com/v1beta1/projects/stitch-story/configs [none]
+[debug] [2022-12-08T16:52:20.851Z] <<< [apiv2][status] GET https://runtimeconfig.googleapis.com/v1beta1/projects/stitch-story/configs 200
+[debug] [2022-12-08T16:52:20.851Z] <<< [apiv2][body] GET https://runtimeconfig.googleapis.com/v1beta1/projects/stitch-story/configs {}
+[info] i  functions: preparing codebase default for deployment 
+[debug] [2022-12-08T16:52:20.856Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2022-12-08T16:52:24.118Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-12-08T16:52:24.119Z] Building nodejs source
+[debug] [2022-12-08T16:52:24.121Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-12-08T16:52:24.832Z] Serving at port 9005
+
+[debug] [2022-12-08T16:52:25.033Z] Got response from /__/functions.yaml {"endpoints":{"addAdminRole":{"platform":"gcfv1","labels":{},"callableTrigger":{},"entryPoint":"addAdminRole"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2022-12-08T16:52:25.045Z] shutdown requested via /__/quitquitquit
+
+[info] i  functions: preparing functions directory for uploading... 
+[info] i  functions: packaged C:\Users\tunde\OneDrive\Documents\Stitch Story\stitch-story\functions (54.83 KB) for uploading 
+[debug] [2022-12-08T16:52:25.173Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/-/functions [none]
+[debug] [2022-12-08T16:52:25.668Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/-/functions 200
+[debug] [2022-12-08T16:52:25.669Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/-/functions {"functions":[{"name":"projects/stitch-story/locations/us-central1/functions/addAdminRole","httpsTrigger":{"url":"https://us-central1-stitch-story.cloudfunctions.net/addAdminRole","securityLevel":"SECURE_ALWAYS"},"status":"ACTIVE","entryPoint":"addAdminRole","timeout":"60s","availableMemoryMb":256,"serviceAccountEmail":"stitch-story@appspot.gserviceaccount.com","updateTime":"2022-10-20T05:10:59.531Z","versionId":"4","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"4bf6aee595567ddcb4fb867c7c898c8ff9ff8d15"},"sourceUploadUrl":"https://storage.googleapis.com/uploads-489912738805.us-central1.cloudfunctions.appspot.com/0af080bb-a327-43ca-a2d6-1f44330281f4.zip","environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"stitch-story\",\"storageBucket\":\"stitch-story.appspot.com\",\"locationId\":\"europe-west\"}","GCLOUD_PROJECT":"stitch-story"},"runtime":"nodejs16","ingressSettings":"ALLOW_ALL","buildId":"34161f50-f532-4692-a163-0141ace056fb","buildName":"projects/528282301455/locations/us-central1/builds/34161f50-f532-4692-a163-0141ace056fb","dockerRegistry":"ARTIFACT_REGISTRY"}]}
+[debug] [2022-12-08T16:52:25.670Z] >>> [apiv2][query] GET https://cloudfunctions.googleapis.com/v2/projects/stitch-story/locations/-/functions filter=environment%3D%22GEN_2%22
+[debug] [2022-12-08T16:52:26.654Z] <<< [apiv2][status] GET https://cloudfunctions.googleapis.com/v2/projects/stitch-story/locations/-/functions 200
+[debug] [2022-12-08T16:52:26.654Z] <<< [apiv2][body] GET https://cloudfunctions.googleapis.com/v2/projects/stitch-story/locations/-/functions {}
+[debug] [2022-12-08T16:52:26.665Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story [none]
+[debug] [2022-12-08T16:52:26.997Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story 200
+[debug] [2022-12-08T16:52:26.997Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/stitch-story {"projectId":"stitch-story","projectNumber":"528282301455","displayName":"stitch-story","name":"projects/stitch-story","resources":{"hostingSite":"stitch-story","storageBucket":"stitch-story.appspot.com","locationId":"europe-west"},"state":"ACTIVE","etag":"1_36f8a847-250e-4b60-9006-72bef2823824"}
+[debug] [2022-12-08T16:52:27.000Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/stitch-story/versions [none]
+[debug] [2022-12-08T16:52:27.000Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/stitch-story/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-12-08T16:52:28.048Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/stitch-story/versions 200
+[debug] [2022-12-08T16:52:28.048Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/stitch-story/versions {"name":"projects/528282301455/sites/stitch-story/versions/54495e684d0a5b8a","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-12-08T16:52:28.049Z] >>> [apiv2][query] POST https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions:generateUploadUrl [none]
+[debug] [2022-12-08T16:52:28.049Z] >>> [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions:generateUploadUrl {}
+[debug] [2022-12-08T16:52:28.727Z] <<< [apiv2][status] POST https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions:generateUploadUrl 200
+[debug] [2022-12-08T16:52:28.728Z] <<< [apiv2][body] POST https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions:generateUploadUrl {"uploadUrl":"https://storage.googleapis.com/uploads-489912738805.us-central1.cloudfunctions.appspot.com/dd665bfc-efd3-4276-8af9-9a8b6150992b.zip?GoogleAccessId=service-528282301455@gcf-admin-robot.iam.gserviceaccount.com&Expires=1670520148&Signature=WqfDXDVLTMbX0W1qr5bF%2FsQiBxftsEMgzJKq2bJoPODb68ssNSForf%2BLlgrzKKOfpbrXUh3rqd5UzqQlBSV1C3o8rEdu0WQ1GAJ%2FZFq1bqFsh9l59pznXxMiDMJ%2FUSt9IzvHx8eQarg5rL7%2BY1WdfM0nyUiYAJCfmyXFLX%2FHjLjU7U8J6UbPAWxMXkM3Vf7lMUlTlIiWNiM43BRHuoychD%2FvKP0HpKvcz9mJY4mD7AJliM56NTEblN6kI9nD0GIKCk9jjG1iGsqyN6pNVJnlwPOwyLqu0dlaTLmh%2BRf57leTJyRkO4aHmBqWcwG2mfrf8cxXZfPCiJetHc9GVrizzg%3D%3D"}
+[debug] [2022-12-08T16:52:28.728Z] >>> [apiv2][query] PUT https://storage.googleapis.com/uploads-489912738805.us-central1.cloudfunctions.appspot.com/dd665bfc-efd3-4276-8af9-9a8b6150992b.zip GoogleAccessId=service-528282301455%40gcf-admin-robot.iam.gserviceaccount.com&Expires=1670520148&Signature=WqfDXDVLTMbX0W1qr5bF%2FsQiBxftsEMgzJKq2bJoPODb68ssNSForf%2BLlgrzKKOfpbrXUh3rqd5UzqQlBSV1C3o8rEdu0WQ1GAJ%2FZFq1bqFsh9l59pznXxMiDMJ%2FUSt9IzvHx8eQarg5rL7%2BY1WdfM0nyUiYAJCfmyXFLX%2FHjLjU7U8J6UbPAWxMXkM3Vf7lMUlTlIiWNiM43BRHuoychD%2FvKP0HpKvcz9mJY4mD7AJliM56NTEblN6kI9nD0GIKCk9jjG1iGsqyN6pNVJnlwPOwyLqu0dlaTLmh%2BRf57leTJyRkO4aHmBqWcwG2mfrf8cxXZfPCiJetHc9GVrizzg%3D%3D
+[debug] [2022-12-08T16:52:28.728Z] >>> [apiv2][body] PUT https://storage.googleapis.com/uploads-489912738805.us-central1.cloudfunctions.appspot.com/dd665bfc-efd3-4276-8af9-9a8b6150992b.zip [stream]
+[debug] [2022-12-08T16:52:29.147Z] <<< [apiv2][status] PUT https://storage.googleapis.com/uploads-489912738805.us-central1.cloudfunctions.appspot.com/dd665bfc-efd3-4276-8af9-9a8b6150992b.zip 200
+[debug] [2022-12-08T16:52:29.147Z] <<< [apiv2][body] PUT https://storage.googleapis.com/uploads-489912738805.us-central1.cloudfunctions.appspot.com/dd665bfc-efd3-4276-8af9-9a8b6150992b.zip [omitted]
+[info] +  functions: functions folder uploaded successfully 
+[info] i  hosting[stitch-story]: beginning deploy... 
+[info] i  hosting[stitch-story]: found 31 files in build 
+[debug] [2022-12-08T16:52:29.163Z] [hosting] uploading with 200 concurrency
+[debug] [2022-12-08T16:52:29.837Z] [hosting] hash cache [YnVpbGQ] stored for 31 files
+[debug] [2022-12-08T16:52:29.838Z] [hosting][hash queue][FINAL] {"max":663,"min":3,"avg":46.67741935483871,"active":0,"complete":31,"success":31,"errored":0,"retried":0,"total":31,"elapsed":671}
+[debug] [2022-12-08T16:52:29.838Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/528282301455/sites/stitch-story/versions/54495e684d0a5b8a:populateFiles [none]
+[debug] [2022-12-08T16:52:29.838Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/528282301455/sites/stitch-story/versions/54495e684d0a5b8a:populateFiles {"files":{"/apple-touch-icon.png":"e30c8854dc96adb9b86ccd210e865072b418f9286ead37c94d0d035a08083689","/favicon-16x16.png":"f685b41bdda7f5d843cfbece789459777c633a09b1026f47ecf8d36871aa452a","/favicon-32x32.png":"ab9f1946cc29638122f595a2114bf1a3ddd2a2d4786e07d44fe40cb944324f23","/favicon.ico":"f11867ad71d2308daf07e4d5cf5e355fe3de042443f8f4cdaa6b21081c5e68a8","/logo192.png":"dead5b14a51669fb17beb0f57813f741af009d54948d7fb5511fed1ce1a4b6ac","/logo256.png":"ae6fa2bd70f4c35ebcedb401043dd28994813b213f3d20dc0212b72a460d8fd6","/logo384.png":"560ad6b8ea53315555972de56f6236d13d15036e34215f0a100a3461c67671c0","/logo512.png":"7df74aaaa24173ad3d5ec6037fbdac2c26175130e9237f77edb4c62aae86c973","/maskable.png":"9b1dbdf8b274bdbf7ce556d7e09f2b498bbdafe17bd4c20a753c7074bc93d0a2","/robots.txt":"5fcd5c559ded0c02b3ed7840ca3ee77e95b798730af98d9f18bc627ac898071e","/manifest.json":"12f43f077bd5218b0185760d17bf2a663d8c2c533e18255a6a433e5435d10aac","/index.html":"62fafd3405b44be58540792324fcaedc4e82d5d1a3610bea71cded7bb67aa11c","/asset-manifest.json":"533f1e52190453e08604cef4869326b318b59b5bd14959d97205fe2306ddfcdc","/service-worker.js.LICENSE.txt":"5d7e5b57938d46394ba5efca4f472d79b7221bc643cee649c4c4671e02100914","/service-worker.js":"3c2a00e0abbff0622fcdff767d603b9ee141a419c32361c0992459924e30d57f","/static/js/main.32bbc701.js.LICENSE.txt":"bdd5dd0243c73f630b46d135abdcfaa6ba1246f36aecd374764b2e3a35c9c6ad","/static/css/main.d62ad2b8.css.map":"5fa19b1cfef424784723c9a2dc8487a10e2273f224211d664b8ee9e03e54b370","/static/media/freeLogo.d50843870a79d76e3ad5.jpeg":"ba21d3d515fee82d990550f15f8489e7676e4fdb98cbce8c4ddeedb24c035b58","/static/media/Logo.ca7a6ce1f4f4fcc922bb.png":"2e6f45c665a4233caebc727036a04242c803964af00b7912678aebe535f5de0e","/static/media/client_default.56fac7fc1983078c2fdb.png":"ef5c02a2ba4519655ccc1aeebdd7e198d6afb36d0bcb09ad2842ab0fbcbe53ee","/static/media/checkback.70851c492ebb58a43bd1.png":"0090a1aede82be3ac033146ceafc1a2b691f3471332e52c1739e5c4c7ebda0be","/static/css/main.d62ad2b8.css":"c2a28c2c110747167b27179402aed2df31ecd9e7d46264000d129204ebe4e463","/static/media/supervisor_default.d6d02ccc0c4e28442029.png":"6052baeac21fb64e5310cc04edabcedfcdf67ad414e1ff3d11329e27e71d28f5","/static/media/user-default.366a86810e883832654e.png":"f7ae268ee6e0e4fadbb08581c28cb8cfabded6d9fe441e3cc15686c73a884ca3","/static/media/loginLogo.909772d37bd941e42984.png":"9bc16ba8028c926c34e4e1336c89e263b2cd97b95a2723737f531143ab2a05e6","/service-worker.js.map":"8a57b3c46d19e04a8f4251a349adfe5e54b96dd8ca8571f38c25f3da695c16aa","/static/media/cloth.3d85716bf0f22d2a7768.jpg":"e6b8e6f4aba64584bc1e7ed680d9ae770b95bd6ba3b073a29433dae4d61c316e","/static/js/main.32bbc701.js":"b0b15aa090ce6a8cecd6820c92bf577e3004414ed3f1c7d97fb3a6d1697a02d0","/static/media/tailor.d868579533b1ea23853a.jpg":"a441ad8d5fc48c991ccdbdda6b93226b94eed82fb4e396ee832f95c9df049f60","/static/media/rickroll-roll.d86bf0d089bda6ab6327.gif":"554fe4767dcf8fded39d51342efb8f4a2045e2707c3b7c617720b1b1fc4b844d","/static/js/main.32bbc701.js.map":"02fbcd73d7f0f8868f25509860b1dcf7bebda73ca65572611c02e719b1a304e4"}}
+[debug] [2022-12-08T16:52:30.682Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/528282301455/sites/stitch-story/versions/54495e684d0a5b8a:populateFiles 200
+[debug] [2022-12-08T16:52:30.682Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/528282301455/sites/stitch-story/versions/54495e684d0a5b8a:populateFiles {"uploadRequiredHashes":["533f1e52190453e08604cef4869326b318b59b5bd14959d97205fe2306ddfcdc","8a57b3c46d19e04a8f4251a349adfe5e54b96dd8ca8571f38c25f3da695c16aa","b0b15aa090ce6a8cecd6820c92bf577e3004414ed3f1c7d97fb3a6d1697a02d0","3c2a00e0abbff0622fcdff767d603b9ee141a419c32361c0992459924e30d57f","02fbcd73d7f0f8868f25509860b1dcf7bebda73ca65572611c02e719b1a304e4","62fafd3405b44be58540792324fcaedc4e82d5d1a3610bea71cded7bb67aa11c","5d7e5b57938d46394ba5efca4f472d79b7221bc643cee649c4c4671e02100914","12f43f077bd5218b0185760d17bf2a663d8c2c533e18255a6a433e5435d10aac"],"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files"}
+[debug] [2022-12-08T16:52:30.684Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/533f1e52190453e08604cef4869326b318b59b5bd14959d97205fe2306ddfcdc [none]
+[debug] [2022-12-08T16:52:30.684Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/533f1e52190453e08604cef4869326b318b59b5bd14959d97205fe2306ddfcdc [stream]
+[debug] [2022-12-08T16:52:30.685Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/8a57b3c46d19e04a8f4251a349adfe5e54b96dd8ca8571f38c25f3da695c16aa [none]
+[debug] [2022-12-08T16:52:30.685Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/8a57b3c46d19e04a8f4251a349adfe5e54b96dd8ca8571f38c25f3da695c16aa [stream]
+[debug] [2022-12-08T16:52:30.686Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/b0b15aa090ce6a8cecd6820c92bf577e3004414ed3f1c7d97fb3a6d1697a02d0 [none]
+[debug] [2022-12-08T16:52:30.686Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/b0b15aa090ce6a8cecd6820c92bf577e3004414ed3f1c7d97fb3a6d1697a02d0 [stream]
+[debug] [2022-12-08T16:52:30.687Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/3c2a00e0abbff0622fcdff767d603b9ee141a419c32361c0992459924e30d57f [none]
+[debug] [2022-12-08T16:52:30.687Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/3c2a00e0abbff0622fcdff767d603b9ee141a419c32361c0992459924e30d57f [stream]
+[debug] [2022-12-08T16:52:30.687Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/02fbcd73d7f0f8868f25509860b1dcf7bebda73ca65572611c02e719b1a304e4 [none]
+[debug] [2022-12-08T16:52:30.687Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/02fbcd73d7f0f8868f25509860b1dcf7bebda73ca65572611c02e719b1a304e4 [stream]
+[debug] [2022-12-08T16:52:30.688Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/62fafd3405b44be58540792324fcaedc4e82d5d1a3610bea71cded7bb67aa11c [none]
+[debug] [2022-12-08T16:52:30.688Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/62fafd3405b44be58540792324fcaedc4e82d5d1a3610bea71cded7bb67aa11c [stream]
+[debug] [2022-12-08T16:52:30.689Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/5d7e5b57938d46394ba5efca4f472d79b7221bc643cee649c4c4671e02100914 [none]
+[debug] [2022-12-08T16:52:30.689Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/5d7e5b57938d46394ba5efca4f472d79b7221bc643cee649c4c4671e02100914 [stream]
+[debug] [2022-12-08T16:52:30.693Z] >>> [apiv2][query] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/12f43f077bd5218b0185760d17bf2a663d8c2c533e18255a6a433e5435d10aac [none]
+[debug] [2022-12-08T16:52:30.693Z] >>> [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/12f43f077bd5218b0185760d17bf2a663d8c2c533e18255a6a433e5435d10aac [stream]
+[debug] [2022-12-08T16:52:30.694Z] [hosting][populate queue][FINAL] {"max":849,"min":849,"avg":849,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":860}
+[debug] [2022-12-08T16:52:30.694Z] [hosting] uploads queued: 8
+[debug] [2022-12-08T16:52:31.481Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/5d7e5b57938d46394ba5efca4f472d79b7221bc643cee649c4c4671e02100914 200
+[debug] [2022-12-08T16:52:31.481Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/5d7e5b57938d46394ba5efca4f472d79b7221bc643cee649c4c4671e02100914 [stream]
+[debug] [2022-12-08T16:52:31.611Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/62fafd3405b44be58540792324fcaedc4e82d5d1a3610bea71cded7bb67aa11c 200
+[debug] [2022-12-08T16:52:31.611Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/62fafd3405b44be58540792324fcaedc4e82d5d1a3610bea71cded7bb67aa11c [stream]
+[debug] [2022-12-08T16:52:31.628Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/533f1e52190453e08604cef4869326b318b59b5bd14959d97205fe2306ddfcdc 200
+[debug] [2022-12-08T16:52:31.628Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/533f1e52190453e08604cef4869326b318b59b5bd14959d97205fe2306ddfcdc [stream]
+[debug] [2022-12-08T16:52:31.703Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/12f43f077bd5218b0185760d17bf2a663d8c2c533e18255a6a433e5435d10aac 200
+[debug] [2022-12-08T16:52:31.703Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/12f43f077bd5218b0185760d17bf2a663d8c2c533e18255a6a433e5435d10aac [stream]
+[debug] [2022-12-08T16:52:31.704Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/8a57b3c46d19e04a8f4251a349adfe5e54b96dd8ca8571f38c25f3da695c16aa 200
+[debug] [2022-12-08T16:52:31.704Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/8a57b3c46d19e04a8f4251a349adfe5e54b96dd8ca8571f38c25f3da695c16aa [stream]
+[debug] [2022-12-08T16:52:31.919Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/3c2a00e0abbff0622fcdff767d603b9ee141a419c32361c0992459924e30d57f 200
+[debug] [2022-12-08T16:52:31.919Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/3c2a00e0abbff0622fcdff767d603b9ee141a419c32361c0992459924e30d57f [stream]
+[debug] [2022-12-08T16:52:32.737Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/b0b15aa090ce6a8cecd6820c92bf577e3004414ed3f1c7d97fb3a6d1697a02d0 200
+[debug] [2022-12-08T16:52:32.737Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/b0b15aa090ce6a8cecd6820c92bf577e3004414ed3f1c7d97fb3a6d1697a02d0 [stream]
+[debug] [2022-12-08T16:52:34.476Z] <<< [apiv2][status] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/02fbcd73d7f0f8868f25509860b1dcf7bebda73ca65572611c02e719b1a304e4 200
+[debug] [2022-12-08T16:52:34.476Z] <<< [apiv2][body] POST https://upload-firebasehosting.googleapis.com/upload/sites/stitch-story/versions/54495e684d0a5b8a/files/02fbcd73d7f0f8868f25509860b1dcf7bebda73ca65572611c02e719b1a304e4 [stream]
+[debug] [2022-12-08T16:52:34.477Z] [hosting][upload queue][FINAL] {"max":3794,"min":799,"avg":1474.875,"active":0,"complete":8,"success":8,"errored":0,"retried":0,"total":8,"elapsed":3795}
+[info] +  hosting[stitch-story]: file upload complete 
+[debug] [2022-12-08T16:52:34.479Z] [hosting] deploy completed after 5330ms
+[info] i  functions: updating Node.js 16 function addAdminRole(us-central1)... 
+[debug] [2022-12-08T16:52:34.484Z] >>> [apiv2][query] PATCH https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions/addAdminRole updateMask=name%2CsourceUploadUrl%2CentryPoint%2Cruntime%2CdockerRegistry%2Clabels%2ChttpsTrigger.securityLevel%2CenvironmentVariables%2CavailableMemoryMb%2CsourceToken
+[debug] [2022-12-08T16:52:34.484Z] >>> [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions/addAdminRole {"name":"projects/stitch-story/locations/us-central1/functions/addAdminRole","sourceUploadUrl":"https://storage.googleapis.com/uploads-489912738805.us-central1.cloudfunctions.appspot.com/dd665bfc-efd3-4276-8af9-9a8b6150992b.zip?GoogleAccessId=service-528282301455@gcf-admin-robot.iam.gserviceaccount.com&Expires=1670520148&Signature=WqfDXDVLTMbX0W1qr5bF%2FsQiBxftsEMgzJKq2bJoPODb68ssNSForf%2BLlgrzKKOfpbrXUh3rqd5UzqQlBSV1C3o8rEdu0WQ1GAJ%2FZFq1bqFsh9l59pznXxMiDMJ%2FUSt9IzvHx8eQarg5rL7%2BY1WdfM0nyUiYAJCfmyXFLX%2FHjLjU7U8J6UbPAWxMXkM3Vf7lMUlTlIiWNiM43BRHuoychD%2FvKP0HpKvcz9mJY4mD7AJliM56NTEblN6kI9nD0GIKCk9jjG1iGsqyN6pNVJnlwPOwyLqu0dlaTLmh%2BRf57leTJyRkO4aHmBqWcwG2mfrf8cxXZfPCiJetHc9GVrizzg%3D%3D","entryPoint":"addAdminRole","runtime":"nodejs16","dockerRegistry":"ARTIFACT_REGISTRY","labels":{"deployment-tool":"cli-firebase","deployment-callable":"true","firebase-functions-hash":"80f4027a00bf6d3c41b9552bbfc499c075fce0fe"},"httpsTrigger":{"securityLevel":"SECURE_ALWAYS"},"environmentVariables":{"FIREBASE_CONFIG":"{\"projectId\":\"stitch-story\",\"storageBucket\":\"stitch-story.appspot.com\",\"locationId\":\"europe-west\"}","GCLOUD_PROJECT":"stitch-story","EVENTARC_CLOUD_EVENT_SOURCE":"projects/stitch-story/locations/us-central1/functions/addAdminRole"},"availableMemoryMb":256}
+[debug] [2022-12-08T16:52:34.828Z] <<< [apiv2][status] PATCH https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions/addAdminRole 403
+[debug] [2022-12-08T16:52:34.829Z] <<< [apiv2][body] PATCH https://cloudfunctions.googleapis.com/v1/projects/stitch-story/locations/us-central1/functions/addAdminRole {"error":{"code":403,"message":"Unable to retrieve the repository metadata for projects/stitch-story/locations/us-central1/repositories/gcf-artifacts. Ensure that the Cloud Functions service account has 'artifactregistry.repositories.list' and 'artifactregistry.repositories.get' permissions. You can add the permissions by granting the role 'roles/artifactregistry.reader'.","status":"PERMISSION_DENIED"}}
+[warn] !  functions: failed to update function projects/stitch-story/locations/us-central1/functions/addAdminRole 
+[error] Failed to update function projects/stitch-story/locations/us-central1/functions/addAdminRole
+[debug] [2022-12-08T16:52:34.838Z] Total Function Deployment time: 350
+[debug] [2022-12-08T16:52:34.838Z] 1 Functions Deployed
+[debug] [2022-12-08T16:52:34.838Z] 1 Functions Errored
+[debug] [2022-12-08T16:52:34.838Z] 0 Function Deployments Aborted
+[debug] [2022-12-08T16:52:34.838Z] Average Function Deployment time: 349
+[info] 
+[info] Functions deploy had errors with the following functions:
+	addAdminRole(us-central1)
+[info] i  functions: cleaning up build files... 
+[debug] [2022-12-08T16:52:34.974Z] >>> [apiv2][query] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/stitch-story/locations/us-central1/repositories/gcf-artifacts/packages/add_admin_role [none]
+[debug] [2022-12-08T16:52:34.975Z] >>> [apiv2][query] GET https://us.gcr.io/v2/stitch-story/gcf/us-central1/tags/list [none]
+[debug] [2022-12-08T16:52:35.160Z] <<< [apiv2][status] GET https://us.gcr.io/v2/stitch-story/gcf/us-central1/tags/list 200
+[debug] [2022-12-08T16:52:35.160Z] <<< [apiv2][body] GET https://us.gcr.io/v2/stitch-story/gcf/us-central1/tags/list {"child":[],"manifest":{},"name":"stitch-story/gcf/us-central1","tags":[]}
+[debug] [2022-12-08T16:52:35.160Z] Could not find image for function projects/stitch-story/locations/us-central1/functions/addAdminRole
+[debug] [2022-12-08T16:52:35.678Z] <<< [apiv2][status] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/stitch-story/locations/us-central1/repositories/gcf-artifacts/packages/add_admin_role 403
+[debug] [2022-12-08T16:52:35.678Z] <<< [apiv2][body] DELETE https://artifactregistry.googleapis.com/v1beta2/projects/stitch-story/locations/us-central1/repositories/gcf-artifacts/packages/add_admin_role {"error":{"code":403,"message":"This API method requires billing to be enabled. Please enable billing on project #528282301455 by visiting https://console.developers.google.com/billing/enable?project=528282301455 then retry. If you enabled billing for this project recently, wait a few minutes for the action to propagate to our systems and retry.","status":"PERMISSION_DENIED","details":[{"@type":"type.googleapis.com/google.rpc.Help","links":[{"description":"Google developers console billing","url":"https://console.developers.google.com/billing/enable?project=528282301455"}]},{"@type":"type.googleapis.com/google.rpc.ErrorInfo","reason":"BILLING_DISABLED","domain":"googleapis.com","metadata":{"service":"artifactregistry.googleapis.com","consumer":"projects/528282301455"}}]}}
+[warn] !  functions: Unhandled error cleaning up build images. This could result in a small monthly bill if not corrected. You can attempt to delete these images by redeploying or you can delete them manually at https://console.cloud.google.com/artifacts/docker/stitch-story/us-central1/gcf-artifacts 
+[debug] [2022-12-08T16:52:35.679Z] Functions deploy failed.
+[debug] [2022-12-08T16:52:35.680Z] {
+  "endpoint": {
+    "id": "addAdminRole",
+    "project": "stitch-story",
+    "region": "us-central1",
+    "entryPoint": "addAdminRole",
+    "platform": "gcfv1",
+    "runtime": "nodejs16",
+    "callableTrigger": {},
+    "labels": {
+      "deployment-tool": "cli-firebase"
+    },
+    "environmentVariables": {
+      "FIREBASE_CONFIG": "{\"projectId\":\"stitch-story\",\"storageBucket\":\"stitch-story.appspot.com\",\"locationId\":\"europe-west\"}",
+      "GCLOUD_PROJECT": "stitch-story",
+      "EVENTARC_CLOUD_EVENT_SOURCE": "projects/stitch-story/locations/us-central1/functions/addAdminRole"
+    },
+    "codebase": "default",
+    "availableMemoryMb": 256,
+    "securityLevel": "SECURE_ALWAYS",
+    "targetedByOnly": false,
+    "hash": "80f4027a00bf6d3c41b9552bbfc499c075fce0fe"
+  },
+  "op": "update",
+  "original": {
+    "name": "FirebaseError",
+    "children": [],
+    "context": {
+      "function": "projects/stitch-story/locations/us-central1/functions/addAdminRole"
+    },
+    "exit": 1,
+    "message": "Failed to update function projects/stitch-story/locations/us-central1/functions/addAdminRole",
+    "original": {
+      "name": "FirebaseError",
+      "children": [],
+      "context": {
+        "body": {
+          "error": {
+            "code": 403,
+            "message": "Unable to retrieve the repository metadata for projects/stitch-story/locations/us-central1/repositories/gcf-artifacts. Ensure that the Cloud Functions service account has 'artifactregistry.repositories.list' and 'artifactregistry.repositories.get' permissions. You can add the permissions by granting the role 'roles/artifactregistry.reader'.",
+            "status": "PERMISSION_DENIED"
+          }
+        },
+        "response": {
+          "statusCode": 403
+        }
+      },
+      "exit": 1,
+      "message": "HTTP Error: 403, Unable to retrieve the repository metadata for projects/stitch-story/locations/us-central1/repositories/gcf-artifacts. Ensure that the Cloud Functions service account has 'artifactregistry.repositories.list' and 'artifactregistry.repositories.get' permissions. You can add the permissions by granting the role 'roles/artifactregistry.reader'.",
+      "status": 403
+    },
+    "status": 500
+  }
+}
+[debug] [2022-12-08T16:52:35.735Z] Error: Failed to update function addAdminRole in region us-central1
+    at C:\Users\tunde\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:41:11
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at async Fabricator.updateV1Function (C:\Users\tunde\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:305:32)
+    at async Fabricator.updateEndpoint (C:\Users\tunde\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:140:13)
+    at async handle (C:\Users\tunde\AppData\Roaming\npm\node_modules\firebase-tools\lib\deploy\functions\release\fabricator.js:78:17)
+[error] 
+[error] Error: There was an error deploying functions
