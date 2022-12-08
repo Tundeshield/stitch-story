@@ -76,7 +76,7 @@ export default function LogIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh' }} className="">
         <CssBaseline />
         <Grid
           item
@@ -106,7 +106,7 @@ export default function LogIn() {
               alignItems: 'center',
             }}
           >
-            <img src={img} alt="" className="w-96 py-7" />
+            <img src={img} alt="" className=" md:w-96 py-7" />
 
             <Typography component="h4" variant="h6" className="text-blue-900">
               Sign in
@@ -145,7 +145,7 @@ export default function LogIn() {
                 Sign in
               </Button>
 
-              <div className="flex justify-between">
+              <div className="flex flex-col md:flex justify-between">
                 <Link to="/register" className="mb-4">
                   <div className="flex justify-center">
                     <div
