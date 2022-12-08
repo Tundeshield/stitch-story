@@ -67,8 +67,8 @@ const Project = () => {
             </ul>
           </div>
           <div className="flex flex-col space-y-4">
-            <div className="flex justify-around">
-              <div className="w-3/5">
+            <div className="flex flex-col md:flex-row  justify-around">
+              <div className="md:w-3/5">
                 <div id="myTabContent">
                   <div
                     class="p-4 bg-gray-50 rounded-lg dark:bg-gray-800"
@@ -76,17 +76,17 @@ const Project = () => {
                     role="tabpanel"
                     aria-labelledby="profile-tab"
                   >
-                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <p class="text-sm text-gray-500 dark:text-gray-400 ">
                       <InfoCard id={project.id} project={project} />
                     </p>
                   </div>
                 </div>
               </div>
-              <div>
+              <div className="md:w-2/5">
                 <TaskContainer project={project} />
               </div>
             </div>
-            <span className="ml-16">
+            <span className="ml-16 w-full">
               <OpenInfo>
                 <QrCode qrCode={qrCode} id={id} project={project} />
               </OpenInfo>

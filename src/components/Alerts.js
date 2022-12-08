@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Collapse, IconButton, Stack } from '@mui/material';
+import { Alert, Box, Button, Collapse, IconButton } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -29,7 +29,7 @@ export const ErrorAlert = ({ primary, secondary }) => {
 export const OpenInfo = ({ children }) => {
   const [open, setOpen] = useState(false);
   return (
-    <Box sx={{ width: '40%' }}>
+    <Box sx={{ width: '70%' }}>
       <Collapse in={open}>
         <Alert
           severity="info"
