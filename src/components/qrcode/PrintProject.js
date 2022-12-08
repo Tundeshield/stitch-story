@@ -12,7 +12,7 @@ const PrintProject = ({ qrCode, project }) => {
         className=" flex flex-col  items-center  p-6 w-full"
         // style={{ width: '100%', height: window.innerHeight }}
       >
-        <div className="w-80 mb-4 flex flex-col items-center ">
+        <div className="w-40 md:w-80 mb-4 flex flex-col items-center ">
           <img src={logo} alt="App Logo" />
           PPROJECT: {id}
         </div>
@@ -25,7 +25,7 @@ const PrintProject = ({ qrCode, project }) => {
         <body className="flex mt-4 flex-col items-center justify-center">
           <div>
             <QrInfo id={project.id} project={project} />
-            {/* <InfoCard id={project.id} project={project} /> */}
+        
           </div>
         </body>
       </div>

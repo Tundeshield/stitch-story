@@ -15,7 +15,7 @@ const QrCode = ({ id, qrCode, project }) => {
   });
 
   return (
-    <div class=" p-2 ml-14 w-full max-w-sm bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+    <div class=" p-2 ml-1 w-full max-w-sm bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
       <span className="flex justify-between items-center">
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
           Project QR Code

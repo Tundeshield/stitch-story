@@ -33,38 +33,36 @@ const TaskContainer = ({ project }) => {
     getData();
   }, []);
   return (
-    <div>
-      <div class="p-4 w-full max-w-sm bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-        <span className="flex justify-between items-center">
-          <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
-            Task List
-          </h5>
-          {user === 'admin' && (
-            <Link to={`/tasks/create/${id}`}>
-              <IconButton>
-                <AddCircleOutlineIcon />
-              </IconButton>
-            </Link>
-          )}
-        </span>
+    <div class="w-full p-4 md: bg-white rounded-lg border shadow-md sm:p-6 dark:bg-gray-800 dark:border-gray-700">
+      <span className="flex justify-between items-center">
+        <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
+          Task List
+        </h5>
+        {user === 'admin' && (
+          <Link to={`/tasks/create/${id}`}>
+            <IconButton>
+              <AddCircleOutlineIcon />
+            </IconButton>
+          </Link>
+        )}
+      </span>
 
-        <p class="text-sm font-normal text-gray-500 dark:text-gray-400">
-          Outline of the list of tasks required to complete the listed project.
-        </p>
-        <ul class="my-4 space-y-3">
-          {tasks.map((item) => (
-            <TaskItem
-              taskName={item.taskName}
-              supervisor={item.supervisor}
-              id={item.id}
-              key={item.id}
-              completed={item.completed}
-              project={project}
-            />
-          ))}
-        </ul>
-        <DoneAlert />
-      </div>
+      <p class="text-sm font-normal text-gray-500 dark:text-gray-400">
+        Outline of the list of tasks required to complete the listed project.
+      </p>
+      <ul class="my-4 space-y-3">
+        {tasks.map((item) => (
+          <TaskItem
+            taskName={item.taskName}
+            supervisor={item.supervisor}
+            id={item.id}
+            key={item.id}
+            completed={item.completed}
+            project={project}
+          />
+        ))}
+      </ul>
+      <DoneAlert />
     </div>
   );
 };

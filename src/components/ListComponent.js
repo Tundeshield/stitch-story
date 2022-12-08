@@ -1,15 +1,14 @@
-import { IconButton } from '@mui/material';
 import React from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
-import StatusBadge from './StatusBadge';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import TaskModal from './TaskModal';
 import * as ROUTE from '../assets/constants/routes';
 import { doc, deleteDoc } from 'firebase/firestore';
 import { db } from '../utils/firebase';
+import TaskModal from './TaskModal';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
-const ProjectListItem = ({ project }) => {
+const ListComponent = ({ project }) => {
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
@@ -36,41 +35,25 @@ const ProjectListItem = ({ project }) => {
   };
 
   return (
-    <>
-      <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <td className="p-4 w-4">
-          <div className="flex items-center">
-            <input
-              id="checkbox-table-search-1"
-              type="checkbox"
-              className="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            />
-            <label for="checkbox-table-search-1" className="sr-only">
-              checkbox
-            </label>
-          </div>
-        </td>
-        <th
-          scope="row"
-          className="text-xs md:py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-        >
-          {project.title}
-        </th>
-        <td className="text-xs md:py-4 px-6">{project.description.substring(0, 30)}...</td>
-        <td className="py-4 px-6">
-          <StatusBadge
-            status={project.status ? project.status : 'In progress'}
-          />
-        </td>
-        <td className="py-4 px-6">
-          <IconButton onClick={handleOpenProject}>
-            <VisibilityIcon className="text-blue-600" />
-          </IconButton>
-          <IconButton onClick={handleOpen}>
-            <DeleteIcon className="text-red-500" />
-          </IconButton>
-        </td>
-      </tr>
+    <div class="w-full p-4 mb-4 text-center bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div className="flex">
+        <p className="text-3x mr-2">Title: </p>
+        <p class="mb-2 l text-gray-900 dark:text-white">{project.title}</p>
+      </div>
+      <div className="flex">
+        <p className="text-3x mr-2">Description:</p>
+        <p class="mb-5 text-base text-gray-500 dark:text-gray-400">
+          {project.description}
+        </p>
+      </div>
+
+      <IconButton onClick={handleOpenProject}>
+        <VisibilityIcon className="text-blue-600" />
+      </IconButton>
+      <IconButton onClick={handleOpen}>
+        <DeleteIcon className="text-red-500" />
+      </IconButton>
+
       <TaskModal
         open={open}
         handleClose={handleClose}
@@ -94,8 +77,8 @@ const ProjectListItem = ({ project }) => {
           </button>
         </span>
       </TaskModal>
-    </>
+    </div>
   );
 };
 
-export default ProjectListItem;
+export default ListComponent;

@@ -50,12 +50,7 @@ const admin = [
       },
     ],
   },
-  {
-    id: 463668947536,
-    name: 'Chats',
-    icon: <QuestionAnswerIcon className="text-white" />,
-    url: '/admin-chats',
-  },
+ 
 ];
 
 const client = [
