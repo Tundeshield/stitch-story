@@ -6,7 +6,6 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-
   "icons": [
     {
       "src": "maskable.png",
