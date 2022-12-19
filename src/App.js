@@ -45,6 +45,7 @@ function App() {
       <Routes>
         {/* General Routes*/}
         <Route path={ROUTE.LANDING} element={<Login />} />
+
         <Route path={ROUTE.NOTFOUND} element={<NotFoundPage />} />
         <Route path={ROUTE.RESETPASSWORD} element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />

@@ -20,6 +20,7 @@ import { logUserDetails } from '../features/user/userSlice';
 import { doc, getDoc, Timestamp } from 'firebase/firestore';
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import AddModeratorIcon from '@mui/icons-material/AddModerator';
+import RequestQuoteIcon from '@mui/icons-material/RequestQuote';
 
 const theme = createTheme();
 
@@ -97,6 +98,18 @@ export default function LogIn() {
         />
 
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <a href="https://forms.gle/hDn5YaoYYYmhz87YA" target="_blank">
+            <div className="flex justify-end">
+              <div
+                id="toast-simple"
+                class="flex items-center p-4 space-x-4 max-w-xs text-myBlue bg-white rounded-lg divide-x divide-gray-200 shadow dark:text-gray-400 dark:divide-gray-700 space-x dark:bg-gray-800"
+                role="alert"
+              >
+                <RequestQuoteIcon />
+                <div class="pl-4 text-sm font-normal">REQUEST FOR QUOTE</div>
+              </div>
+            </div>
+          </a>
           <Box
             sx={{
               my: 8,
@@ -107,7 +120,6 @@ export default function LogIn() {
             }}
           >
             <img src={img} alt="" className=" md:w-96 py-7" />
-
             <Typography component="h4" variant="h6" className="text-blue-900">
               Sign in
             </Typography>

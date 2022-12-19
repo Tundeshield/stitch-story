@@ -5,13 +5,10 @@ import { ErrorAlert, SuccessAlert } from '../../components/Alerts';
 import Button from '../../components/Button';
 import { ErrorDisplay } from '../../components/Form/Form';
 import LoadingButton from '../../components/task/LoadingButton';
-
 import img from '../../assets/images/loginLogo.png';
 import { useNavigate } from 'react-router-dom';
 import { doc, setDoc } from 'firebase/firestore';
-
 import { IconButton } from '@mui/material';
-
 import googleIcon from '../../assets/images/googleIcon.png';
 import { signOut, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useDispatch } from 'react-redux';

@@ -10,6 +10,8 @@ import CommentBox from '../CommentBox';
 import TaskModal from '../TaskModal';
 import { async } from '@firebase/util';
 import {
+  addDoc,
+  collection,
   deleteDoc,
   doc,
   getDoc,
@@ -83,6 +85,11 @@ const TaskItem = ({ taskName, id, completed, project, supervisor }) => {
         completed: true,
         timestamp: serverTimestamp(),
       });
+      const colRef = collection(db, 'notifications');
+      const docRef = await addDoc(colRef, {
+        to: '+447788787372',
+        body: 'Hello from Firebase!'
+      });
 
       //Send Email notification to user
       const emailParams = { taskName: taskName, clientEmail: client.email };
@@ -104,6 +111,9 @@ const TaskItem = ({ taskName, id, completed, project, supervisor }) => {
         completed: false,
         completedAt: null,
       });
+      
+      
+      
       console.log(id, 'has been uncompleted!');
     }
   };
