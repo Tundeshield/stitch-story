@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../utils/firebase';
 import { useSelector } from 'react-redux';
+import MilestoneCarousel from './carousel/MilestoneCarousel';
 
 const InfoCard = ({ project }) => {
   const [client, setClient] = useState({});
@@ -32,9 +33,7 @@ const InfoCard = ({ project }) => {
         <h3 className="text-lg font-medium leading-6 text-gray-900">
           Production Contract Details
         </h3>
-        <IconButton>
-          <ModeEditIcon />
-        </IconButton>
+        <MilestoneCarousel />
       </div>
       <div className="border-t border-gray-200">
         <dl>

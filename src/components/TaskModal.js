@@ -10,7 +10,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 600,
+  width: 400,
   bgcolor: 'background.paper',
   border: '0.2px solid rgb(209 213 219)',
   boxShadow: 24,
@@ -27,7 +27,7 @@ const TaskModal = ({ children, handleClose, open, title }) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
+        <Typography id="modal-modal-title" variant="p" component="h3">
           {title}
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>

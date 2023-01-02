@@ -6,6 +6,7 @@ import SendIcon from '@mui/icons-material/Send';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../utils/firebase';
+import MilestoneCarousel from '../carousel/MilestoneCarousel';
 
 const ProjectInfoCard = ({ project }) => {
   const [user, loading, error] = useAuthState(auth);
@@ -17,7 +18,9 @@ const ProjectInfoCard = ({ project }) => {
           <p>
             <strong>{project.title}</strong>{' '}
           </p>
-          <p className="text-xs flex-wrap">{project.description}</p>
+          <p className="text-xs flex-wrap mb-4">{project.description}</p>
+
+          <MilestoneCarousel />
         </span>
         <span className="flex flex-col items-center">
           <Avatar

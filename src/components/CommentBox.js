@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { auth, db } from '../utils/firebase';
+import { auth, db, storage } from '../utils/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useSelector } from 'react-redux';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { v4 } from 'uuid';
+import { useParams } from 'react-router-dom';
 
 const CommentBox = ({ handleClose, id }) => {
   const [comment, setComment] = useState('');
   const [error, setError] = useState(false);
   const [sentComment, setSentComment] = useState(false);
+  const [file, setFile] = useState(null);
+  const projectId = useParams();
+
   const user = useSelector((state) => state.user);
+
+  const productionImageUpload = (e) => {
+    const file = e.target.files[0];
+    setFile(file);
+    console.log(file);
+    console.log(projectId);
+  };
 
   const postComment = async (e) => {
     e.preventDefault();
@@ -24,6 +38,18 @@ const CommentBox = ({ handleClose, id }) => {
         timestamp: serverTimestamp(),
         taskId: id,
       });
+
+      //store image in storage with project id
+      if (file) {
+        const storageRef = ref(
+          storage,
+          `projectImages/${projectId.id}/${file.name}`,
+        );
+        const uploadTask = await uploadBytes(storageRef, file);
+        const downloadUrl = await getDownloadURL(uploadTask.ref);
+        console.log(downloadUrl);
+      }
+
       setSentComment(true);
     }
     setError(false);
@@ -56,6 +82,7 @@ const CommentBox = ({ handleClose, id }) => {
             <SendIcon className="text-white" />
           </button>
         </div>
+        <input type="file" onChange={productionImageUpload} />
         {error && (
           <div
             class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800"
