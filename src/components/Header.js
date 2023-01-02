@@ -9,6 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../utils/firebase';
 import userImg from '../assets/images/user-default.png';
 import AccountMenu from './menu/AccountMenu';
+import MobileDrawer from './menu/MobileDrawer';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -44,28 +45,27 @@ const Header = () => {
           </Tooltip>
         </span>
         {admin ? (
-          <Avatar
-            alt="Remy Sharp"
-            src={user?.photoURL ? user?.photoURL : userImg}
-            className="cursor-pointer"
-          />
-        ) : (
-          <AccountMenu user={user}>
+          <span className="hidden md:block">
             <Avatar
               alt="Remy Sharp"
               src={user?.photoURL ? user?.photoURL : userImg}
-              className="cursor-pointer"
+              className=" cursor-pointer "
             />
+          </span>
+        ) : (
+          <AccountMenu user={user}>
+            <span className="hidden md:block">
+              <Avatar
+                alt="Remy Sharp"
+                src={user?.photoURL ? user?.photoURL : userImg}
+                className="cursor-pointer "
+              />
+            </span>
           </AccountMenu>
         )}
 
-        <span
-          className="cursor-pointer text-myDarkBlue md:hidden"
-          onClick={() => setOpen(!open)}
-        >
-          <IconButton>
-            <MenuIcon />
-          </IconButton>
+        <span className="cursor-pointer text-myDarkBlue md:hidden">
+          <MobileDrawer />
         </span>
       </div>
     </header>

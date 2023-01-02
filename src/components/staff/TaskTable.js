@@ -42,7 +42,7 @@ export default function TaskTable() {
       <div class="px-4 md:px-6 py-4 md:py-7"></div>
       <div class="bg-white py-4 md:py-7 px-4 md:px-8 xl:px-10">
         <div class="sm:flex items-center justify-between">
-          <div class="flex items-center">
+          <div class="flex items-center mb-4">
             <Link className="rounded-full focus:outline-none focus:ring-2  focus:bg-indigo-50 focus:ring-indigo-800">
               <div class="py-2 px-8 bg-indigo-100 text-indigo-700 rounded-full">
                 <p>All</p>

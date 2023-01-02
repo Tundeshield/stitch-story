@@ -36,12 +36,12 @@ const ListComponent = ({ project }) => {
 
   return (
     <div class="w-full p-4 mb-4 text-center bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-      <div className="flex">
-        <p className="text-3x mr-2">Title: </p>
+      <div>
+        <p className="text-3x mr-2 font-bold">Title: </p>
         <p class="mb-2 l text-gray-900 dark:text-white">{project.title}</p>
       </div>
-      <div className="flex">
-        <p className="text-3x mr-2">Description:</p>
+      <div className="flex flex-col">
+        <p className="text-3x mr-2 font-bold">Description:</p>
         <p class="mb-5 text-base text-gray-500 dark:text-gray-400">
           {project.description}
         </p>

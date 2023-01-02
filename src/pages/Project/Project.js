@@ -82,11 +82,11 @@ const Project = () => {
                   </div>
                 </div>
               </div>
-              <div className="md:w-2/5">
+              <div className="mt-2 md:w-2/5 ">
                 <TaskContainer project={project} />
               </div>
             </div>
-            <span className="ml-16 w-full">
+            <span className="w-full md:ml-16">
               <OpenInfo>
                 <QrCode qrCode={qrCode} id={id} project={project} />
               </OpenInfo>

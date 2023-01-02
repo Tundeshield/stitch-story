@@ -3,6 +3,7 @@ import Button from '../Button';
 import image from '../../assets/images/freeLogo.jpeg';
 import { Avatar, IconButton } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../utils/firebase';
 
@@ -24,20 +25,18 @@ const ProjectInfoCard = ({ project }) => {
             sx={{ width: 56, height: 56 }}
             className="ml-4 mb-1"
           />
-          <h3>
+          <h3 className="hidden md:block">
             <strong>Company name</strong>{' '}
           </h3>
         </span>
       </section>
       <section className="border-t-2 border-grey-200 flex justify-between p-4 items-center">
-        <div className="w-1/2">
-          <p className="text-xs flex-wrap">
-            Send a message to the production team handling your project.
-          </p>
+        <div className="hidden md:block w-1/2">
+          <p className="text-xs flex-wrap">Send a ping to the project team.</p>
         </div>
         <div>
           <Button>
-            Message team <SendIcon className="ml-2" />{' '}
+            Ping team <NotificationsActiveIcon className="ml-2" />{' '}
           </Button>
         </div>
       </section>

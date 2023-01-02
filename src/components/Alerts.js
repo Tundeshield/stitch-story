@@ -29,37 +29,39 @@ export const ErrorAlert = ({ primary, secondary }) => {
 export const OpenInfo = ({ children }) => {
   const [open, setOpen] = useState(false);
   return (
-    <Box sx={{ width: '70%' }}>
-      <Collapse in={open}>
-        <Alert
-          severity="info"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <ClearIcon fontSize="inherit" />
-            </IconButton>
-          }
-          sx={{ mb: 2 }}
+    // <Box sx={{ width: '100%' }}>
+      <div>
+        <Collapse in={open}>
+          <Alert
+            severity="info"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <ClearIcon fontSize="inherit" />
+              </IconButton>
+            }
+            sx={{ mb: 2 }}
+          >
+            {children}
+          </Alert>
+        </Collapse>
+        <Button
+          disabled={open}
+          variant="outlined"
+          onClick={() => {
+            setOpen(true);
+          }}
         >
-          {children}
-        </Alert>
-      </Collapse>
-      <Button
-        disabled={open}
-        variant="outlined"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Open to view and print the QR code
-      </Button>
-    </Box>
+          Open to view and print the QR code
+        </Button>
+      </div>
+    // </Box>
   );
 };
 

@@ -21,7 +21,7 @@ const MilestoneUpdate = ({ comment }) => {
         {/* <p class=" text-md pl-2  text-gray-400 dark:text-gray-600 mt-4">
           {comment.role}:
         </p> */}
-        <p class="text-lg bg-blue-700 p-4 pl-5 rounded-full text-white dark:text-gray-600 mt-4">
+        <p class="text-sm p-2 sm:text-lg bg-blue-700  pl-5 rounded-full text-white dark:text-gray-600 mt-4">
           {comment.comment}
         </p>
       </li>

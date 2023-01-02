@@ -49,7 +49,7 @@ const TrackOrder = () => {
   return (
     <Page>
       <Container>
-        <div className=" h-full w-1/2 mx-auto">
+        <div className="w-full md:w-1/2 h-screen mx-auto">
           <div>
             <ProjectInfoCard project={project} />
           </div>

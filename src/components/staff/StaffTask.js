@@ -9,17 +9,16 @@ const StaffTask = ({ task }) => {
   return (
     <tr
       tabindex="0"
-      class="focus:outline-none h-16 border border-gray-100 rounded"
+      className="focus:outline-none h-16 border border-gray-100 rounded"
     >
-      <td class="">
+      <td>
         <div class="flex items-center pl-5">
-          <p class="text-base font-medium leading-none text-gray-700 mr-2">
+          <p class="font-bold text-base leading-none text-gray-700 mr-2 md:font-medium ">
             {task.taskName}
           </p>
         </div>
       </td>
-
-      <td class="pl-5">
+      <td class=" pl-5 ">
         <div class="flex items-center">
           <p class="text-sm leading-none  ml-2 text-green-600 py-3 px-5 bg-green-100 rounded">
             <strong className="mr-4">
@@ -30,7 +29,7 @@ const StaffTask = ({ task }) => {
         </div>
       </td>
 
-      <td class="pl-5">
+      <td class=" pl-5 ">
         <button class="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">
           <strong className="mr-4">Due Date: </strong>
           {task.endDate.toDate().toLocaleDateString()}
@@ -42,15 +41,6 @@ const StaffTask = ({ task }) => {
             View Project Details
           </button>
         </Link>
-      </td>
-
-      <td>
-        <div class="ml-5 mr-2">
-          <div class="rounded-sm w-5 h-5 flex flex-shrink-0 justify-center items-center relative">
-            <span className="text-sm">Done:</span>{' '}
-            <Checkbox sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />
-          </div>
-        </div>
       </td>
     </tr>
   );

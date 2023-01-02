@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import SaveIcon from '@mui/icons-material/Save';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { addDays } from 'date-fns';
 import { useForm } from 'react-hook-form';
@@ -124,8 +124,8 @@ const CreateTask = () => {
   return (
     <Page>
       <Container>
-        <div className="w-full flex justify-between items-center">
-          <section className="w-1/2 p-4 bg-white  rounded-lg dark:bg-gray-800">
+        <div className="flex flex-col justify-between w-full items-center md:flex-row">
+          <section className="w-full mb-4 md:w-1/2 p-4 bg-white  rounded-lg dark:bg-gray-800">
             <form
               className="overflow-hidden bg-white drop-shadow-lg sm:rounded-lg px-4 py-5 sm:px-6"
               onSubmit={handleSubmit(submitTask)}
@@ -191,13 +191,13 @@ const CreateTask = () => {
               </span>
             </form>
           </section>
-          <span>
+          <span className="mb-4 md:mb-0">
             <OnCreateTaskContainer taskIds={taskIds} />
           </span>
           <div>
             <span onClick={() => navigate('/projects')}>
               <Button>
-                Done <CreateNewFolderIcon fontSize="large" />
+                Done <SaveIcon fontSize="small" />
               </Button>
             </span>
           </div>
