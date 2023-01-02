@@ -5,6 +5,7 @@ import ListIcon from '@mui/icons-material/List';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+
 import * as ROUTE from './constants/routes';
 
 const randomInt = () => {
@@ -50,7 +51,6 @@ const admin = [
       },
     ],
   },
- 
 ];
 
 const client = [
@@ -59,6 +59,12 @@ const client = [
     name: 'My projects',
     icon: <FolderOpenIcon className="text-white" />,
     url: '/orders',
+  },
+  {
+    id: 42599883735,
+    name: 'Get help',
+    icon: <MailOutlineIcon className="text-white" />,
+    url: '/get-help-quick-faq',
   },
 ];
 const supervisor = [

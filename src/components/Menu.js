@@ -12,7 +12,7 @@ const Menu = ({ name, icon, subMenu, url }) => {
         <Link to={url}>
           <button
             type="button"
-            className="flex items-center p-2 w-full border border-myBlue mb-4 text-base font-normal rounded-full transition duration-75 group hover:bg-myBlue dark:text-white dark:hover:bg-gray-700"
+            className="md:flex items-center p-2 w-full border border-myBlue mb-4 text-base font-normal rounded-full transition duration-75 group hover:bg-myBlue dark:text-white dark:hover:bg-gray-700"
           >
             {icon}
             <span

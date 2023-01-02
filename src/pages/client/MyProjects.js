@@ -38,7 +38,7 @@ const MyProjects = () => {
     <Page>
       <Container>
         <ProjectHeader header={headers} />
-        <div className="flex flex-col justify-center items-center w-5/6 mt-4 ">
+        <div className="flex flex-col items-center mt-4 container px-6 mx-auto  h-screen ">
           {myOrders.map((order) => (
             <OrderCard order={order} />
           ))}

@@ -32,6 +32,8 @@ import StaffConfirmationPage from './pages/staff/StaffConfirmationPage';
 import StaffRegistrationPage from './pages/staff/StaffRegistrationPage';
 import StaffTasks from './pages/staff/StaffTasks';
 import ProductionAdmin from './pages/staff/ProductionAdmin';
+import Contact from './pages/Contact';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -50,6 +52,7 @@ function App() {
         <Route path={ROUTE.RESETPASSWORD} element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/StaffConfirmation" element={<StaffConfirmationPage />} />
+        <Route path="/get-help-quick-faq" element={<ContactPage />} />
 
         <Route
           path="/staff/secret-registration"

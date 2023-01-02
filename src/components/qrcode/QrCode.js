@@ -20,7 +20,7 @@ const QrCode = ({ id, qrCode, project }) => {
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl dark:text-white">
           Project QR Code
         </h5>
-        <span onClick={handlePrint}>
+        <span onClick={handlePrint} className="hidden md:block">
           <IconButton>
             <LocalPrintshopIcon />
           </IconButton>
@@ -36,7 +36,7 @@ const QrCode = ({ id, qrCode, project }) => {
         </span>
 
         <QrAlert />
-        <span ref={componentRef}>
+        <span ref={componentRef} className="hidden md:block">
           <PrintProject id={id} qrCode={qrCode} project={project} />
         </span>
       </div>

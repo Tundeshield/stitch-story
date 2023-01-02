@@ -88,7 +88,7 @@ const TaskItem = ({ taskName, id, completed, project, supervisor }) => {
       const colRef = collection(db, 'notifications');
       const docRef = await addDoc(colRef, {
         to: '+447788787372',
-        body: 'Hello from Firebase!'
+        body: 'Notification update'
       });
 
       //Send Email notification to user

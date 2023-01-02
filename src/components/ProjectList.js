@@ -28,7 +28,7 @@ const ProjectList = () => {
   return (
     <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
       <div className="p-4 flex justify-between items-center bg-white dark:bg-gray-900">
-        <div className="flex">
+        <div className=" md:flex">
           <Link to="/projects/create">
             <Button>Create New Project</Button>
           </Link>
@@ -62,7 +62,7 @@ const ProjectList = () => {
         </table>
       </div>
 
-      <div className="md:hidden">
+      <div className="m-2 md:hidden">
         {projects.map((project) => (
           <ListComponent project={project} />
         ))}

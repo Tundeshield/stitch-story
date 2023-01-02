@@ -53,8 +53,8 @@ const CreateUser = () => {
   return (
     <Page>
       <Container>
-        <div className="flex  justify-between relative p-4">
-          <section className="w-3/5 p-4 bg-white rounded-lg dark:bg-gray-800">
+        <div className="flex justify-between relative p-4">
+          <section className="w-full md:w-3/5 p-4 bg-white rounded-lg dark:bg-gray-800">
             <form
               className="overflow-hidden bg-white drop-shadow-lg sm:rounded-lg px-4 py-5 sm:px-6"
               onSubmit={handleSubmit((data) => handleCreateUser(data))}
