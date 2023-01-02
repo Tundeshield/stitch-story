@@ -30,6 +30,7 @@
     "flowbite": "^1.5.3",
     "flowbite-datepicker": "^1.2.2",
     "flowbite-react": "^0.1.12",
+    "fslightbox-react": "^1.6.2-2",
     "history": "^5.3.0",
     "luxon": "^2.5.0",
     "moment": "^2.29.4",

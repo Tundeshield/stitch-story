@@ -11,6 +11,7 @@ import { getDownloadURL, listAll, ref } from 'firebase/storage';
 
 import { OpenInfo } from '../../components/Alerts';
 import QrCode from '../../components/qrcode/QrCode';
+import MilestoneCarousel from '../../components/carousel/MilestoneCarousel';
 
 const Project = () => {
   const { id } = useParams();
@@ -46,7 +47,7 @@ const Project = () => {
         <div>
           <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul
-              class="flex flex-wrap -mb-px text-sm font-medium text-center"
+              class="flex flex-wrap mb-px text-sm font-medium text-center"
               id="myTab"
               data-tabs-toggle="#myTabContent"
               role="tablist"
@@ -82,7 +83,7 @@ const Project = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-2 md:w-2/5 ">
+              <div className="md:w-2/5 ">
                 <TaskContainer project={project} />
               </div>
             </div>
