@@ -1,6 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Contact = () => {
+  const [message, setMessage] = useState('');
+  const [success, setSuccess] = useState(false);
+  const name = useSelector((state) => state.user.fullName);
+  const email = useSelector((state) => state.user.email);
+
+  const getHelp = (e) => {
+    e.preventDefault();
+    const data = {
+      name,
+      email,
+      message,
+    };
+    if (message === '') {
+      alert('Please enter a message');
+    } else {
+      console.log(data);
+      setSuccess(true);
+      setMessage('');
+    }
+  };
   return (
     <div class="container my-24 px-6 mx-auto mb-32 h-full">
       <section class="mb-32 text-gray-800">
@@ -40,7 +61,7 @@ const Contact = () => {
             <p class="font-bold mb-6">
               Didn't find your answer in the FAQ? Contact our sales
             </p>
-            <form>
+            <form onSubmit={getHelp}>
               <div class="form-group mb-6">
                 <input
                   type="text"
@@ -60,11 +81,13 @@ const Contact = () => {
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   id="exampleInput7"
                   placeholder="Name"
+                  value={name}
                 />
               </div>
               <div class="form-group mb-6">
                 <input
                   type="email"
+                  value={email}
                   class="form-control block
               w-full
               px-3
@@ -105,6 +128,8 @@ const Contact = () => {
                   id="exampleFormControlTextarea13"
                   rows="3"
                   placeholder="Message"
+                  name={message}
+                  onChange={(e) => setMessage(e.target.value)}
                 ></textarea>
               </div>
 
@@ -132,6 +157,15 @@ const Contact = () => {
                 Send
               </button>
             </form>
+            {success && (
+              <div
+                class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-6"
+                role="alert"
+              >
+                <strong class="font-bold">Success!</strong>
+                <span class="block sm:inline">Your message has been sent.</span>
+              </div>
+            )}
           </div>
         </div>
       </section>
