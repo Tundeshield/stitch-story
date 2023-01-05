@@ -36,7 +36,7 @@ const QrCode = ({ id, qrCode, project }) => {
         </span>
 
         <QrAlert />
-        <span ref={componentRef} className="hidden md:block">
+        <span ref={componentRef} className="md:block">
           <PrintProject id={id} qrCode={qrCode} project={project} />
         </span>
       </div>

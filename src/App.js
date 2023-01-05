@@ -27,12 +27,10 @@ import { auth } from './utils/firebase';
 import UpdateUser from './pages/User/UpdateUser';
 import CreateTask from './pages/Task/CreateTask';
 import ClientChat from './pages/clientChat/ClientChat';
-
 import StaffConfirmationPage from './pages/staff/StaffConfirmationPage';
 import StaffRegistrationPage from './pages/staff/StaffRegistrationPage';
 import StaffTasks from './pages/staff/StaffTasks';
 import ProductionAdmin from './pages/staff/ProductionAdmin';
-import Contact from './pages/Contact';
 import ContactPage from './pages/ContactPage';
 
 function App() {
@@ -47,7 +45,6 @@ function App() {
       <Routes>
         {/* General Routes*/}
         <Route path={ROUTE.LANDING} element={<Login />} />
-
         <Route path={ROUTE.NOTFOUND} element={<NotFoundPage />} />
         <Route path={ROUTE.RESETPASSWORD} element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />
@@ -81,7 +78,6 @@ function App() {
           path="/projects"
           element={user.role === 'admin' ? <Projects /> : <Navigate to="/" />}
         />
-
         <Route
           path="/users/create-user"
           element={
@@ -92,7 +88,6 @@ function App() {
             )
           }
         />
-
         <Route
           path="/projects/create"
           element={
@@ -103,7 +98,6 @@ function App() {
             )
           }
         />
-
         <Route
           path="/users"
           element={

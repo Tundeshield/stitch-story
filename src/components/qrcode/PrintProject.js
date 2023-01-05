@@ -25,7 +25,6 @@ const PrintProject = ({ qrCode, project }) => {
         <body className="flex mt-4 flex-col items-center justify-center">
           <div>
             <QrInfo id={project.id} project={project} />
-        
           </div>
         </body>
       </div>
