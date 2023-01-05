@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { ErrorAlert, SuccessAlert } from '../../components/Alerts';
 import Button from '../../components/Button';
@@ -18,6 +17,7 @@ import { auth, db } from '../../utils/firebase';
 const Register = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   const {
@@ -70,9 +70,8 @@ const Register = () => {
         navigate('/orders');
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        setError(true);
+        setErrorMessage(error.message);
       });
   };
 
@@ -230,7 +229,7 @@ const Register = () => {
         {error && (
           <ErrorAlert
             primary="Oops!"
-            secondary={`Something went wrong. ${error}`}
+            secondary={`Something went wrong. ${errorMessage}`}
           />
         )}
         {success && (
