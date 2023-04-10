@@ -33,7 +33,7 @@ const MilestoneCarousel = () => {
     <div>
       {milestoneImages.length === 0 ? null : (
         <Button variant="outlined" onClick={() => setToggler(!toggler)}>
-          Project images
+          Order images
         </Button>
       )}
 

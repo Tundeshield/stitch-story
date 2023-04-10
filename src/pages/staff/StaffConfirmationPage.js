@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import img from '../../assets/images/loginLogo.png';
 import tailor from '../../assets/images/tailor.jpg';
-import { Link } from 'react-router-dom';
 import Copyright from '../../components/Copyright';
 import { ErrorAlert } from '../../components/Feedback';
 import { auth } from '../../utils/firebase';

@@ -15,7 +15,7 @@ const randomInt = () => {
 const admin = [
   {
     id: 1909008,
-    name: 'Projects',
+    name: 'Orders',
     icon: <FolderOpenIcon className="text-white" />,
     subMenu: [
       {
@@ -26,7 +26,7 @@ const admin = [
       },
       {
         id: 357654,
-        name: 'View Projects ',
+        name: 'View Orders ',
         url: ROUTE.PROJECTS,
         icon: <ListIcon className="text-white" />,
       },
@@ -56,7 +56,7 @@ const admin = [
 const client = [
   {
     id: 426253735,
-    name: 'My projects',
+    name: 'My Orders',
     icon: <FolderOpenIcon className="text-white" />,
     url: '/orders',
   },

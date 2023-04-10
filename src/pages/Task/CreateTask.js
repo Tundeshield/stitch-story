@@ -175,7 +175,7 @@ const CreateTask = () => {
                 <textarea
                   {...register('taskDescription', {
                     required: true,
-                    maxLength: 150,
+                    maxLength: 1000,
                   })}
                   id="message"
                   rows="4"
