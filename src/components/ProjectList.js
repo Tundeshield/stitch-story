@@ -30,7 +30,7 @@ const ProjectList = () => {
       <div className="p-4 flex justify-between items-center bg-white dark:bg-gray-900">
         <div className=" md:flex">
           <Link to="/projects/create">
-            <Button>Create New Project</Button>
+            <Button>Create New Order</Button>
           </Link>
         </div>
       </div>
@@ -43,7 +43,7 @@ const ProjectList = () => {
                 Client Name
               </th>
               <th scope="col" className="text-xs md:py-3 px-6">
-                Project Description
+                Order Description
               </th>
               <th scope="col" className="text-xs md:py-3 px-6">
                 Status

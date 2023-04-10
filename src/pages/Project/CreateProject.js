@@ -32,7 +32,7 @@ const CreateProject = () => {
   const headers = [
     {
       id: 1235768,
-      title: 'Create New Project',
+      title: 'Create New Order',
       url: '#',
     },
   ];
@@ -125,7 +125,7 @@ const CreateProject = () => {
                     for="base-input"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                   >
-                    Project Title
+                    Order Title
                   </label>
                   <input
                     {...register('title', { required: true, maxLength: 70 })}
