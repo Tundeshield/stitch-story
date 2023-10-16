@@ -33,7 +33,6 @@ export default function LogIn() {
   const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
   const defaultEmail = 'admin@stitchstory.com';
-  // const pass = process.env.REACT_APP_PASS;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,9 +47,6 @@ export default function LogIn() {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        // ...
-        //Get user details from the database
-        //rETURN BACK TO THIS
         const userRef = doc(db, 'users', user.uid);
 
         getDoc(userRef).then((doc) => {
